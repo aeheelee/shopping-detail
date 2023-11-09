@@ -1,0 +1,59 @@
+// 공통 타입
+/////////////////////////////////////////////
+export interface PaginationType {
+  maxPage: number;
+  currentPage: number;
+}
+
+export interface PaginationResponse {
+  maxPage: number;
+  totalItems: number;
+  currentPage: number;
+  currentLimit: number;
+  next: boolean;
+}
+/////////////////////////////////////////////
+
+// 카테고리 
+export interface ProductCategoryType {
+  id: number;
+  category: string;
+  title: string;
+  imageUrl: string;
+}
+
+export interface RecomType {
+  id: number;
+  type: string;
+}
+
+export interface AgeType {
+  id: number;
+  type: string;
+  description: string;
+}
+
+export interface SearchPriceFilterType {
+  id: number;
+  min: number;
+  max: number;
+}
+
+export interface SearchDiscountFilterType {
+  id: number;
+  min: number;
+  max: number;
+}
+export interface SearchFiltersType {
+  price: SearchPriceFilterType[];
+  discount: SearchDiscountFilterType[];
+}
+
+// 카테고리 타입
+export interface CategoryType {
+  product: ProductCategoryType[];
+  searchFilter: SearchFiltersType;
+  recomType: RecomType[];
+  ageType: AgeType[];
+}
+/////////////////////////////////////////////
