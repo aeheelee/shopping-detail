@@ -21,8 +21,6 @@ export default function Header() {
   const handleSearch = () => {
     if (query) {
       navigate(`/search?query=${query}`);
-    } else {
-      // 나중에 토스트 ui등을 띄움.
     }
   };
 
