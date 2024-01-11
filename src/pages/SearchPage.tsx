@@ -1,4 +1,8 @@
 // import { useSearchParams } from "react-router-dom";
+import { styled } from 'styled-components';
+import Button from '../components/Button';
+import ProductList from '../components/ProductList';
+import SearchFilter from '../components/SearchFilter';
 import { useCategories } from '../query/Categories';
 
 export default function SearchPage() {
@@ -22,5 +26,36 @@ export default function SearchPage() {
   console.log('errorMsg: ' + errorCategoriesMsg);
   console.log('-----------------------------------');
 
-  return <div>검색 페이지 입니다.</div>;
+  return (
+    <StyledWrap>
+      <StyledFilter>
+        <SearchFilter />
+        <Button />
+      </StyledFilter>
+      <StyledContent>
+        <ProductList />
+      </StyledContent>
+    </StyledWrap>
+  );
 }
+
+const StyledWrap = styled.div`
+  display: flex;
+  max-width: 1240px;
+  height: 100%;
+  margin: 0 auto;
+  align-items: flex-start;
+  gap: 0 20px;
+`;
+
+const StyledFilter = styled.section`
+  display: flex;
+  width: 300px;
+  height: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+`;
+
+const StyledContent = styled.section`
+  flex: 1;
+`;

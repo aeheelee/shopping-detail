@@ -28,3 +28,7 @@ main::-webkit-scrollbar {
 .loading_container {
   height: 92vh;
 }
+
+main {
+  min-height: 100%;
+}

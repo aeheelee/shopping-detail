@@ -28,7 +28,6 @@ const StyledWrap = styled.article`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 10px;
-  margin-top: 30px;
 
   @media only screen and (max-width: 900px) {
     overflow: hidden;
