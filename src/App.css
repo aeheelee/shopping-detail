@@ -29,6 +29,10 @@ main::-webkit-scrollbar {
   height: 92vh;
 }
 
-main {
+body {
   min-height: 100%;
+}
+
+main {
+  height: 100%;
 }

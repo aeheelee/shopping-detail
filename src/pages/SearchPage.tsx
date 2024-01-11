@@ -2,8 +2,8 @@
 import { styled } from 'styled-components';
 import Button from '../components/Button';
 import ProductList from '../components/ProductList';
-import SearchFilter from '../components/SearchFilter';
 import Pagination from '../components/Pagination';
+import SearchFilterList from '../components/SearchFilterList';
 import { useCategories } from '../query/Categories';
 
 export default function SearchPage() {
@@ -30,7 +30,7 @@ export default function SearchPage() {
   return (
     <StyledWrap>
       <StyledFilter>
-        <SearchFilter />
+        <SearchFilterList />
         <Button />
       </StyledFilter>
       <StyledContent>
@@ -47,7 +47,7 @@ export default function SearchPage() {
 const StyledWrap = styled.div`
   display: flex;
   max-width: 1240px;
-  height: 100%;
+  height: calc(100% - 80px);
   margin: 0 auto;
   align-items: flex-start;
   gap: 0 20px;
