@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import { filterList } from "../constants/filterList.constant";
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import { filterList } from '../constants/filterList.constant';
 
 interface OpenStatesProps {
   id: number;
@@ -16,41 +16,27 @@ const SearchFilter = () => {
 
   const handleButtonClick = (itemId: number) => {
     setOpenStates((prevStates) => {
-      return prevStates.map((state) =>
-        state.id === itemId ? { ...state, isOpen: !state.isOpen } : state,
-      );
+      return prevStates.map((state) => (state.id === itemId ? { ...state, isOpen: !state.isOpen } : state));
     });
   };
 
-  const getIsOpen = (itemId: number) =>
-    openStates.find((state) => state.id === itemId)?.isOpen ?? false;
+  const getIsOpen = (itemId: number) => openStates.find((state) => state.id === itemId)?.isOpen ?? false;
 
   return (
     <>
       {filterList.map((item) => (
         <StyledFilterItem.Wrap key={item.id}>
-          <StyledFilterItem.ButtonTitle
-            type="button"
-            onClick={() => handleButtonClick(item.id)}
-          >
+          <StyledFilterItem.ButtonTitle type="button" onClick={() => handleButtonClick(item.id)}>
             {item.title}
             <StyledFilterItem.ButtonIcon $isOpen={getIsOpen(item.id)}>
-              {getIsOpen(item.id)
-                ? "필터 선택 리스트 열림"
-                : "필터 선택 리스트 닫힘"}
+              {getIsOpen(item.id) ? '필터 선택 리스트 열림' : '필터 선택 리스트 닫힘'}
             </StyledFilterItem.ButtonIcon>
           </StyledFilterItem.ButtonTitle>
           <StyledFilterItem.DetailList $isOpen={getIsOpen(item.id)}>
             {item.filterChoice.map((filterChoice, index) => (
               <StyledFilterItem.DetailListItem key={index}>
-                <input
-                  type="radio"
-                  id={`${item.category}_${index}`}
-                  name={item.category}
-                />
-                <StyledFilterItem.Label htmlFor={`${item.category}_${index}`}>
-                  {filterChoice}
-                </StyledFilterItem.Label>
+                <input type="radio" id={`${item.category}_${index}`} name={item.category} />
+                <StyledFilterItem.Label htmlFor={`${item.category}_${index}`}>{filterChoice}</StyledFilterItem.Label>
               </StyledFilterItem.DetailListItem>
             ))}
           </StyledFilterItem.DetailList>
@@ -81,7 +67,7 @@ const StyledFilterItem = {
     overflow: hidden;
 
     &::before {
-      content: "";
+      content: '';
       position: absolute;
       top: 50%;
       left: 50%;
@@ -89,16 +75,14 @@ const StyledFilterItem = {
       height: 10px;
       -webkit-transform: translate(-50%, -50%) rotate(45deg);
       transform: ${({ $isOpen }) =>
-        $isOpen
-          ? "translate(-50%, -50%) rotate(-135deg)"
-          : "translate(-50%, -50%) rotate(45deg)"};
+        $isOpen ? 'translate(-50%, -50%) rotate(-135deg)' : 'translate(-50%, -50%) rotate(45deg)'};
       margin-top: 2px;
       border-top: 1px solid #333;
       border-left: 1px solid #333;
     }
   `,
   DetailList: styled.ul<{ $isOpen: boolean }>`
-    display: ${({ $isOpen }) => ($isOpen ? "block" : "none")};
+    display: ${({ $isOpen }) => ($isOpen ? 'block' : 'none')};
     padding-top: 10px;
   `,
   DetailListItem: styled.li`

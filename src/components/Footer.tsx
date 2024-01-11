@@ -1,4 +1,4 @@
-import logo from "../assets/coz_logo_192.png";
+import logo from '../assets/coz_logo_192.png';
 
 export default function Footer() {
   return (

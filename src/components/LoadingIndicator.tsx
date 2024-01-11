@@ -1,9 +1,6 @@
 export default function LoadingIndicator() {
   return (
-    <main
-      role="status"
-      className="flex justify-center items-center loading_container"
-    >
+    <main role="status" className="flex justify-center items-center loading_container">
       <svg
         aria-hidden="true"
         className="w-20 h-20 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"

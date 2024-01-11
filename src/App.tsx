@@ -1,14 +1,14 @@
-import { Suspense, lazy, useLayoutEffect } from "react";
-import { Routes, Route, useLocation } from "react-router-dom";
-import "./App.css";
-import Footer from "./components/Footer";
-import Header from "./components/Header";
-import LoadingIndicator from "./components/LoadingIndicator";
-import MainPage from "./pages/MainPage";
+import { Suspense, lazy, useLayoutEffect } from 'react';
+import { Routes, Route, useLocation } from 'react-router-dom';
+import './App.css';
+import Footer from './components/Footer';
+import Header from './components/Header';
+import LoadingIndicator from './components/LoadingIndicator';
+import MainPage from './pages/MainPage';
 
-import { QueryClient, QueryClientProvider } from "react-query";
+import { QueryClient, QueryClientProvider } from 'react-query';
 
-const SearchPage = lazy(() => import("./pages/SearchPage"));
+const SearchPage = lazy(() => import('./pages/SearchPage'));
 
 function ScrollToTop(): null {
   const { pathname } = useLocation();
@@ -16,7 +16,7 @@ function ScrollToTop(): null {
   useLayoutEffect(() => {
     window.scrollTo({
       top: 0,
-      behavior: "smooth",
+      behavior: 'smooth',
     });
   }, [pathname]);
 

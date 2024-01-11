@@ -1,23 +1,22 @@
-import { useNavigate } from "react-router-dom";
-import logo from "../assets/coz_logo_192.png";
-import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
+import logo from '../assets/coz_logo_192.png';
+import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 export default function Header() {
   const navigate = useNavigate();
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState('');
 
   const location = useLocation();
 
   useEffect(() => {
     // 페이지 이동 시 검색어 초기화
-    if (!location.pathname.includes("search")) {
-      setQuery("");
+    if (!location.pathname.includes('search')) {
+      setQuery('');
     }
   }, [location]);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) =>
-    setQuery(e.target.value);
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => setQuery(e.target.value);
   const handleSearch = () => {
     if (query) {
       navigate(`/search?query=${query}`);
@@ -25,13 +24,13 @@ export default function Header() {
   };
 
   const handleFocus = () => {
-    if (query === "검색어를 입력하세요") {
-      setQuery(""); // 입력 필드에 포커스가 있을 때, 기본 텍스트 제거
+    if (query === '검색어를 입력하세요') {
+      setQuery(''); // 입력 필드에 포커스가 있을 때, 기본 텍스트 제거
     }
   };
 
   const handleLogoClick = () => {
-    setQuery("");
+    setQuery('');
     navigate(`/`);
   };
 
@@ -51,15 +50,12 @@ export default function Header() {
           onChange={handleInputChange}
           onFocus={handleFocus}
           onKeyDown={(e) => {
-            if (e.key === "Enter") {
+            if (e.key === 'Enter') {
               handleSearch();
             }
           }}
         />
-        <span
-          className="absolute inset-y-0 right-2 flex items-center p-2 cursor-pointer"
-          onClick={handleSearch}
-        >
+        <span className="absolute inset-y-0 right-2 flex items-center p-2 cursor-pointer" onClick={handleSearch}>
           <i className="fa-solid fa-magnifying-glass text-indigo-500 hover:text-emerald-500 m-auto"></i>
         </span>
       </label>

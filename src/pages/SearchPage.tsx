@@ -1,5 +1,5 @@
 // import { useSearchParams } from "react-router-dom";
-import { useCategories } from "../query/Categories";
+import { useCategories } from '../query/Categories';
 
 export default function SearchPage() {
   // 검색어 + 필터 설정은 전부 Query Parameter로 설정 및 사용 됩니다.
@@ -15,12 +15,12 @@ export default function SearchPage() {
     error: errorCategoriesMsg = null,
   } = useCategories();
 
-  console.log("-----------------------------------");
-  console.log("data: " + JSON.stringify(categories));
-  console.log("isLoading: " + islLoadingCategories);
-  console.log("isError: " + isErrorCategories);
-  console.log("errorMsg: " + errorCategoriesMsg);
-  console.log("-----------------------------------");
+  console.log('-----------------------------------');
+  console.log('data: ' + JSON.stringify(categories));
+  console.log('isLoading: ' + islLoadingCategories);
+  console.log('isError: ' + isErrorCategories);
+  console.log('errorMsg: ' + errorCategoriesMsg);
+  console.log('-----------------------------------');
 
   return <div>검색 페이지 입니다.</div>;
 }

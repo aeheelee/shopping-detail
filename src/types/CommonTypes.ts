@@ -14,7 +14,7 @@ export interface PaginationResponse {
 }
 /////////////////////////////////////////////
 
-// 카테고리 
+// 카테고리
 export interface ProductCategoryType {
   id: number;
   category: string;
@@ -57,3 +57,21 @@ export interface CategoryType {
   ageType: AgeType[];
 }
 /////////////////////////////////////////////
+
+// 상품목록 타입
+export interface ProductType {
+  id: number;
+  type: string;
+  title: string;
+  subTitle?: null;
+  brandName?: string | null;
+  price: number;
+  discountPercentage: number;
+  discountPrice: number;
+  imageUrl: string;
+  brandImageUrl: null;
+  category: {
+    id: number;
+    category: string;
+  };
+}
