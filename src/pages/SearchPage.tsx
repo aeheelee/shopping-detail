@@ -3,6 +3,7 @@ import { styled } from 'styled-components';
 import Button from '../components/Button';
 import ProductList from '../components/ProductList';
 import SearchFilter from '../components/SearchFilter';
+import Pagination from '../components/Pagination';
 import { useCategories } from '../query/Categories';
 
 export default function SearchPage() {
@@ -33,7 +34,11 @@ export default function SearchPage() {
         <Button />
       </StyledFilter>
       <StyledContent>
+        <StyledText>
+          <strong>19</strong>개 결과
+        </StyledText>
         <ProductList />
+        <Pagination />
       </StyledContent>
     </StyledWrap>
   );
@@ -58,4 +63,9 @@ const StyledFilter = styled.section`
 
 const StyledContent = styled.section`
   flex: 1;
+`;
+
+const StyledText = styled.p`
+  padding: 12px 0;
+  font-size: 14px;
 `;
