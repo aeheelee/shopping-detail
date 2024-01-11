@@ -1,18 +1,16 @@
 import React from 'react';
 import SearchFilter from './SearchFilter';
-import Button from './Button';
 import styled from 'styled-components';
 
 const SearchFilterList = () => {
   return (
-    <StyldFilterListWrap>
+    <StyledFilterListWrap>
       <SearchFilter />
-      <Button />
-    </StyldFilterListWrap>
+    </StyledFilterListWrap>
   );
 };
 
-const StyldFilterListWrap = styled.div`
+const StyledFilterListWrap = styled.div`
   padding-bottom: 20px;
 `;
 
