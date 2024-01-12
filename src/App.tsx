@@ -6,7 +6,8 @@ import Header from './components/Header';
 import LoadingIndicator from './components/LoadingIndicator';
 import MainPage from './pages/MainPage';
 
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 const SearchPage = lazy(() => import('./pages/SearchPage'));
 
@@ -23,7 +24,7 @@ function ScrollToTop(): null {
   return null;
 }
 
-const queryClient = new QueryClient({
+export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       // 5분에 한번씩 상태를 업데이트 합니다.
@@ -35,6 +36,7 @@ const queryClient = new QueryClient({
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
+      <ReactQueryDevtools initialIsOpen={false} />
       <div className="App h-screen">
         <Header />
         <main>

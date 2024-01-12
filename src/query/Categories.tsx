@@ -1,4 +1,4 @@
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { API_BASE_URL } from '../constants/constants';
 import { CategoryType } from '../types/CommonTypes';
@@ -24,5 +24,5 @@ const fetchCategories = async (): Promise<CategoryType> => {
  * @returns
  */
 export const useCategories = () => {
-  return useQuery<CategoryType>('categories', fetchCategories);
+  return useQuery<CategoryType>({ queryKey: ['categories'], queryFn: fetchCategories });
 };
