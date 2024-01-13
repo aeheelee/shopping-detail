@@ -59,7 +59,7 @@ export interface CategoryType {
 /////////////////////////////////////////////
 
 // 상품목록 타입
-export interface ProductType {
+export interface ProductItemsType {
   id: number;
   type: string;
   title: string;
@@ -74,4 +74,12 @@ export interface ProductType {
     id: number;
     category: string;
   };
+}
+
+export interface ProductType {
+  maxPage: number;
+  totalItems: number;
+  currentPate: number;
+  next: boolean;
+  items: ProductItemsType[];
 }

@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import { ProductType } from '../types/CommonTypes';
+import { ProductItemsType } from '../types/CommonTypes';
 
 interface Props {
-  data: ProductType;
+  data: ProductItemsType;
 }
 const ProductCard = ({ data }: Props) => {
   const { title, price, discountPercentage, discountPrice, imageUrl } = data;

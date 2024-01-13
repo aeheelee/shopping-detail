@@ -5,6 +5,7 @@ import ProductList from '../components/ProductList';
 import Pagination from '../components/Pagination';
 import SearchFilterList from '../components/SearchFilterList';
 import { useCategories } from '../hooks/api/Categories';
+import { useProducts } from '../hooks/api/Products';
 
 export default function SearchPage() {
   // 검색어 + 필터 설정은 전부 Query Parameter로 설정 및 사용 됩니다.
@@ -19,6 +20,12 @@ export default function SearchPage() {
     isError: isErrorCategories = false,
     error: errorCategoriesMsg = null,
   } = useCategories();
+
+  const { data: products } = useProducts();
+
+  if (!products) {
+    return null;
+  }
 
   console.log('-----------------------------------');
   console.log('data: ' + JSON.stringify(categories));
@@ -37,7 +44,7 @@ export default function SearchPage() {
         <StyledText>
           <strong>19</strong>개 결과
         </StyledText>
-        <ProductList />
+        <ProductList data={products} />
         <Pagination />
       </StyledContent>
     </StyledWrap>
