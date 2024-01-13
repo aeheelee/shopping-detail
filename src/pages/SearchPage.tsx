@@ -1,7 +1,7 @@
 import { useSearchParams } from 'react-router-dom';
 import { NumberParam, StringParam, useQueryParams, withDefault } from 'use-query-params';
 import { styled } from 'styled-components';
-import Button from '../components/Button';
+import Button from '../components/filter/Button';
 import ProductList from '../components/product/ProductList';
 import Pagination from '../components/Pagination';
 import SearchFilterList from '../components/filter/SearchFilterList';
@@ -33,12 +33,12 @@ export default function SearchPage() {
     window.scrollTo(0, 0);
   };
 
-  console.log('-----------------------------------');
-  console.log('data: ' + JSON.stringify(categories));
-  console.log('isLoading: ' + isLoadingCategories);
+  // console.log('-----------------------------------');
+  // console.log('data: ' + JSON.stringify(categories));
+  // console.log('isLoading: ' + isLoadingCategories);
   // console.log('isError: ' + isErrorCategories);
   // console.log('errorMsg: ' + errorCategoriesMsg);
-  console.log('-----------------------------------');
+  // console.log('-----------------------------------');
 
   return (
     <StyledWrap>
