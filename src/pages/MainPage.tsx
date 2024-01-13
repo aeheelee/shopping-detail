@@ -22,7 +22,7 @@ export default function MainPage() {
   console.log('-----------------------------------');
   return (
     <main>
-      <ProductList data={products} />
+      <ProductList data={products.items} />
     </main>
   );
 }

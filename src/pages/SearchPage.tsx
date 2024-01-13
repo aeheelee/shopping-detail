@@ -53,7 +53,9 @@ export default function SearchPage() {
         {isLoadingCategories ? (
           <LoadingIndicator />
         ) : (
-          <>{products.items.length === 0 ? <div>찾으시는 상품이 없어요.</div> : <ProductList data={products} />}</>
+          <>
+            {products.items.length === 0 ? <div>찾으시는 상품이 없어요.</div> : <ProductList data={products.items} />}
+          </>
         )}
         <Pagination maxPage={products.maxPage} currentPage={query.page} onPageChange={handleChangePage} />
       </StyledContent>

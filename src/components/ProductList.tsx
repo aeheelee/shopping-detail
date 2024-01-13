@@ -1,24 +1,15 @@
-import React, { useEffect, useState } from 'react';
 import ProductCard from './ProductCard';
 import styled from 'styled-components';
-import { ProductItemsType, ProductType } from '../types/CommonTypes';
+import { ProductItemsType } from '../types/CommonTypes';
 
 interface IProps {
-  data: ProductType;
+  data: ProductItemsType[];
 }
 
 const ProductList = ({ data }: IProps) => {
-  const [productsData, setProductsData] = useState<ProductItemsType[]>([]);
-
-  const productList = data.items;
-
-  useEffect(() => {
-    setProductsData(productList);
-  }, [productList]);
-
   return (
     <StyledWrap>
-      {productsData.map((product) => (
+      {data.map((product) => (
         <ProductCard data={product} key={product.id} />
       ))}
     </StyledWrap>
