@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import ProductCard from './ProductCard';
 import styled from 'styled-components';
-import productsList from '../resource/productList';
-import { ProductType } from '../types/CommonTypes';
+import { ProductItemsType, ProductType } from '../types/CommonTypes';
 
-const ProductList = () => {
-  const [productsData, setProductsData] = useState<ProductType[]>([]);
+interface IProps {
+  data: ProductType;
+}
 
-  const productList: ProductType[] = productsList.items;
+const ProductList = ({ data }: IProps) => {
+  const [productsData, setProductsData] = useState<ProductItemsType[]>([]);
+
+  const productList = data.items;
 
   useEffect(() => {
     setProductsData(productList);
-  }, []);
+  }, [productList]);
 
   return (
     <StyledWrap>
