@@ -31,15 +31,15 @@ const SearchFilter = ({ filter }: IProps) => {
       <StyledFilterItem.Wrap>
         <StyledFilterItem.ButtonTitle type="button" onClick={handleClick}>
           {filter.title}
-          <StyledFilterItem.ButtonIcon isOpen>
+          <StyledFilterItem.ButtonIcon isOpen={isOpen}>
             {isOpen ? '필터 선택 리스트 열림' : '필터 선택 리스트 닫힘'}
           </StyledFilterItem.ButtonIcon>
         </StyledFilterItem.ButtonTitle>
-        <StyledFilterItem.DetailList isOpen>
+        <StyledFilterItem.DetailList isOpen={isOpen}>
           {filterData.map((item, index) => (
             <StyledFilterItem.DetailListItem key={index}>
-              <input type="radio" id={`${item.title}_${item.id}`} name={item.title} />
-              <StyledFilterItem.Label htmlFor={`${item.title}_${item.id}`}>{item.title}</StyledFilterItem.Label>
+              <input type="radio" id={`${filter.type}_${item.id}`} name={filter.type} />
+              <StyledFilterItem.Label htmlFor={`${filter.type}_${item.id}`}>{item.title}</StyledFilterItem.Label>
             </StyledFilterItem.DetailListItem>
           ))}
         </StyledFilterItem.DetailList>
@@ -77,7 +77,7 @@ const StyledFilterItem = {
       height: 10px;
       -webkit-transform: translate(-50%, -50%) rotate(45deg);
       transform: ${({ isOpen }) =>
-        isOpen ? 'translate(-50%, -50%) rotate(-135deg)' : 'translate(-50%, -50%) rotate(45deg)'};
+        !isOpen ? 'translate(-50%, -50%) rotate(-135deg)' : 'translate(-50%, -50%) rotate(45deg)'};
       margin-top: 2px;
       border-top: 1px solid #333;
       border-left: 1px solid #333;
