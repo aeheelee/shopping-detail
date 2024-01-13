@@ -18,20 +18,20 @@ const FilterList = ({ data }: IProps) => {
     const priceData = price.map((item) => ({ ...item, title: `${item.min} ~ ${item.max}` }));
     const discountData = discount.map((item) => ({ ...item, title: `${item.min} ~ ${item.max}` }));
 
-    const productDataArray = [{ type: 'product', title: '상품별', data: productData }];
-    const priceDataArray = [{ type: 'product', title: '가격별', data: priceData }];
-    const discountDataArray = [{ type: 'product', title: '할인별', data: discountData }];
-
-    return [productDataArray, priceDataArray, discountDataArray];
+    return [
+      { type: 'product', title: '상품별', data: productData },
+      { type: 'price', title: '가격별', data: priceData },
+      { type: 'discount', title: '할인별', data: discountData },
+    ];
   }, [data]);
 
   console.log(newArray);
 
   return (
     <StyledFilterListWrap>
-      {newArray.map((item, index) => {
-        <FilterItem data={item} key={index} />;
-      })}
+      {newArray.map((item, index) => (
+        <FilterItem filter={item} key={index} />
+      ))}
     </StyledFilterListWrap>
   );
 };

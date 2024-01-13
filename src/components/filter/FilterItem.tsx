@@ -1,37 +1,47 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import type { CategoryType } from '../../types/CommonTypes';
-import { CATEGORIES_TYPES_TYPE } from '../../constants/constants';
 
-//개발 시 삭제 - 필터아이템 목데이터
-// const filterItem = ['의류', '반려동물', '안경', '신발'];
-
+interface IData {
+  id: number;
+  title: string;
+  min?: number;
+  max?: number;
+}
 interface IProps {
-  data: CategoryType;
+  filter: {
+    type: string;
+    title: string;
+    data: IData[];
+  };
 }
 
-const SearchFilter = ({ data }: IProps) => {
+const FilterItem = ({ filter }: IProps) => {
+  console.log(filter);
   const [isOpen, setIsOpen] = useState(false);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     console.log(event);
     setIsOpen((prev) => !prev);
   };
-
-  console.log(data);
+  //필터 데이터
+  const filterData = filter.data;
+  console.log(filterData);
 
   return (
     <>
       <StyledFilterItem.Wrap>
         <StyledFilterItem.ButtonTitle type="button" onClick={handleClick}>
+          {filter.title}
           <StyledFilterItem.ButtonIcon isOpen>
             {isOpen ? '필터 선택 리스트 열림' : '필터 선택 리스트 닫힘'}
           </StyledFilterItem.ButtonIcon>
         </StyledFilterItem.ButtonTitle>
         <StyledFilterItem.DetailList isOpen>
-          <StyledFilterItem.DetailListItem key={index}>
-            <input type="radio" id={`${category}_${id}`} name={title} />
-            <StyledFilterItem.Label htmlFor={`${category}_${id}`}>{title}</StyledFilterItem.Label>
-          </StyledFilterItem.DetailListItem>
+          {filterData.map((item, index) => (
+            <StyledFilterItem.DetailListItem key={index}>
+              <input type="radio" id={`${item.title}_${item.id}`} name={item.title} />
+              <StyledFilterItem.Label htmlFor={`${item.title}_${item.id}`}>{item.title}</StyledFilterItem.Label>
+            </StyledFilterItem.DetailListItem>
+          ))}
         </StyledFilterItem.DetailList>
       </StyledFilterItem.Wrap>
     </>
@@ -91,4 +101,4 @@ const StyledFilterItem = {
   `,
 };
 
-export default SearchFilter;
+export default FilterItem;
