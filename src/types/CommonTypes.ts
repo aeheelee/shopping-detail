@@ -22,16 +22,16 @@ export interface ProductCategoryType {
   imageUrl: string;
 }
 
-export interface RecomType {
-  id: number;
-  type: string;
-}
+// export interface RecomType {
+//   id: number;
+//   type: string;
+// }
 
-export interface AgeType {
-  id: number;
-  type: string;
-  description: string;
-}
+// export interface AgeType {
+//   id: number;
+//   type: string;
+//   description: string;
+// }
 
 export interface SearchPriceFilterType {
   id: number;
@@ -53,8 +53,8 @@ export interface SearchFiltersType {
 export interface CategoryType {
   product: ProductCategoryType[];
   searchFilter: SearchFiltersType;
-  recomType: RecomType[];
-  ageType: AgeType[];
+  // recomType: RecomType[];
+  // ageType: AgeType[];
 }
 /////////////////////////////////////////////
 

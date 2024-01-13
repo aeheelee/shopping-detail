@@ -3,7 +3,7 @@ import { styled } from 'styled-components';
 import Button from '../components/Button';
 import ProductList from '../components/ProductList';
 import Pagination from '../components/Pagination';
-import SearchFilterList from '../components/SearchFilterList';
+import FilterList from '../components/filter/FilterList';
 import { useCategories } from '../hooks/api/Categories';
 
 export default function SearchPage() {
@@ -20,6 +20,8 @@ export default function SearchPage() {
     error: errorCategoriesMsg = null,
   } = useCategories();
 
+  if (!categories) return null;
+
   console.log('-----------------------------------');
   console.log('data: ' + JSON.stringify(categories));
   console.log('isLoading: ' + islLoadingCategories);
@@ -30,7 +32,7 @@ export default function SearchPage() {
   return (
     <StyledWrap>
       <StyledFilter>
-        <SearchFilterList />
+        <FilterList data={categories} />
         <Button />
       </StyledFilter>
       <StyledContent>
