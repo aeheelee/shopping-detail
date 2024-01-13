@@ -1,5 +1,5 @@
 // import { useSearchParams } from "react-router-dom";
-import { NumberParam, useQueryParams, withDefault } from 'use-query-params';
+import { NumberParam, StringParam, useQueryParams, withDefault } from 'use-query-params';
 import { styled } from 'styled-components';
 import Button from '../components/Button';
 import ProductList from '../components/ProductList';
@@ -7,12 +7,16 @@ import Pagination from '../components/Pagination';
 import SearchFilterList from '../components/filter/SearchFilterList';
 import { useCategories } from '../hooks/api/Categories';
 import useSearch from '../hooks/api/Search';
+import { useSearchParams } from 'react-router-dom';
 
 export default function SearchPage() {
   // 검색어 + 필터 설정은 전부 Query Parameter로 설정 및 사용 됩니다.
   // useSearchParams을 이용해서 Query 정보를 관리 해 보세요.
-  // const [searchParams, setSearchParams] = useSearchParams();
-  // const query = searchParams.get("query");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const keyword = searchParams.get('keyword') || '%20';
+  //검색바에서 검색어를 setSearchParam넣어서 updatae..
+  // setSearchParams();
+  console.log(setSearchParams);
 
   // 리액트 쿼리 : 카테고리 가져오기
   const {
@@ -24,7 +28,9 @@ export default function SearchPage() {
 
   const [query, setQuery] = useQueryParams({
     page: withDefault(NumberParam, 1),
+    query: withDefault(StringParam, keyword),
   });
+  console.log(query);
 
   const { data: products } = useSearch({ ...query });
 

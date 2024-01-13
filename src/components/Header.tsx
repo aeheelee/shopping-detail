@@ -6,6 +6,8 @@ import { useLocation } from 'react-router-dom';
 export default function Header() {
   const navigate = useNavigate();
   const [query, setQuery] = useState('');
+  console.log('헤더 쿼리');
+  console.log(query);
 
   const location = useLocation();
 
