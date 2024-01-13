@@ -80,6 +80,7 @@ export interface ProductType {
   maxPage: number;
   totalItems: number;
   currentPage: number;
+  currentLimit: number;
   next: boolean;
   items: ProductItemsType[];
 }

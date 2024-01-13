@@ -8,6 +8,8 @@ import MainPage from './pages/MainPage';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { QueryParamProvider } from 'use-query-params';
+import { ReactRouter6Adapter } from 'use-query-params/adapters/react-router-6';
 
 // const MainPage = lazy(() => import('./pages/MainPage'));
 const SearchPage = lazy(() => import('./pages/SearchPage'));
@@ -41,13 +43,15 @@ function App() {
       <div className="App h-screen">
         <Header />
         <main>
-          <Suspense fallback={<LoadingIndicator />}>
-            <ScrollToTop />
-            <Routes>
-              <Route path="/" element={<MainPage />} />
-              <Route path="/search" element={<SearchPage />} />
-            </Routes>
-          </Suspense>
+          <QueryParamProvider adapter={ReactRouter6Adapter}>
+            <Suspense fallback={<LoadingIndicator />}>
+              <ScrollToTop />
+              <Routes>
+                <Route path="/" element={<MainPage />} />
+                <Route path="/search" element={<SearchPage />} />
+              </Routes>
+            </Suspense>
+          </QueryParamProvider>
         </main>
         <Footer />
       </div>

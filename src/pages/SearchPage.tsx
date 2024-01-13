@@ -1,11 +1,12 @@
 // import { useSearchParams } from "react-router-dom";
+import { NumberParam, useQueryParams, withDefault } from 'use-query-params';
 import { styled } from 'styled-components';
 import Button from '../components/Button';
 import ProductList from '../components/ProductList';
 import Pagination from '../components/Pagination';
 import SearchFilterList from '../components/filter/SearchFilterList';
 import { useCategories } from '../hooks/api/Categories';
-import { useSearch } from '../hooks/api/Search';
+import useSearch from '../hooks/api/Search';
 
 export default function SearchPage() {
   // 검색어 + 필터 설정은 전부 Query Parameter로 설정 및 사용 됩니다.
@@ -21,10 +22,19 @@ export default function SearchPage() {
     error: errorCategoriesMsg = null,
   } = useCategories();
 
-  const { data: products } = useSearch();
+  const [query, setQuery] = useQueryParams({
+    page: withDefault(NumberParam, 1),
+  });
+
+  const { data: products } = useSearch({ ...query });
 
   if (!categories) return null;
   if (!products) return null;
+
+  const handleChangePage = (page: number) => {
+    setQuery({ page });
+    window.scrollTo(0, 0);
+  };
 
   console.log('-----------------------------------');
   console.log('data: ' + JSON.stringify(categories));
@@ -44,7 +54,12 @@ export default function SearchPage() {
           <strong>19</strong>개 결과
         </StyledText>
         <ProductList data={products} />
-        <Pagination />
+        <Pagination
+          maxPage={products.maxPage}
+          currentLimit={products.currentLimit}
+          currentPage={query.page}
+          onPageChange={handleChangePage}
+        />
       </StyledContent>
     </StyledWrap>
   );

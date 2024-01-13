@@ -1,5 +1,5 @@
 import ProductList from '../components/ProductList';
-import { useSearch } from '../hooks/api/Search';
+import useSearch from '../hooks/api/Search';
 
 export default function MainPage() {
   // Phase1 작업물을 추가합니다.
