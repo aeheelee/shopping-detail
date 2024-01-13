@@ -1,6 +1,6 @@
 import ProductCard from './ProductCard';
 import styled from 'styled-components';
-import { ProductItemsType } from '../types/CommonTypes';
+import { ProductItemsType } from '../../types/CommonTypes';
 
 interface IProps {
   data: ProductItemsType[];

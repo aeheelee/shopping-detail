@@ -2,7 +2,7 @@ import { useSearchParams } from 'react-router-dom';
 import { NumberParam, StringParam, useQueryParams, withDefault } from 'use-query-params';
 import { styled } from 'styled-components';
 import Button from '../components/Button';
-import ProductList from '../components/ProductList';
+import ProductList from '../components/product/ProductList';
 import Pagination from '../components/Pagination';
 import SearchFilterList from '../components/filter/SearchFilterList';
 import { useCategories } from '../hooks/api/Categories';

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ProductItemsType } from '../types/CommonTypes';
+import { ProductItemsType } from '../../types/CommonTypes';
 
 interface Props {
   data: ProductItemsType;
