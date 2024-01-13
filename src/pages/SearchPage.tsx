@@ -1,4 +1,4 @@
-// import { useSearchParams } from "react-router-dom";
+import { useSearchParams } from 'react-router-dom';
 import { NumberParam, StringParam, useQueryParams, withDefault } from 'use-query-params';
 import { styled } from 'styled-components';
 import Button from '../components/Button';
@@ -7,30 +7,21 @@ import Pagination from '../components/Pagination';
 import SearchFilterList from '../components/filter/SearchFilterList';
 import { useCategories } from '../hooks/api/Categories';
 import useSearch from '../hooks/api/Search';
-import { useSearchParams } from 'react-router-dom';
+import LoadingIndicator from '../components/LoadingIndicator';
 
 export default function SearchPage() {
   // 검색어 + 필터 설정은 전부 Query Parameter로 설정 및 사용 됩니다.
   // useSearchParams을 이용해서 Query 정보를 관리 해 보세요.
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const keyword = searchParams.get('keyword') || '%20';
-  //검색바에서 검색어를 setSearchParam넣어서 updatae..
-  // setSearchParams();
-  console.log(setSearchParams);
 
   // 리액트 쿼리 : 카테고리 가져오기
-  const {
-    data: categories,
-    isLoading: islLoadingCategories = true,
-    isError: isErrorCategories = false,
-    error: errorCategoriesMsg = null,
-  } = useCategories();
+  const { data: categories, isLoading: isLoadingCategories = true } = useCategories();
 
   const [query, setQuery] = useQueryParams({
     page: withDefault(NumberParam, 1),
     query: withDefault(StringParam, keyword),
   });
-  console.log(query);
 
   const { data: products } = useSearch({ ...query });
 
@@ -44,9 +35,9 @@ export default function SearchPage() {
 
   console.log('-----------------------------------');
   console.log('data: ' + JSON.stringify(categories));
-  console.log('isLoading: ' + islLoadingCategories);
-  console.log('isError: ' + isErrorCategories);
-  console.log('errorMsg: ' + errorCategoriesMsg);
+  console.log('isLoading: ' + isLoadingCategories);
+  // console.log('isError: ' + isErrorCategories);
+  // console.log('errorMsg: ' + errorCategoriesMsg);
   console.log('-----------------------------------');
 
   return (
@@ -59,7 +50,11 @@ export default function SearchPage() {
         <StyledText>
           <strong>{products.totalItems}</strong>개 결과
         </StyledText>
-        <ProductList data={products} />
+        {isLoadingCategories ? (
+          <LoadingIndicator />
+        ) : (
+          <>{products.items.length === 0 ? <div>찾으시는 상품이 없어요.</div> : <ProductList data={products} />}</>
+        )}
         <Pagination maxPage={products.maxPage} currentPage={query.page} onPageChange={handleChangePage} />
       </StyledContent>
     </StyledWrap>

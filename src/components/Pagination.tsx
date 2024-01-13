@@ -32,7 +32,7 @@ const StyledPagination = styled.div`
   align-items: center;
   justify-content: center;
   height: 25px;
-  margin: 20px 0;
+  margin: 60px 0 30px;
 `;
 
 const StyledPaginationButton = styled.button<{ disabled: boolean }>`
