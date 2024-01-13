@@ -1,47 +1,33 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { filterList } from '../constants/filterList.constant';
 
-interface OpenStatesProps {
-  id: number;
-  isOpen: boolean;
-}
-
+//개발 시 삭제 - 필터아이템 목데이터
+const filterItem = ['의류', '반려동물', '안경', '신발'];
 const SearchFilter = () => {
-  const [openStates, setOpenStates] = useState<OpenStatesProps[]>([
-    { id: 1, isOpen: false },
-    { id: 2, isOpen: false },
-    { id: 3, isOpen: false },
-  ]);
-
-  const handleButtonClick = (itemId: number) => {
-    setOpenStates((prevStates) => {
-      return prevStates.map((state) => (state.id === itemId ? { ...state, isOpen: !state.isOpen } : state));
-    });
+  const [isOpen, setIsOpen] = useState(false);
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    console.log(event);
+    setIsOpen((prev) => !prev);
   };
-
-  const getIsOpen = (itemId: number) => openStates.find((state) => state.id === itemId)?.isOpen ?? false;
 
   return (
     <>
-      {filterList.map((item) => (
-        <StyledFilterItem.Wrap key={item.id}>
-          <StyledFilterItem.ButtonTitle type="button" onClick={() => handleButtonClick(item.id)}>
-            {item.title}
-            <StyledFilterItem.ButtonIcon $isOpen={getIsOpen(item.id)}>
-              {getIsOpen(item.id) ? '필터 선택 리스트 열림' : '필터 선택 리스트 닫힘'}
-            </StyledFilterItem.ButtonIcon>
-          </StyledFilterItem.ButtonTitle>
-          <StyledFilterItem.DetailList $isOpen={getIsOpen(item.id)}>
-            {item.filterChoice.map((filterChoice, index) => (
-              <StyledFilterItem.DetailListItem key={index}>
-                <input type="radio" id={`${item.category}_${index}`} name={item.category} />
-                <StyledFilterItem.Label htmlFor={`${item.category}_${index}`}>{filterChoice}</StyledFilterItem.Label>
-              </StyledFilterItem.DetailListItem>
-            ))}
-          </StyledFilterItem.DetailList>
-        </StyledFilterItem.Wrap>
-      ))}
+      <StyledFilterItem.Wrap>
+        <StyledFilterItem.ButtonTitle type="button" onClick={handleClick}>
+          상품별
+          <StyledFilterItem.ButtonIcon isOpen>
+            {isOpen ? '필터 선택 리스트 열림' : '필터 선택 리스트 닫힘'}
+          </StyledFilterItem.ButtonIcon>
+        </StyledFilterItem.ButtonTitle>
+        <StyledFilterItem.DetailList isOpen>
+          {filterItem.map((item, index) => (
+            <StyledFilterItem.DetailListItem key={index}>
+              <input type="radio" id={`${item}_${index}`} name={item} />
+              <StyledFilterItem.Label htmlFor={`${item}_${index}`}>{item}</StyledFilterItem.Label>
+            </StyledFilterItem.DetailListItem>
+          ))}
+        </StyledFilterItem.DetailList>
+      </StyledFilterItem.Wrap>
     </>
   );
 };
@@ -58,7 +44,7 @@ const StyledFilterItem = {
     width: 100%;
     color: purple;
   `,
-  ButtonIcon: styled.i<{ $isOpen: boolean }>`
+  ButtonIcon: styled.i<{ isOpen: boolean }>`
     position: relative;
     display: block;
     width: 30px;
@@ -74,15 +60,15 @@ const StyledFilterItem = {
       width: 10px;
       height: 10px;
       -webkit-transform: translate(-50%, -50%) rotate(45deg);
-      transform: ${({ $isOpen }) =>
-        $isOpen ? 'translate(-50%, -50%) rotate(-135deg)' : 'translate(-50%, -50%) rotate(45deg)'};
+      transform: ${({ isOpen }) =>
+        isOpen ? 'translate(-50%, -50%) rotate(-135deg)' : 'translate(-50%, -50%) rotate(45deg)'};
       margin-top: 2px;
       border-top: 1px solid #333;
       border-left: 1px solid #333;
     }
   `,
-  DetailList: styled.ul<{ $isOpen: boolean }>`
-    display: ${({ $isOpen }) => ($isOpen ? 'block' : 'none')};
+  DetailList: styled.ul<{ isOpen: boolean }>`
+    display: ${({ isOpen }) => (isOpen ? 'block' : 'none')};
     padding-top: 10px;
   `,
   DetailListItem: styled.li`
