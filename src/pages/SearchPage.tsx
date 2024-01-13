@@ -3,7 +3,7 @@ import { styled } from 'styled-components';
 import Button from '../components/Button';
 import ProductList from '../components/ProductList';
 import Pagination from '../components/Pagination';
-import FilterList from '../components/filter/FilterList';
+import SearchFilterList from '../components/filter/SearchFilterList';
 import { useCategories } from '../hooks/api/Categories';
 import { useProducts } from '../hooks/api/Products';
 
@@ -36,7 +36,7 @@ export default function SearchPage() {
   return (
     <StyledWrap>
       <StyledFilter>
-        <FilterList data={categories} />
+        <SearchFilterList data={categories} />
         <Button />
       </StyledFilter>
       <StyledContent>

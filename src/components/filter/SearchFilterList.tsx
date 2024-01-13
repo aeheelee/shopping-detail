@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import FilterItem from './FilterItem';
+import SearchFilter from './SearchFilter';
 import type { CategoryType } from '../../types/CommonTypes';
 import styled from 'styled-components';
 
@@ -7,7 +7,7 @@ interface IProps {
   data: CategoryType;
 }
 
-const FilterList = ({ data }: IProps) => {
+const SearchFilterList = ({ data }: IProps) => {
   const newArray = useMemo(() => {
     const {
       product,
@@ -25,12 +25,10 @@ const FilterList = ({ data }: IProps) => {
     ];
   }, [data]);
 
-  console.log(newArray);
-
   return (
     <StyledFilterListWrap>
       {newArray.map((item, index) => (
-        <FilterItem filter={item} key={index} />
+        <SearchFilter filter={item} key={index} />
       ))}
     </StyledFilterListWrap>
   );
@@ -40,4 +38,4 @@ const StyledFilterListWrap = styled.div`
   padding-bottom: 20px;
 `;
 
-export default FilterList;
+export default SearchFilterList;
