@@ -1,34 +1,26 @@
-import { useMemo } from 'react';
+// import { useMemo } from 'react';
 import styled, { css } from 'styled-components';
 
 interface IPaginationProps {
   maxPage: number;
-  currentLimit: number;
-  // paginationSize?: number;
   currentPage?: number;
   onPageChange: (page: number) => void;
 }
 
-const Pagination = ({ maxPage, currentLimit, currentPage = 1, onPageChange }: IPaginationProps) => {
-  // const totalPages = maxPage;
-
-  const startPage = 1;
-  const endPage = maxPage / currentLimit;
-
-  const pages = useMemo(
-    () => Array.from({ length: endPage - startPage + 1 }, (_, i) => i + startPage),
-    [endPage, startPage],
-  );
-
-  console.log(pages);
+const Pagination = ({ maxPage, currentPage = 1, onPageChange }: IPaginationProps) => {
+  const pages = Array.from({ length: maxPage }, (_, index) => index + 1);
 
   const handleClickPage = (page: number) => () => onPageChange(page);
 
   return (
     <StyledPagination>
-      {pages.map((i, idx) => (
-        <StyledPaginationButton key={`page_${i}_${idx}`} disabled={currentPage === i} onClick={handleClickPage(i)}>
-          {i}
+      {pages.map((index, _idx) => (
+        <StyledPaginationButton
+          key={`page_${index}_${_idx}`}
+          disabled={currentPage === index}
+          onClick={handleClickPage(index)}
+        >
+          {index}
         </StyledPaginationButton>
       ))}
     </StyledPagination>
