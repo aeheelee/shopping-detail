@@ -4,7 +4,7 @@ import Button from '../components/Button';
 import ProductList from '../components/ProductList';
 import Pagination from '../components/Pagination';
 import SearchFilterList from '../components/SearchFilterList';
-import { useCategories } from '../query/Categories';
+import { useCategories } from '../hooks/api/Categories';
 
 export default function SearchPage() {
   // 검색어 + 필터 설정은 전부 Query Parameter로 설정 및 사용 됩니다.

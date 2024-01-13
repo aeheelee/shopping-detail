@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
-import { API_BASE_URL } from '../constants/constants';
-import { CategoryType } from '../types/CommonTypes';
+import { API_BASE_URL } from '../../constants/constants';
+import { CategoryType } from '../../types/CommonTypes';
 
 /**
  * 카테고리 정보를 가지고 옵니다.
