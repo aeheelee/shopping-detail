@@ -5,7 +5,7 @@ import ProductList from '../components/ProductList';
 import Pagination from '../components/Pagination';
 import SearchFilterList from '../components/filter/SearchFilterList';
 import { useCategories } from '../hooks/api/Categories';
-import { useProducts } from '../hooks/api/Products';
+import { useSearch } from '../hooks/api/Search';
 
 export default function SearchPage() {
   // 검색어 + 필터 설정은 전부 Query Parameter로 설정 및 사용 됩니다.
@@ -21,7 +21,7 @@ export default function SearchPage() {
     error: errorCategoriesMsg = null,
   } = useCategories();
 
-  const { data: products } = useProducts();
+  const { data: products } = useSearch();
 
   if (!categories) return null;
   if (!products) return null;

@@ -8,9 +8,9 @@ import { ProductType } from '../../types/CommonTypes';
  *
  * @returns
  */
-const fetchProducts = async (): Promise<ProductType> => {
+const fetchSearch = async (): Promise<ProductType> => {
   try {
-    const url = API_BASE_URL + '/products?page=1&limit=10';
+    const url = API_BASE_URL + '/search?query=%20&page=1&limit=10';
     const response = await axios.get<ProductType>(url);
     return response.data;
   } catch (error) {
@@ -23,6 +23,6 @@ const fetchProducts = async (): Promise<ProductType> => {
  *
  * @returns
  */
-export const useProducts = () => {
-  return useQuery<ProductType>({ queryKey: ['products'], queryFn: fetchProducts });
+export const useSearch = () => {
+  return useQuery<ProductType>({ queryKey: ['search'], queryFn: fetchSearch });
 };

@@ -1,5 +1,5 @@
 import ProductList from '../components/ProductList';
-import { useProducts } from '../hooks/api/Products';
+import { useSearch } from '../hooks/api/Search';
 
 export default function MainPage() {
   // Phase1 작업물을 추가합니다.
@@ -8,7 +8,7 @@ export default function MainPage() {
     isLoading: islLoadingProducts = true,
     isError: isErrorProducts = false,
     error: errorProductsMsg = null,
-  } = useProducts();
+  } = useSearch();
 
   if (!products) {
     return null;
