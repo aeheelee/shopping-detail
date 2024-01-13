@@ -16,10 +16,8 @@ interface IProps {
 }
 
 const SearchFilter = ({ filter }: IProps) => {
-  console.log(filter);
   const [isOpen, setIsOpen] = useState(false);
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    console.log(event);
+  const handleClick = () => {
     setIsOpen((prev) => !prev);
   };
 
@@ -77,7 +75,7 @@ const StyledFilterItem = {
       height: 10px;
       -webkit-transform: translate(-50%, -50%) rotate(45deg);
       transform: ${({ isOpen }) =>
-        !isOpen ? 'translate(-50%, -50%) rotate(-135deg)' : 'translate(-50%, -50%) rotate(45deg)'};
+        isOpen ? 'translate(-50%, -50%) rotate(-135deg)' : 'translate(-50%, -50%) rotate(45deg)'};
       margin-top: 2px;
       border-top: 1px solid #333;
       border-left: 1px solid #333;
