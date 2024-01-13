@@ -60,12 +60,7 @@ export default function SearchPage() {
           <strong>19</strong>개 결과
         </StyledText>
         <ProductList data={products} />
-        <Pagination
-          maxPage={products.maxPage}
-          currentLimit={products.currentLimit}
-          currentPage={query.page}
-          onPageChange={handleChangePage}
-        />
+        <Pagination maxPage={products.maxPage} currentPage={query.page} onPageChange={handleChangePage} />
       </StyledContent>
     </StyledWrap>
   );
