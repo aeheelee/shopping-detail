@@ -19,7 +19,7 @@ export default function Header() {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => setQuery(e.target.value);
   const handleSearch = () => {
     if (query) {
-      navigate(`/search?query=${query}`);
+      navigate(`/search?query=${query.trim()}`);
     }
   };
 
@@ -51,6 +51,7 @@ export default function Header() {
           onFocus={handleFocus}
           onKeyDown={(e) => {
             if (e.key === 'Enter') {
+              setQuery(query.trim());
               handleSearch();
             }
           }}
