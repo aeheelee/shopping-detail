@@ -15,8 +15,11 @@ const SearchFilterList = ({ data }: IProps) => {
     } = data;
 
     const productData = product.map(({ id, title }) => ({ id, title }));
-    const priceData = price.map((item) => ({ ...item, title: `${item.min} ~ ${item.max}` }));
-    const discountData = discount.map((item) => ({ ...item, title: `${item.min} ~ ${item.max}` }));
+    const priceData = price.map((item) => ({
+      ...item,
+      title: `₩${item.min.toLocaleString()} ~ ₩${item.max.toLocaleString()}`,
+    }));
+    const discountData = discount.map((item) => ({ ...item, title: `${item.min}% ~ ${item.max}%` }));
 
     return [
       { type: 'product', title: '상품별', data: productData },
