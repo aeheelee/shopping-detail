@@ -10,10 +10,9 @@ import useSearch from '../hooks/api/Search';
 import LoadingIndicator from '../components/LoadingIndicator';
 
 export default function SearchPage() {
-  // 검색어 + 필터 설정은 전부 Query Parameter로 설정 및 사용 됩니다.
-  // useSearchParams을 이용해서 Query 정보를 관리 해 보세요.
+  // NOTE http://localhost:3000/search?query='검색어'
   const [searchParams] = useSearchParams();
-  const keyword = searchParams.get('keyword') || '%20';
+  const keyword = searchParams.get('query') || '%20';
 
   // 리액트 쿼리 : 카테고리 가져오기
   const { data: categories, isLoading: isLoadingCategories = true } = useCategories();
