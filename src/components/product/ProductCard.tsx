@@ -15,9 +15,9 @@ const ProductCard = ({ data }: Props) => {
       <StyledContent>
         <StyledTitle>{title}</StyledTitle>
         <StyledPriceBox>
-          <StyledPrice>{price}</StyledPrice>
-          <StyledDiscountPercentage>{discountPercentage}</StyledDiscountPercentage>
-          <StyledDiscountPrice>{discountPrice}</StyledDiscountPrice>
+          <StyledPrice>₩{price.toLocaleString()}</StyledPrice>
+          <StyledDiscountPercentage>{discountPercentage}% 할인</StyledDiscountPercentage>
+          <StyledDiscountPrice>₩{discountPrice.toLocaleString()}</StyledDiscountPrice>
         </StyledPriceBox>
       </StyledContent>
     </StyledWrap>
@@ -70,8 +70,8 @@ const StyledTitle = styled.strong`
 const StyledPriceBox = styled.div`
   display: block;
   margin-top: 4px;
-  font-size: 14px;
-  line-height: 20px;
+  font-size: 12px;
+  line-height: 18px;
 `;
 
 const StyledPrice = styled.span`
@@ -81,6 +81,7 @@ const StyledPrice = styled.span`
 `;
 
 const StyledDiscountPercentage = styled.span`
+  margin-left: 2px;
   color: rgb(184, 49, 40);
 `;
 
