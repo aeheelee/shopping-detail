@@ -7,7 +7,7 @@ interface Props {
 const ProductCard = ({ data }: Props) => {
   const { title, price, discountPercentage, discountPrice, imageUrl } = data;
 
-  return (
+  return typeof price !== 'number' || typeof discountPrice !== 'number' ? (
     <StyledWrap>
       <StyledThumbnail>
         <img src={imageUrl} alt={title} />
@@ -15,9 +15,26 @@ const ProductCard = ({ data }: Props) => {
       <StyledContent>
         <StyledTitle>{title}</StyledTitle>
         <StyledPriceBox>
-          <StyledPrice>₩{price.toLocaleString()}</StyledPrice>
+          <StyledPrice>₩ 0</StyledPrice>
+          <StyledDiscountPercentage>0% 할인</StyledDiscountPercentage>
+          <StyledDiscountPrice>₩ 0</StyledDiscountPrice>
+        </StyledPriceBox>
+      </StyledContent>
+      <StyledDim>
+        <p>판매 중지</p>
+      </StyledDim>
+    </StyledWrap>
+  ) : (
+    <StyledWrap>
+      <StyledThumbnail>
+        <img src={imageUrl} alt={title} />
+      </StyledThumbnail>
+      <StyledContent>
+        <StyledTitle>{title}</StyledTitle>
+        <StyledPriceBox>
+          <StyledPrice>₩ {price.toLocaleString()}</StyledPrice>
           <StyledDiscountPercentage>{discountPercentage}% 할인</StyledDiscountPercentage>
-          <StyledDiscountPrice>₩{discountPrice.toLocaleString()}</StyledDiscountPrice>
+          <StyledDiscountPrice>₩ {discountPrice.toLocaleString()}</StyledDiscountPrice>
         </StyledPriceBox>
       </StyledContent>
     </StyledWrap>
@@ -87,4 +104,28 @@ const StyledDiscountPercentage = styled.span`
 
 const StyledDiscountPrice = styled.strong`
   display: block;
+`;
+
+const StyledDim = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  min-height: 100%;
+  background-color: black;
+  opacity: 0.5;
+  z-index: 10;
+
+  > p {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-weight: bold;
+    z-index: 30;
+    opacity: 1;
+  }
 `;
