@@ -1,9 +1,13 @@
 import React, { useEffect, useMemo, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import styled from 'styled-components';
+// import { StringParam, useQueryParams, withDefault } from 'use-query-params';
 
 interface IData {
   id: number;
   title: string;
+  category?: string;
+  imageUrl?: string;
   min?: number;
   max?: number;
 }
@@ -18,9 +22,36 @@ interface IProps {
 const SearchFilter = ({ filter }: IProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedItemId, setSelectedItemId] = useState<number | null>(null);
-  const handleClick = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [filterType, setFilterType] = useState('');
+  const [category, setCategory] = useState(0);
+  const [rangeMin, setRangeMin] = useState<number | undefined>(undefined);
+  const [rangeMax, setRangeMax] = useState<number | undefined>(undefined);
+
+  const handleClick = (type: string) => {
     setIsOpen((prev) => !prev);
+    setFilterType(type);
   };
+  function handleChange(item: IData) {
+    setSelectedItemId(item.id);
+    if (item.category !== undefined) {
+      setCategory(item.id);
+    } else {
+      setRangeMin(item.min);
+      setRangeMax(item.max);
+    }
+  }
+
+  console.log(rangeMin, rangeMax);
+  const handleFilterClick = () => {
+    searchParams.set('category', category.toString());
+    if (filterType === 'discount') {
+      searchParams.set('minDiscount', rangeMin?.toString());
+      searchParams.set('maxDiscount', rangeMax?.toString());
+    }
+    setSearchParams(searchParams);
+  };
+  // console.log(searchParams.get('category'));
 
   //필터 데이터
   const filterData = useMemo(() => [{ id: 0, title: '전체' }, ...filter.data], [filter.data]);
@@ -32,10 +63,13 @@ const SearchFilter = ({ filter }: IProps) => {
     }
   }, [filterData]);
 
+  //카테고리
+  // const formattedCategory;
+
   return (
     <>
       <StyledFilterItem.Wrap>
-        <StyledFilterItem.ButtonTitle type="button" onClick={handleClick}>
+        <StyledFilterItem.ButtonTitle type="button" onClick={() => handleClick(filter.type)}>
           {filter.title}
           <StyledFilterItem.ButtonIcon $isOpen={isOpen}>
             {isOpen ? '필터 선택 리스트 열림' : '필터 선택 리스트 닫힘'}
@@ -49,7 +83,8 @@ const SearchFilter = ({ filter }: IProps) => {
                 id={`${filter.type}_${item.id}`}
                 name={filter.type}
                 checked={item.id === selectedItemId}
-                onChange={() => setSelectedItemId(item.id)}
+                onChange={() => handleChange(item)}
+                onClick={handleFilterClick}
               />
               <StyledFilterItem.Label htmlFor={`${filter.type}_${item.id}`}>{item.title}</StyledFilterItem.Label>
             </StyledFilterItem.DetailListItem>

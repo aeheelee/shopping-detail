@@ -14,7 +14,6 @@ const SearchFilterList = ({ data }: IProps) => {
       searchFilter: { price, discount },
     } = data;
 
-    const productData = product.map(({ id, title }) => ({ id, title }));
     const priceData = price.map((item) => ({
       ...item,
       title: `₩${item.min.toLocaleString()} ~ ₩${item.max.toLocaleString()}`,
@@ -22,7 +21,7 @@ const SearchFilterList = ({ data }: IProps) => {
     const discountData = discount.map((item) => ({ ...item, title: `${item.min}% ~ ${item.max}%` }));
 
     return [
-      { type: 'product', title: '상품별', data: productData },
+      { type: 'product', title: '상품별', data: product },
       { type: 'price', title: '가격별', data: priceData },
       { type: 'discount', title: '할인별', data: discountData },
     ];

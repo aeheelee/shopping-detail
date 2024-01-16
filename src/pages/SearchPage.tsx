@@ -12,7 +12,12 @@ import LoadingIndicator from '../components/LoadingIndicator';
 export default function SearchPage() {
   // NOTE http://localhost:3000/search?query='검색어'
   const [searchParams] = useSearchParams();
+  const [categoryPrams] = useSearchParams();
   const keyword = searchParams.get('query') || '%20';
+  const category = categoryPrams.get('category') || '';
+  // const location = useLocation();
+  console.log('filter 선택');
+  console.log(category);
 
   // 리액트 쿼리 : 카테고리 가져오기
   const { data: categories, isLoading: isLoadingCategories = true } = useCategories();
@@ -20,6 +25,7 @@ export default function SearchPage() {
   const [query, setQuery] = useQueryParams({
     page: withDefault(NumberParam, 1),
     query: withDefault(StringParam, keyword),
+    category: withDefault(StringParam, category),
   });
 
   const { data: products } = useSearch({ ...query });
