@@ -6,8 +6,6 @@ import { useLocation } from 'react-router-dom';
 export default function Header() {
   const navigate = useNavigate();
   const [query, setQuery] = useState('');
-  console.log('헤더 쿼리');
-  console.log(query);
 
   const location = useLocation();
 
@@ -21,7 +19,7 @@ export default function Header() {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => setQuery(e.target.value);
   const handleSearch = () => {
     if (query) {
-      navigate(`/search?query=${query}`);
+      navigate(`/search?query=${query.trim()}`);
     }
   };
 
@@ -53,6 +51,7 @@ export default function Header() {
           onFocus={handleFocus}
           onKeyDown={(e) => {
             if (e.key === 'Enter') {
+              setQuery(query.trim());
               handleSearch();
             }
           }}

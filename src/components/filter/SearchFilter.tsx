@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import styled from 'styled-components';
 
 interface IData {
@@ -23,14 +23,14 @@ const SearchFilter = ({ filter }: IProps) => {
   };
 
   //필터 데이터
-  const filterData = filter.data;
+  const filterData = useMemo(() => [{ id: 0, title: '전체' }, ...filter.data], [filter.data]);
 
   useEffect(() => {
     // 첫 번째 아이템의 id를 초기 선택 값으로 설정
-    if (filter.data.length > 0) {
-      setSelectedItemId(filter.data[0].id);
+    if (filterData.length > 0) {
+      setSelectedItemId(filterData[0].id);
     }
-  }, [filter.data]);
+  }, [filterData]);
 
   return (
     <>

@@ -15,17 +15,16 @@ const SearchFilterList = ({ data }: IProps) => {
     } = data;
 
     const productData = product.map(({ id, title }) => ({ id, title }));
-    const priceData = price.map((item) => ({ ...item, title: `${item.min} ~ ${item.max}` }));
-    const discountData = discount.map((item) => ({ ...item, title: `${item.min} ~ ${item.max}` }));
-
-    const productDataAddAll = [{ id: 0, title: '전체' }, ...productData];
-    const priceDataAddAll = [{ id: 0, title: '전체' }, ...priceData];
-    const discountDataAddAll = [{ id: 0, title: '전체' }, ...discountData];
+    const priceData = price.map((item) => ({
+      ...item,
+      title: `₩${item.min.toLocaleString()} ~ ₩${item.max.toLocaleString()}`,
+    }));
+    const discountData = discount.map((item) => ({ ...item, title: `${item.min}% ~ ${item.max}%` }));
 
     return [
-      { type: 'product', title: '상품별', data: productDataAddAll },
-      { type: 'price', title: '가격별', data: priceDataAddAll },
-      { type: 'discount', title: '할인별', data: discountDataAddAll },
+      { type: 'product', title: '상품별', data: productData },
+      { type: 'price', title: '가격별', data: priceData },
+      { type: 'discount', title: '할인별', data: discountData },
     ];
   }, [data]);
 

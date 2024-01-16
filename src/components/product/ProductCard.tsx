@@ -7,7 +7,7 @@ interface Props {
 const ProductCard = ({ data }: Props) => {
   const { title, price, discountPercentage, discountPrice, imageUrl } = data;
 
-  return (
+  return typeof price !== 'number' || typeof discountPrice !== 'number' ? (
     <StyledWrap>
       <StyledThumbnail>
         <img src={imageUrl} alt={title} />
@@ -15,9 +15,26 @@ const ProductCard = ({ data }: Props) => {
       <StyledContent>
         <StyledTitle>{title}</StyledTitle>
         <StyledPriceBox>
-          <StyledPrice>{price}</StyledPrice>
-          <StyledDiscountPercentage>{discountPercentage}</StyledDiscountPercentage>
-          <StyledDiscountPrice>{discountPrice}</StyledDiscountPrice>
+          <StyledPrice>₩ 0</StyledPrice>
+          <StyledDiscountPercentage>0% 할인</StyledDiscountPercentage>
+          <StyledDiscountPrice>₩ 0</StyledDiscountPrice>
+        </StyledPriceBox>
+      </StyledContent>
+      <StyledDim>
+        <p>판매 중지</p>
+      </StyledDim>
+    </StyledWrap>
+  ) : (
+    <StyledWrap>
+      <StyledThumbnail>
+        <img src={imageUrl} alt={title} />
+      </StyledThumbnail>
+      <StyledContent>
+        <StyledTitle>{title}</StyledTitle>
+        <StyledPriceBox>
+          <StyledPrice>₩ {price.toLocaleString()}</StyledPrice>
+          <StyledDiscountPercentage>{discountPercentage}% 할인</StyledDiscountPercentage>
+          <StyledDiscountPrice>₩ {discountPrice.toLocaleString()}</StyledDiscountPrice>
         </StyledPriceBox>
       </StyledContent>
     </StyledWrap>
@@ -70,8 +87,8 @@ const StyledTitle = styled.strong`
 const StyledPriceBox = styled.div`
   display: block;
   margin-top: 4px;
-  font-size: 14px;
-  line-height: 20px;
+  font-size: 12px;
+  line-height: 18px;
 `;
 
 const StyledPrice = styled.span`
@@ -81,9 +98,34 @@ const StyledPrice = styled.span`
 `;
 
 const StyledDiscountPercentage = styled.span`
+  margin-left: 2px;
   color: rgb(184, 49, 40);
 `;
 
 const StyledDiscountPrice = styled.strong`
   display: block;
+`;
+
+const StyledDim = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  min-height: 100%;
+  background-color: black;
+  opacity: 0.5;
+  z-index: 10;
+
+  > p {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-weight: bold;
+    z-index: 30;
+    opacity: 1;
+  }
 `;

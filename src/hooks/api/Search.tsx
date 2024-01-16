@@ -30,7 +30,7 @@ import { QueryStringParams } from '../../constants/constants';
 
 const useSearch = (params: QueryStringParams = {}) => {
   const url = generateUrl(`${API_BASE_URL}/search`, {
-    limit: 10,
+    limit: 12,
     ...params,
   });
   const fetchSearch = (): Promise<ProductType> => fetchApi(url);
