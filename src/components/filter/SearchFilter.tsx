@@ -23,11 +23,6 @@ const SearchFilter = ({ filter }: IProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedItemId, setSelectedItemId] = useState<number | null>(null);
   const [searchParams, setSearchParams] = useSearchParams();
-  // const [category, setCategory] = useState(0);
-  // const [discountMin, setDiscountMin] = useState<number | undefined>(undefined);
-  // const [discountMax, setDiscountMax] = useState<number | undefined>(undefined);
-  // const [priceMin, setPriceMin] = useState<number | undefined>(undefined);
-  // const [priceMax, setPriceMax] = useState<number | undefined>(undefined);
 
   const handleClick = () => {
     setIsOpen((prev) => !prev);
@@ -61,32 +56,6 @@ const SearchFilter = ({ filter }: IProps) => {
     // query parameter 업데이트
     setSearchParams(searchParams);
   };
-
-  // const handleFilterClick = (type: string) => {
-  //   // 선택한 필터 옵션을 query parameter로 설정
-  //   switch (type) {
-  //     case 'product':
-  //       searchParams.set('category', category.toString());
-  //       break;
-  //     case 'discount':
-  //       if (discountMin !== undefined && discountMax !== undefined) {
-  //         searchParams.set('minDiscount', discountMin.toString());
-  //         searchParams.set('maxDiscount', discountMax.toString());
-  //       }
-  //       break;
-  //     case 'price':
-  //       if (priceMin !== undefined && priceMax !== undefined) {
-  //         searchParams.set('minPrice', priceMin.toString());
-  //         searchParams.set('maxPrice', priceMax.toString());
-  //       }
-  //       break;
-  //     default:
-  //       console.log('선택한 타입이 없습니다');
-  //   }
-
-  //   // query parameter 업데이트
-  //   setSearchParams(searchParams);
-  // };
 
   //필터 데이터
   const filterData = useMemo(() => [{ id: 0, title: '전체' }, ...filter.data], [filter.data]);
