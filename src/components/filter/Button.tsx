@@ -1,8 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Button = () => {
-  return <StyleButton type="button">초기화</StyleButton>;
+interface IProps {
+  handleButtonClick: () => void;
+}
+
+const Button = ({ handleButtonClick }: IProps) => {
+  return (
+    <StyleButton type="button" onClick={handleButtonClick}>
+      초기화
+    </StyleButton>
+  );
 };
 
 const StyleButton = styled.button`
