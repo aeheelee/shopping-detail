@@ -23,35 +23,70 @@ const SearchFilter = ({ filter }: IProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedItemId, setSelectedItemId] = useState<number | null>(null);
   const [searchParams, setSearchParams] = useSearchParams();
-  const [filterType, setFilterType] = useState('');
-  const [category, setCategory] = useState(0);
-  const [rangeMin, setRangeMin] = useState<number | undefined>(undefined);
-  const [rangeMax, setRangeMax] = useState<number | undefined>(undefined);
+  // const [category, setCategory] = useState(0);
+  // const [discountMin, setDiscountMin] = useState<number | undefined>(undefined);
+  // const [discountMax, setDiscountMax] = useState<number | undefined>(undefined);
+  // const [priceMin, setPriceMin] = useState<number | undefined>(undefined);
+  // const [priceMax, setPriceMax] = useState<number | undefined>(undefined);
 
-  const handleClick = (type: string) => {
+  const handleClick = () => {
     setIsOpen((prev) => !prev);
-    setFilterType(type);
   };
-  function handleChange(item: IData) {
-    setSelectedItemId(item.id);
-    if (item.category !== undefined) {
-      setCategory(item.id);
-    } else {
-      setRangeMin(item.min);
-      setRangeMax(item.max);
-    }
-  }
+  console.log('필터항목 클릭 : ' + isOpen);
 
-  console.log(rangeMin, rangeMax);
-  const handleFilterClick = () => {
-    searchParams.set('category', category.toString());
-    if (filterType === 'discount') {
-      searchParams.set('minDiscount', rangeMin?.toString());
-      searchParams.set('maxDiscount', rangeMax?.toString());
+  const handleChange = (item: IData, type: string) => {
+    setSelectedItemId(item.id);
+
+    //각 데이터 값 추출
+    switch (type) {
+      case 'product':
+        searchParams.set('category', item.id.toString());
+        break;
+      case 'discount':
+        if (item.min !== undefined && item.max !== undefined) {
+          searchParams.set('minDiscount', item.min.toString());
+          searchParams.set('maxDiscount', item.max.toString());
+        }
+        break;
+      case 'price':
+        if (item.min !== undefined && item.max !== undefined) {
+          searchParams.set('minPrice', item.min.toString());
+          searchParams.set('maxPrice', item.max.toString());
+        }
+        break;
+      default:
+        console.log('선택한 값이 없어요');
     }
+
+    // query parameter 업데이트
     setSearchParams(searchParams);
   };
-  // console.log(searchParams.get('category'));
+
+  // const handleFilterClick = (type: string) => {
+  //   // 선택한 필터 옵션을 query parameter로 설정
+  //   switch (type) {
+  //     case 'product':
+  //       searchParams.set('category', category.toString());
+  //       break;
+  //     case 'discount':
+  //       if (discountMin !== undefined && discountMax !== undefined) {
+  //         searchParams.set('minDiscount', discountMin.toString());
+  //         searchParams.set('maxDiscount', discountMax.toString());
+  //       }
+  //       break;
+  //     case 'price':
+  //       if (priceMin !== undefined && priceMax !== undefined) {
+  //         searchParams.set('minPrice', priceMin.toString());
+  //         searchParams.set('maxPrice', priceMax.toString());
+  //       }
+  //       break;
+  //     default:
+  //       console.log('선택한 타입이 없습니다');
+  //   }
+
+  //   // query parameter 업데이트
+  //   setSearchParams(searchParams);
+  // };
 
   //필터 데이터
   const filterData = useMemo(() => [{ id: 0, title: '전체' }, ...filter.data], [filter.data]);
@@ -63,13 +98,10 @@ const SearchFilter = ({ filter }: IProps) => {
     }
   }, [filterData]);
 
-  //카테고리
-  // const formattedCategory;
-
   return (
     <>
       <StyledFilterItem.Wrap>
-        <StyledFilterItem.ButtonTitle type="button" onClick={() => handleClick(filter.type)}>
+        <StyledFilterItem.ButtonTitle type="button" onClick={handleClick}>
           {filter.title}
           <StyledFilterItem.ButtonIcon $isOpen={isOpen}>
             {isOpen ? '필터 선택 리스트 열림' : '필터 선택 리스트 닫힘'}
@@ -83,8 +115,8 @@ const SearchFilter = ({ filter }: IProps) => {
                 id={`${filter.type}_${item.id}`}
                 name={filter.type}
                 checked={item.id === selectedItemId}
-                onChange={() => handleChange(item)}
-                onClick={handleFilterClick}
+                onChange={() => handleChange(item, filter.type)}
+                // onClick={() => handleFilterClick(filter.type)}
               />
               <StyledFilterItem.Label htmlFor={`${filter.type}_${item.id}`}>{item.title}</StyledFilterItem.Label>
             </StyledFilterItem.DetailListItem>
