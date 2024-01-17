@@ -23,8 +23,7 @@ export default function SearchPage() {
     query: withDefault(StringParam, keyword),
   });
 
-  console.log('query');
-  console.log(query);
+  console.log('query :', query);
 
   const { data: products } = useSearch({ ...query });
 
@@ -40,7 +39,7 @@ export default function SearchPage() {
     setQuery(
       {
         page: 1,
-        query: undefined,
+        query: keyword,
         // category: undefined,
         // minDiscount: undefined,
         // maxDiscount: undefined,

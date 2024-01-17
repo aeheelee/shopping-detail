@@ -16,17 +16,27 @@ export default function Header() {
     }
   }, [location]);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => setQuery(e.target.value);
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const inputValue = e.target.value;
+
+    // 첫번째 입력값은 스페이스(공백) 불가
+    if (inputValue[0] !== ' ') {
+      setQuery(inputValue);
+    }
+  };
+
   const handleSearch = () => {
+    if (query.length === 0) {
+      alert('검색어를 입력하세요');
+    }
+
     if (query) {
       navigate(`/search?query=${query.trim()}`);
     }
   };
 
   const handleFocus = () => {
-    if (query === '검색어를 입력하세요') {
-      setQuery(''); // 입력 필드에 포커스가 있을 때, 기본 텍스트 제거
-    }
+    setQuery('');
   };
 
   const handleLogoClick = () => {
