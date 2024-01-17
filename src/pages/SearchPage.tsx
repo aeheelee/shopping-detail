@@ -32,6 +32,21 @@ export default function SearchPage() {
     window.scrollTo(0, 0);
   };
 
+  const handleButtonClick = () => {
+    setQuery(
+      {
+        page: 1,
+        query: undefined,
+        // category: undefined,
+        // minDiscount: undefined,
+        // maxDiscount: undefined,
+        // minPrice: undefined,
+        // maxPrice: undefined,
+      },
+      'replaceIn',
+    );
+  };
+
   // console.log('-----------------------------------');
   // console.log('data: ' + JSON.stringify(categories));
   // console.log('isLoading: ' + isLoadingCategories);
@@ -43,7 +58,7 @@ export default function SearchPage() {
     <StyledWrap>
       <StyledFilter>
         <SearchFilterList data={categories} />
-        <Button />
+        <Button handleButtonClick={handleButtonClick} />
       </StyledFilter>
       <StyledContent>
         <StyledText>
