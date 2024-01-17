@@ -1,9 +1,14 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import React, { useEffect, useMemo, useState } from 'react';
+import { NumberParam, useQueryParams, withDefault } from 'use-query-params';
 import styled from 'styled-components';
+import useSearch from '../../hooks/api/Search';
 
 interface IData {
   id: number;
   title: string;
+  category?: string;
+  imageUrl?: string;
   min?: number;
   max?: number;
 }
@@ -18,9 +23,13 @@ interface IProps {
 const SearchFilter = ({ filter }: IProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedItemId, setSelectedItemId] = useState<number | null>(null);
-  const handleClick = () => {
-    setIsOpen((prev) => !prev);
-  };
+  const [query, setQuery] = useQueryParams({
+    category: withDefault(NumberParam, 0),
+    minDiscount: withDefault(NumberParam, 0),
+    maxDiscount: withDefault(NumberParam, 0),
+    minPrice: withDefault(NumberParam, 0),
+    maxPrice: withDefault(NumberParam, 0),
+  });
 
   //필터 데이터
   const filterData = useMemo(() => [{ id: 0, title: '전체' }, ...filter.data], [filter.data]);
@@ -31,6 +40,35 @@ const SearchFilter = ({ filter }: IProps) => {
       setSelectedItemId(filterData[0].id);
     }
   }, [filterData]);
+
+  const handleClick = () => {
+    setIsOpen((prev) => !prev);
+  };
+
+  const handleChange = (item: IData, type: string) => {
+    setSelectedItemId(item.id);
+
+    //각 카테고리 parameter set
+    switch (type) {
+      case 'product':
+        setQuery({ category: item.id });
+        break;
+      case 'discount':
+        if (item.min !== undefined && item.max !== undefined) {
+          setQuery({ minDiscount: item.min, maxDiscount: item.max });
+        }
+        break;
+      case 'price':
+        if (item.min !== undefined && item.max !== undefined) {
+          setQuery({ minPrice: item.min, maxPrice: item.max });
+        }
+        break;
+      default:
+        console.log('선택한 값이 없어요');
+    }
+  };
+  //TODO 쿼리 파라미터에서 사용자가 아무것도 클릭 안했을 시 쿼리 스트링 아예 안붙도록
+  useSearch({ ...query });
 
   return (
     <>
@@ -49,7 +87,7 @@ const SearchFilter = ({ filter }: IProps) => {
                 id={`${filter.type}_${item.id}`}
                 name={filter.type}
                 checked={item.id === selectedItemId}
-                onChange={() => setSelectedItemId(item.id)}
+                onChange={() => handleChange(item, filter.type)}
               />
               <StyledFilterItem.Label htmlFor={`${filter.type}_${item.id}`}>{item.title}</StyledFilterItem.Label>
             </StyledFilterItem.DetailListItem>
