@@ -21,9 +21,12 @@ export default function SearchPage() {
   const [query, setQuery] = useQueryParams({
     page: withDefault(NumberParam, 1),
     query: withDefault(StringParam, keyword),
+    category: withDefault(NumberParam, 0),
+    minDiscount: withDefault(NumberParam, 0),
+    maxDiscount: withDefault(NumberParam, 0),
+    minPrice: withDefault(NumberParam, 0),
+    maxPrice: withDefault(NumberParam, 0),
   });
-
-  console.log('query :', query);
 
   const { data: products } = useSearch({ ...query });
 
@@ -39,12 +42,12 @@ export default function SearchPage() {
     setQuery(
       {
         page: 1,
-        query: keyword,
-        // category: undefined,
-        // minDiscount: undefined,
-        // maxDiscount: undefined,
-        // minPrice: undefined,
-        // maxPrice: undefined,
+        query: undefined,
+        category: undefined,
+        minDiscount: undefined,
+        maxDiscount: undefined,
+        minPrice: undefined,
+        maxPrice: undefined,
       },
       'replaceIn',
     );
