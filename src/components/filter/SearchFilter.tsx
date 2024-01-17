@@ -1,7 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import styled from 'styled-components';
-// import { StringParam, useQueryParams, withDefault } from 'use-query-params';
 
 interface IData {
   id: number;
@@ -32,7 +31,7 @@ const SearchFilter = ({ filter }: IProps) => {
   const handleChange = (item: IData, type: string) => {
     setSelectedItemId(item.id);
 
-    //각 데이터 값 추출
+    //각 카테고리 parameter set
     switch (type) {
       case 'product':
         searchParams.set('category', item.id.toString());
@@ -85,7 +84,6 @@ const SearchFilter = ({ filter }: IProps) => {
                 name={filter.type}
                 checked={item.id === selectedItemId}
                 onChange={() => handleChange(item, filter.type)}
-                // onClick={() => handleFilterClick(filter.type)}
               />
               <StyledFilterItem.Label htmlFor={`${filter.type}_${item.id}`}>{item.title}</StyledFilterItem.Label>
             </StyledFilterItem.DetailListItem>
