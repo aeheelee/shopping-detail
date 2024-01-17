@@ -8,16 +8,12 @@ import SearchFilterList from '../components/filter/SearchFilterList';
 import { useCategories } from '../hooks/api/Categories';
 import useSearch from '../hooks/api/Search';
 import LoadingIndicator from '../components/LoadingIndicator';
+// import { useEffect } from 'react';
 
 export default function SearchPage() {
   // NOTE http://localhost:3000/search?query='검색어'
   const [searchParams] = useSearchParams();
   const keyword = searchParams.get('query') || '%20';
-  const category = searchParams.get('category') || '';
-  const minDiscount = searchParams.get('minDiscount') || '';
-  const maxDiscount = searchParams.get('maxDiscount') || '';
-  const minPrice = searchParams.get('minPrice') || '';
-  const maxPrice = searchParams.get('maxPrice') || '';
 
   // 리액트 쿼리 : 카테고리 가져오기
   const { data: categories, isLoading: isLoadingCategories = true } = useCategories();
@@ -25,11 +21,6 @@ export default function SearchPage() {
   const [query, setQuery] = useQueryParams({
     page: withDefault(NumberParam, 1),
     query: withDefault(StringParam, keyword),
-    category: withDefault(StringParam, category),
-    minDiscount: withDefault(StringParam, minDiscount),
-    maxDiscount: withDefault(StringParam, maxDiscount),
-    minPrice: withDefault(StringParam, minPrice),
-    maxPrice: withDefault(StringParam, maxPrice),
   });
 
   console.log('query');

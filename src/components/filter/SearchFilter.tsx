@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { NumberParam, useQueryParams, withDefault } from 'use-query-params';
 import styled from 'styled-components';
 
 interface IData {
@@ -21,12 +21,19 @@ interface IProps {
 const SearchFilter = ({ filter }: IProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedItemId, setSelectedItemId] = useState<number | null>(null);
-  const [searchParams, setSearchParams] = useSearchParams();
+
+  const [, setQuery] = useQueryParams({
+    category: withDefault(NumberParam, 0),
+    minDiscount: withDefault(NumberParam, 0),
+    maxDiscount: withDefault(NumberParam, 0),
+    minPrice: withDefault(NumberParam, 0),
+    maxPrice: withDefault(NumberParam, 0),
+  });
 
   const handleClick = () => {
     setIsOpen((prev) => !prev);
   };
-  console.log('필터항목 클릭 : ' + isOpen);
+  console.log('필터항목 클릭 : ' + selectedItemId);
 
   const handleChange = (item: IData, type: string) => {
     setSelectedItemId(item.id);
@@ -34,26 +41,23 @@ const SearchFilter = ({ filter }: IProps) => {
     //각 카테고리 parameter set
     switch (type) {
       case 'product':
-        searchParams.set('category', item.id.toString());
+        setQuery({ category: item.id });
         break;
       case 'discount':
         if (item.min !== undefined && item.max !== undefined) {
-          searchParams.set('minDiscount', item.min.toString());
-          searchParams.set('maxDiscount', item.max.toString());
+          setQuery({ minDiscount: item.min });
+          setQuery({ maxDiscount: item.max });
         }
         break;
       case 'price':
         if (item.min !== undefined && item.max !== undefined) {
-          searchParams.set('minPrice', item.min.toString());
-          searchParams.set('maxPrice', item.max.toString());
+          setQuery({ minPrice: item.min });
+          setQuery({ maxPrice: item.max });
         }
         break;
       default:
         console.log('선택한 값이 없어요');
     }
-
-    // query parameter 업데이트
-    setSearchParams(searchParams);
   };
 
   //필터 데이터
