@@ -83,7 +83,7 @@ const SearchFilter = ({ filter }: IProps) => {
             const isChecked = ((): boolean => {
               const isAllSelected = filter.data[0].id === selectedItem;
 
-              if (isAllSelected) return true;
+              if (!isAllSelected) return true;
 
               switch (filter.type) {
                 case 'product':
@@ -96,6 +96,7 @@ const SearchFilter = ({ filter }: IProps) => {
                   return false;
               }
             })();
+
             console.log('isChecked:', isChecked, item, index, filter.type);
             return (
               <StyledFilterItem.DetailListItem key={index}>
