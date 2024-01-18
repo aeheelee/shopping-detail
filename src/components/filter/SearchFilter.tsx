@@ -36,7 +36,7 @@ const SearchFilter = ({ filter }: IProps) => {
 
   const handleChange = (item: IData) => {
     const setQueryParam = (param: string, value: number | undefined) => {
-      setQuery({ [param]: item.title === '전체' ? undefined : value }, 'replaceIn');
+      setQuery({ [param]: item.title === '전체' ? undefined : value }, 'pushIn');
     };
 
     //각 카테고리 parameter set
