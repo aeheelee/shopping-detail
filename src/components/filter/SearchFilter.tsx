@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { NumberParam, StringParam, useQueryParams, withDefault } from 'use-query-params';
 import styled from 'styled-components';
 
@@ -20,7 +20,6 @@ interface IProps {
 
 const SearchFilter = ({ filter }: IProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedItem, setSelectedItem] = useState<number | null>(null);
   const [query, setQuery] = useQueryParams({
     page: withDefault(NumberParam, 1),
     query: withDefault(StringParam, window.encodeURIComponent(' ')),
@@ -31,19 +30,11 @@ const SearchFilter = ({ filter }: IProps) => {
     maxPrice: NumberParam,
   });
 
-  useEffect(() => {
-    if (filter.data.length > 0) {
-      setSelectedItem(filter.data[0].id);
-    }
-  }, [filter.data]);
-
   const handleClick = () => {
     setIsOpen((prev) => !prev);
   };
 
   const handleChange = (item: IData) => {
-    setSelectedItem(item.id);
-
     const setQueryParam = (param: string, value: number | undefined) => {
       setQuery({ [param]: item.title === '전체' ? undefined : value }, 'replaceIn');
     };
@@ -78,27 +69,20 @@ const SearchFilter = ({ filter }: IProps) => {
         <StyledFilterItem.DetailList $isOpen={isOpen}>
           {filter.data.map((item, index) => {
             const isChecked = ((): boolean => {
-              // TODO : 이 코드의 문제점은 뭘까?
-              const isAllSelected = filter.data[0].id === selectedItem;
-
-              console.log('isAllSelected', isAllSelected);
-              console.log('query.category', query.category);
-              console.log('query.minPrice', query.minPrice);
-              console.log('query.minDiscount', query.minDiscount);
-
               switch (filter.type) {
                 case 'product':
+                  if (query.category === undefined && item.id === 0) return true;
                   return item.id === query.category;
                 case 'price':
                 case 'discount':
                   const key = filter.type === 'price' ? 'minPrice' : 'minDiscount';
+                  if (query[key] === undefined && item.id === 0) return true;
                   return 'min' in item && item.min === query[key];
                 default:
                   return false;
               }
             })();
 
-            console.log('isChecked:', isChecked, item, index, filter.type);
             return (
               <StyledFilterItem.DetailListItem key={index}>
                 <input
