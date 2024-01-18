@@ -4,7 +4,7 @@ import { QueryStringParams } from '../../constants/constants';
 // key=value 문자열 받고 인코딩 수행
 export function generateQueryString(params: QueryStringParams = {}) {
   return Object.keys(params)
-    .map((key) => `${key}=${key === 'keyword' ? encodeURIComponent(String(params[key])) : params[key]}`)
+    .map((key) => `${key}=${key === 'query' ? encodeURIComponent(String(params[key])) : params[key]}`)
     .join('&');
 }
 
