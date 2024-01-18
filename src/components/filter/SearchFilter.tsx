@@ -44,25 +44,22 @@ const SearchFilter = ({ filter }: IProps) => {
   const handleChange = (item: IData) => {
     setSelectedItem(item.id);
 
+    const setQueryParam = (param: string, value: number | undefined) => {
+      setQuery({ [param]: item.title === '전체' ? undefined : value }, 'replaceIn');
+    };
+
     //각 카테고리 parameter set
     switch (filter.type) {
       case 'product':
-        if (item.title === '전체') {
-          // 전체 클릭 시 undefined
-          setQuery({ category: undefined }, 'replaceIn');
-        } else {
-          setQuery({ category: item.id }, 'replaceIn');
-        }
+        setQueryParam('category', item.id);
         break;
       case 'discount':
-        if (item.min !== undefined && item.max !== undefined) {
-          setQuery({ minDiscount: item.min, maxDiscount: item.max }, 'replaceIn');
-        }
+        setQueryParam('minDiscount', item.min);
+        setQueryParam('maxDiscount', item.max);
         break;
       case 'price':
-        if (item.min !== undefined && item.max !== undefined) {
-          setQuery({ minPrice: item.min, maxPrice: item.max }, 'replaceIn');
-        }
+        setQueryParam('minPrice', item.min);
+        setQueryParam('maxPrice', item.max);
         break;
       default:
         console.log('선택한 값이 없어요');
@@ -81,9 +78,13 @@ const SearchFilter = ({ filter }: IProps) => {
         <StyledFilterItem.DetailList $isOpen={isOpen}>
           {filter.data.map((item, index) => {
             const isChecked = ((): boolean => {
+              // TODO : 이 코드의 문제점은 뭘까?
               const isAllSelected = filter.data[0].id === selectedItem;
 
-              if (!isAllSelected) return true;
+              console.log('isAllSelected', isAllSelected);
+              console.log('query.category', query.category);
+              console.log('query.minPrice', query.minPrice);
+              console.log('query.minDiscount', query.minDiscount);
 
               switch (filter.type) {
                 case 'product':
@@ -105,8 +106,7 @@ const SearchFilter = ({ filter }: IProps) => {
                   id={`${filter.type}_${item.id}`}
                   name={filter.type}
                   checked={isChecked}
-                  onChange={(el) => {
-                    console.log('el', el);
+                  onChange={() => {
                     handleChange(item);
                   }}
                 />
