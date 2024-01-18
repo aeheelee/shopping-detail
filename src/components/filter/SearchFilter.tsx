@@ -133,7 +133,7 @@ const StyledFilterItem = {
       height: 10px;
       -webkit-transform: translate(-50%, -50%) rotate(45deg);
       transform: ${({ $isOpen }) =>
-        $isOpen ? 'translate(-50%, -50%) rotate(-135deg)' : 'translate(-50%, -50%) rotate(45deg)'};
+        !$isOpen ? 'translate(-50%, -50%) rotate(-135deg)' : 'translate(-50%, -50%) rotate(45deg)'};
       margin-top: 2px;
       border-top: 1px solid #333;
       border-left: 1px solid #333;
