@@ -8,7 +8,6 @@ import SearchFilterList from '../components/filter/SearchFilterList';
 import { useCategories } from '../hooks/api/Categories';
 import useSearch from '../hooks/api/Search';
 import LoadingIndicator from '../components/LoadingIndicator';
-// import { useEffect } from 'react';
 
 export default function SearchPage() {
   // NOTE http://localhost:3000/search?query='검색어'
