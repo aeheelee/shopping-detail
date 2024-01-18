@@ -1,5 +1,4 @@
-/* eslint-disable react-hooks/rules-of-hooks */
-import React, { useEffect, useMemo, useState } from 'react';
+import { useState, useEffect } from 'react';
 import { NumberParam, StringParam, useQueryParams, withDefault } from 'use-query-params';
 import styled from 'styled-components';
 
@@ -21,8 +20,8 @@ interface IProps {
 
 const SearchFilter = ({ filter }: IProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedItemId, setSelectedItemId] = useState<number | null>(null);
-  const [, setQuery] = useQueryParams({
+  const [selectedItem, setSelectedItem] = useState<number | null>(null);
+  const [query, setQuery] = useQueryParams({
     page: withDefault(NumberParam, 1),
     query: withDefault(StringParam, window.encodeURIComponent(' ')),
     category: NumberParam,
@@ -32,25 +31,21 @@ const SearchFilter = ({ filter }: IProps) => {
     maxPrice: NumberParam,
   });
 
-  //필터 데이터
-  const filterData = useMemo(() => [{ id: 0, title: '전체' }, ...filter.data], [filter.data]);
-
   useEffect(() => {
-    // 첫 번째 아이템의 id를 초기 선택 값으로 설정
-    if (filterData.length > 0) {
-      setSelectedItemId(filterData[0].id);
+    if (filter.data.length > 0) {
+      setSelectedItem(filter.data[0].id);
     }
-  }, [filterData]);
+  }, [filter.data]);
 
   const handleClick = () => {
     setIsOpen((prev) => !prev);
   };
 
-  const handleChange = (item: IData, type: string) => {
-    setSelectedItemId(item.id);
+  const handleChange = (item: IData) => {
+    setSelectedItem(item.id);
 
     //각 카테고리 parameter set
-    switch (type) {
+    switch (filter.type) {
       case 'product':
         if (item.title === '전체') {
           // 전체 클릭 시 undefined
@@ -84,18 +79,40 @@ const SearchFilter = ({ filter }: IProps) => {
           </StyledFilterItem.ButtonIcon>
         </StyledFilterItem.ButtonTitle>
         <StyledFilterItem.DetailList $isOpen={isOpen}>
-          {filterData.map((item, index) => (
-            <StyledFilterItem.DetailListItem key={index}>
-              <input
-                type="radio"
-                id={`${filter.type}_${item.id}`}
-                name={filter.type}
-                checked={item.id === selectedItemId}
-                onChange={() => handleChange(item, filter.type)}
-              />
-              <StyledFilterItem.Label htmlFor={`${filter.type}_${item.id}`}>{item.title}</StyledFilterItem.Label>
-            </StyledFilterItem.DetailListItem>
-          ))}
+          {filter.data.map((item, index) => {
+            const isChecked = ((): boolean => {
+              const isAllSelected = filter.data[0].id === selectedItem;
+
+              if (isAllSelected) return true;
+
+              switch (filter.type) {
+                case 'product':
+                  return item.id === query.category;
+                case 'price':
+                case 'discount':
+                  const key = filter.type === 'price' ? 'minPrice' : 'minDiscount';
+                  return 'min' in item && item.min === query[key];
+                default:
+                  return false;
+              }
+            })();
+            console.log('isChecked:', isChecked, item, index, filter.type);
+            return (
+              <StyledFilterItem.DetailListItem key={index}>
+                <input
+                  type="radio"
+                  id={`${filter.type}_${item.id}`}
+                  name={filter.type}
+                  checked={isChecked}
+                  onChange={(el) => {
+                    console.log('el', el);
+                    handleChange(item);
+                  }}
+                />
+                <StyledFilterItem.Label htmlFor={`${filter.type}_${item.id}`}>{item.title}</StyledFilterItem.Label>
+              </StyledFilterItem.DetailListItem>
+            );
+          })}
         </StyledFilterItem.DetailList>
       </StyledFilterItem.Wrap>
     </>

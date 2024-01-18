@@ -21,9 +21,9 @@ const SearchFilterList = ({ data }: IProps) => {
     const discountData = discount.map((item) => ({ ...item, title: `${item.min}% ~ ${item.max}%` }));
 
     return [
-      { type: 'product', title: '상품별', data: product },
-      { type: 'price', title: '가격별', data: priceData },
-      { type: 'discount', title: '할인별', data: discountData },
+      { type: 'product', title: '상품별', data: [{ id: 0, title: '전체' }, ...product] },
+      { type: 'price', title: '가격별', data: [{ id: 0, title: '전체' }, ...priceData] },
+      { type: 'discount', title: '할인별', data: [{ id: 0, title: '전체' }, ...discountData] },
     ];
   }, [data]);
 
