@@ -29,9 +29,16 @@ import { QueryStringParams } from '../../constants/constants';
 // };
 
 const useSearch = (params: QueryStringParams = {}) => {
+  const queries = Object.entries(params).reduce((acc, cur) => {
+    const [k, v] = cur;
+    if (!v) return acc;
+    acc[k] = v;
+    return acc;
+  }, {} as QueryStringParams);
+
   const url = generateUrl(`${API_BASE_URL}/search`, {
     limit: 12,
-    ...params,
+    ...queries,
   });
   const fetchSearch = (): Promise<ProductType> => fetchApi(url);
 

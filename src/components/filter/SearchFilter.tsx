@@ -1,8 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, { useEffect, useMemo, useState } from 'react';
-import { NumberParam, useQueryParams, withDefault } from 'use-query-params';
+import { NumberParam, StringParam, useQueryParams, withDefault } from 'use-query-params';
 import styled from 'styled-components';
-import useSearch from '../../hooks/api/Search';
 
 interface IData {
   id: number;
@@ -23,12 +22,14 @@ interface IProps {
 const SearchFilter = ({ filter }: IProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedItemId, setSelectedItemId] = useState<number | null>(null);
-  const [query, setQuery] = useQueryParams({
-    category: withDefault(NumberParam, 0),
-    minDiscount: withDefault(NumberParam, 0),
-    maxDiscount: withDefault(NumberParam, 0),
-    minPrice: withDefault(NumberParam, 0),
-    maxPrice: withDefault(NumberParam, 0),
+  const [, setQuery] = useQueryParams({
+    page: withDefault(NumberParam, 1),
+    query: withDefault(StringParam, window.encodeURIComponent(' ')),
+    category: NumberParam,
+    minDiscount: NumberParam,
+    maxDiscount: NumberParam,
+    minPrice: NumberParam,
+    maxPrice: NumberParam,
   });
 
   //필터 데이터
@@ -51,24 +52,27 @@ const SearchFilter = ({ filter }: IProps) => {
     //각 카테고리 parameter set
     switch (type) {
       case 'product':
-        setQuery({ category: item.id });
+        if (item.title === '전체') {
+          // 전체 클릭 시 undefined
+          setQuery({ category: undefined }, 'replaceIn');
+        } else {
+          setQuery({ category: item.id }, 'replaceIn');
+        }
         break;
       case 'discount':
         if (item.min !== undefined && item.max !== undefined) {
-          setQuery({ minDiscount: item.min, maxDiscount: item.max });
+          setQuery({ minDiscount: item.min, maxDiscount: item.max }, 'replaceIn');
         }
         break;
       case 'price':
         if (item.min !== undefined && item.max !== undefined) {
-          setQuery({ minPrice: item.min, maxPrice: item.max });
+          setQuery({ minPrice: item.min, maxPrice: item.max }, 'replaceIn');
         }
         break;
       default:
         console.log('선택한 값이 없어요');
     }
   };
-  //TODO 쿼리 파라미터에서 사용자가 아무것도 클릭 안했을 시 쿼리 스트링 아예 안붙도록
-  useSearch({ ...query });
 
   return (
     <>

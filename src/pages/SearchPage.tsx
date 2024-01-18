@@ -13,7 +13,7 @@ import LoadingIndicator from '../components/LoadingIndicator';
 export default function SearchPage() {
   // NOTE http://localhost:3000/search?query='검색어'
   const [searchParams] = useSearchParams();
-  const keyword = searchParams.get('query') || '%20';
+  const keyword = searchParams.get('query') || window.encodeURIComponent(' ');
 
   // 리액트 쿼리 : 카테고리 가져오기
   const { data: categories, isLoading: isLoadingCategories = true } = useCategories();
@@ -21,9 +21,12 @@ export default function SearchPage() {
   const [query, setQuery] = useQueryParams({
     page: withDefault(NumberParam, 1),
     query: withDefault(StringParam, keyword),
+    category: NumberParam,
+    minDiscount: NumberParam,
+    maxDiscount: NumberParam,
+    minPrice: NumberParam,
+    maxPrice: NumberParam,
   });
-
-  console.log('query :', query);
 
   const { data: products } = useSearch({ ...query });
 
@@ -40,11 +43,11 @@ export default function SearchPage() {
       {
         page: 1,
         query: keyword,
-        // category: undefined,
-        // minDiscount: undefined,
-        // maxDiscount: undefined,
-        // minPrice: undefined,
-        // maxPrice: undefined,
+        category: undefined,
+        minDiscount: undefined,
+        maxDiscount: undefined,
+        minPrice: undefined,
+        maxPrice: undefined,
       },
       'replaceIn',
     );
