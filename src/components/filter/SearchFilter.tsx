@@ -36,7 +36,7 @@ const SearchFilter = ({ filter }: IProps) => {
 
   const handleChange = (item: IData) => {
     const setQueryParam = (param: string, value: number | undefined) => {
-      setQuery({ [param]: item.title === '전체' ? undefined : value }, 'replaceIn');
+      setQuery({ [param]: item.title === '전체' ? undefined : value }, 'pushIn');
     };
 
     //각 카테고리 parameter set
@@ -133,7 +133,7 @@ const StyledFilterItem = {
       height: 10px;
       -webkit-transform: translate(-50%, -50%) rotate(45deg);
       transform: ${({ $isOpen }) =>
-        $isOpen ? 'translate(-50%, -50%) rotate(-135deg)' : 'translate(-50%, -50%) rotate(45deg)'};
+        !$isOpen ? 'translate(-50%, -50%) rotate(-135deg)' : 'translate(-50%, -50%) rotate(45deg)'};
       margin-top: 2px;
       border-top: 1px solid #333;
       border-left: 1px solid #333;
