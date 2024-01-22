@@ -5,29 +5,10 @@ import { generateUrl, fetchApi } from '../api';
 import { QueryStringParams } from '../../constants/constants';
 
 /**
- * 카테고리 정보를 가지고 옵니다.
  *
- * @returns
+ * @param params 쿼리스트링을 인자로 받아옵니다.
+ * @returns response dat와 쿼리스트링을 리턴합니다.
  */
-// const fetchSearch = async (): Promise<ProductType> => {
-//   try {
-//     const url = API_BASE_URL + '/search?query=%20&limit=10';
-//     const response = await axios.get<ProductType>(url);
-//     return response.data;
-//   } catch (error) {
-//     throw new Error(error.response ? error.response.data : 'Network error');
-//   }
-// };
-
-/**
- * 카테고리 정보를 관리 합니다.
- *
- * @returns
- */
-// export const useSearch = () => {
-//   return useQuery<ProductType>({ queryKey: ['search', params], queryFn: fetchSearch });
-// };
-
 const useSearch = (params: QueryStringParams = {}) => {
   const queries = Object.entries(params).reduce((acc, cur) => {
     const [k, v] = cur;
