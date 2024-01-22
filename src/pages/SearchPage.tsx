@@ -63,7 +63,8 @@ export default function SearchPage() {
     <StyledWrap>
       <StyledFilter>
         <SearchFilterList data={categories} />
-        <Button handleButtonClick={handleButtonClick} />
+        <Button handleButtonClick={handleButtonClick} />{' '}
+        {/* 리뷰: 필터 초기화 버튼의 의미가 담기는 함수명이 되면 좋겠습니다. */}
       </StyledFilter>
       <StyledContent>
         <StyledText>

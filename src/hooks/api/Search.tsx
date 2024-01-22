@@ -29,6 +29,7 @@ import { QueryStringParams } from '../../constants/constants';
 // };
 
 const useSearch = (params: QueryStringParams = {}) => {
+  // 리뷰: api/index.ts 쪽 리뷰 내용을 보시면 여기서 역시 queries를 만들어주는 부분이 필요 없을 것 같습니다.
   const queries = Object.entries(params).reduce((acc, cur) => {
     const [k, v] = cur;
     if (!v) return acc;
