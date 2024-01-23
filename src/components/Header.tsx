@@ -31,7 +31,7 @@ export default function Header() {
     }
 
     if (query) {
-      navigate(`/search?query=${query.trim()}`);
+      navigate(`/search?query=${query.trim()}&page=1`);
       window.location.reload();
     }
   };
