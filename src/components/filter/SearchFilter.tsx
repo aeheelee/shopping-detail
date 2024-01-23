@@ -24,17 +24,19 @@ interface IFilterProps {
 }
 [];
 
+const initialFilterState: IFilterProps[] = [
+  { type: 'product', open: false },
+  { type: 'price', open: false },
+  { type: 'discount', open: false },
+];
+
 const SearchFilter = ({ filter }: IProps) => {
   const [searchParams] = useSearchParams();
   const queryCategory = searchParams.get('category');
   const queryMinPrice = searchParams.get('minPrice');
   const queryMinDiscount = searchParams.get('minDiscount');
 
-  const [isOpen, setIsOpen] = useState<IFilterProps[]>([
-    { type: 'product', open: false },
-    { type: 'price', open: false },
-    { type: 'discount', open: false },
-  ]);
+  const [isOpen, setIsOpen] = useState<IFilterProps[]>(initialFilterState);
 
   const [query, setQuery] = useQueryParams({
     page: withDefault(NumberParam, 1),
@@ -47,16 +49,20 @@ const SearchFilter = ({ filter }: IProps) => {
   });
 
   useEffect(() => {
+    const updateFilterState = (type: string, isOpen: boolean) => {
+      setIsOpen((prev) => prev.map((item) => (item.type === type ? { ...item, open: isOpen } : item)));
+    };
+
     if (queryCategory !== null) {
-      setIsOpen((prev) => prev.map((item) => (item.type === 'product' ? { ...item, open: true } : item)));
+      updateFilterState('product', true);
     }
 
     if (queryMinPrice !== null) {
-      setIsOpen((prev) => prev.map((item) => (item.type === 'price' ? { ...item, open: true } : item)));
+      updateFilterState('price', true);
     }
 
     if (queryMinDiscount !== null) {
-      setIsOpen((prev) => prev.map((item) => (item.type === 'discount' ? { ...item, open: true } : item)));
+      updateFilterState('discount', true);
     }
   }, [queryCategory, queryMinPrice, queryMinDiscount]);
 
