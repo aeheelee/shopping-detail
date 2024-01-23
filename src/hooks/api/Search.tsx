@@ -10,6 +10,7 @@ import { QueryStringParams } from '../../constants/constants';
  * @returns response dat와 쿼리스트링을 리턴합니다.
  */
 const useSearch = (params: QueryStringParams = {}) => {
+  // key 값이 존재하는 속성들만 모아 새로운 객체를 생성
   const queries = Object.entries(params).reduce((acc, cur) => {
     const [k, v] = cur;
     if (!v) return acc;
