@@ -1,18 +1,15 @@
-import React from 'react';
 import styled from 'styled-components';
-import ProductList from '../components/product/ProductList';
-import Pagination from '../components/Pagination';
-import LoadingIndicator from '../components/LoadingIndicator';
-
 import { NumberParam, StringParam, useQueryParams, withDefault } from 'use-query-params';
-
-import useSearch from '../hooks/api/Search';
+import ProductList from './ProductList';
+import Pagination from '../Pagination';
+import LoadingIndicator from '../LoadingIndicator';
+import useSearch from '../../hooks/api/Search';
 
 interface IContentsProps {
   keyword: string;
 }
 
-const Contents = ({ keyword }: IContentsProps) => {
+const ProductWrap = ({ keyword }: IContentsProps) => {
   const [query, setQuery] = useQueryParams({
     page: withDefault(NumberParam, 1),
     query: withDefault(StringParam, keyword),
@@ -56,4 +53,4 @@ const StyledText = styled.p`
   font-size: 14px;
 `;
 
-export default Contents;
+export default ProductWrap;
