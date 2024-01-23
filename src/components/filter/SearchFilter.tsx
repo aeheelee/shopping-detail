@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { NumberParam, StringParam, useQueryParams, withDefault } from 'use-query-params';
 import styled from 'styled-components';
+import { useSearchParams } from 'react-router-dom';
 
 interface IData {
   id: number;
@@ -17,9 +18,24 @@ interface IProps {
     data: IData[];
   };
 }
+interface IFilterProps {
+  type: string;
+  open: boolean;
+}
+[];
 
 const SearchFilter = ({ filter }: IProps) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [searchParams] = useSearchParams();
+  const queryCategory = searchParams.get('category');
+  const queryMinPrice = searchParams.get('minPrice');
+  const queryMinDiscount = searchParams.get('minDiscount');
+
+  const [isOpen, setIsOpen] = useState<IFilterProps[]>([
+    { type: 'product', open: false },
+    { type: 'price', open: false },
+    { type: 'discount', open: false },
+  ]);
+
   const [query, setQuery] = useQueryParams({
     page: withDefault(NumberParam, 1),
     query: withDefault(StringParam, window.encodeURIComponent(' ')),
@@ -30,8 +46,29 @@ const SearchFilter = ({ filter }: IProps) => {
     maxPrice: NumberParam,
   });
 
+  useEffect(() => {
+    if (queryCategory !== null) {
+      setIsOpen((prev) => prev.map((item) => (item.type === 'product' ? { ...item, open: true } : item)));
+    }
+
+    if (queryMinPrice !== null) {
+      setIsOpen((prev) => prev.map((item) => (item.type === 'price' ? { ...item, open: true } : item)));
+    }
+
+    if (queryMinDiscount !== null) {
+      setIsOpen((prev) => prev.map((item) => (item.type === 'discount' ? { ...item, open: true } : item)));
+    }
+  }, [queryCategory, queryMinPrice, queryMinDiscount]);
+
   const handleClick = () => {
-    setIsOpen((prev) => !prev);
+    setIsOpen((prev) => {
+      return prev.map((item) => {
+        if (item.type === filter.type) {
+          return { ...item, open: !item.open };
+        }
+        return item;
+      });
+    });
   };
 
   const handleChange = (item: IData) => {
@@ -62,11 +99,11 @@ const SearchFilter = ({ filter }: IProps) => {
       <StyledFilterItem.Wrap>
         <StyledFilterItem.ButtonTitle type="button" onClick={handleClick}>
           {filter.title}
-          <StyledFilterItem.ButtonIcon $isOpen={isOpen}>
-            {isOpen ? '필터 선택 리스트 열림' : '필터 선택 리스트 닫힘'}
+          <StyledFilterItem.ButtonIcon $isOpen={isOpen.find((item) => item.type === filter.type)?.open ?? false}>
+            {isOpen.find((item) => item.type === filter.type)?.open ? '필터 선택 리스트 열림' : '필터 선택 리스트 닫힘'}
           </StyledFilterItem.ButtonIcon>
         </StyledFilterItem.ButtonTitle>
-        <StyledFilterItem.DetailList $isOpen={isOpen}>
+        <StyledFilterItem.DetailList $isOpen={isOpen.find((item) => item.type === filter.type)?.open ?? false}>
           {filter.data.map((item, index) => {
             const isChecked = ((): boolean => {
               switch (filter.type) {
