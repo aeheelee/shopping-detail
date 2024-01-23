@@ -100,13 +100,15 @@ const SearchFilter = ({ filter }: IProps) => {
     }
   };
 
+  const filterItem = isOpen.find((item) => item.type === filter.type) || { open: false };
+
   return (
     <>
       <StyledFilterItem.Wrap>
         <StyledFilterItem.ButtonTitle type="button" onClick={handleClick}>
           {filter.title}
-          <StyledFilterItem.ButtonIcon $isOpen={isOpen.find((item) => item.type === filter.type)?.open ?? false}>
-            {isOpen.find((item) => item.type === filter.type)?.open ? '필터 선택 리스트 열림' : '필터 선택 리스트 닫힘'}
+          <StyledFilterItem.ButtonIcon $isOpen={filterItem.open}>
+            {filterItem.open ? '필터 선택 리스트 열림' : '필터 선택 리스트 닫힘'}
           </StyledFilterItem.ButtonIcon>
         </StyledFilterItem.ButtonTitle>
         <StyledFilterItem.DetailList $isOpen={isOpen.find((item) => item.type === filter.type)?.open ?? false}>
