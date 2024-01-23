@@ -111,7 +111,7 @@ const SearchFilter = ({ filter }: IProps) => {
             {filterItem.open ? '필터 선택 리스트 열림' : '필터 선택 리스트 닫힘'}
           </StyledFilterItem.ButtonIcon>
         </StyledFilterItem.ButtonTitle>
-        <StyledFilterItem.DetailList $isOpen={isOpen.find((item) => item.type === filter.type)?.open ?? false}>
+        <StyledFilterItem.DetailList $isOpen={filterItem.open}>
           {filter.data.map((item, index) => {
             const isChecked = ((): boolean => {
               switch (filter.type) {
