@@ -1,13 +1,13 @@
-import { useSearchParams } from 'react-router-dom';
+// import { useSearchParams } from 'react-router-dom';
 import { NumberParam, StringParam, useQueryParams, withDefault } from 'use-query-params';
 import { styled } from 'styled-components';
 import Button from '../components/filter/Button';
-import ProductList from '../components/product/ProductList';
-import Pagination from '../components/Pagination';
+
 import SearchFilterList from '../components/filter/SearchFilterList';
 import { useCategories } from '../hooks/api/Categories';
-import useSearch from '../hooks/api/Search';
-import LoadingIndicator from '../components/LoadingIndicator';
+// import useSearch from '../hooks/api/Search';
+import Contents from '../components/Contents';
+import { useSearchParams } from 'react-router-dom';
 
 export default function SearchPage() {
   // NOTE http://localhost:3000/search?query='검색어'
@@ -15,40 +15,22 @@ export default function SearchPage() {
   const keyword = searchParams.get('query') || window.encodeURIComponent(' ');
 
   // 리액트 쿼리 : 카테고리 가져오기
-  const { data: categories, isLoading: isLoadingCategories = true } = useCategories();
+  const { data: categories } = useCategories();
 
-  const [query, setQuery] = useQueryParams({
+  const [, setQuery] = useQueryParams({
     page: withDefault(NumberParam, 1),
-    query: withDefault(StringParam, keyword),
-    category: NumberParam,
-    minDiscount: NumberParam,
-    maxDiscount: NumberParam,
-    minPrice: NumberParam,
-    maxPrice: NumberParam,
+    query: StringParam,
   });
 
-  const { data: products } = useSearch({ ...query });
-
   if (!categories) return null;
-  if (!products) return null;
-
-  const handleChangePage = (page: number) => {
-    setQuery({ page });
-    window.scrollTo(0, 0);
-  };
 
   const handleButtonClick = () => {
     setQuery(
       {
         page: 1,
         query: keyword,
-        category: undefined,
-        minDiscount: undefined,
-        maxDiscount: undefined,
-        minPrice: undefined,
-        maxPrice: undefined,
       },
-      'replaceIn',
+      'replace',
     );
   };
 
@@ -65,19 +47,7 @@ export default function SearchPage() {
         <SearchFilterList data={categories} />
         <Button handleButtonClick={handleButtonClick} />
       </StyledFilter>
-      <StyledContent>
-        <StyledText>
-          <strong>{products.totalItems}</strong>개 결과
-        </StyledText>
-        {isLoadingCategories ? (
-          <LoadingIndicator />
-        ) : (
-          <>
-            {products.items.length === 0 ? <div>찾으시는 상품이 없어요.</div> : <ProductList data={products.items} />}
-          </>
-        )}
-        <Pagination maxPage={products.maxPage} currentPage={query.page} onPageChange={handleChangePage} />
-      </StyledContent>
+      <Contents keyword={keyword} />
     </StyledWrap>
   );
 }
@@ -113,13 +83,4 @@ const StyledFilter = styled.section`
     background-color: #fff;
     z-index: 10;
   }
-`;
-
-const StyledContent = styled.section`
-  flex: 1;
-`;
-
-const StyledText = styled.p`
-  padding: 12px 0;
-  font-size: 14px;
 `;
