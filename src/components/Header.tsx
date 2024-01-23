@@ -32,6 +32,7 @@ export default function Header() {
 
     if (query) {
       navigate(`/search?query=${query.trim()}`);
+      window.location.reload();
     }
   };
 

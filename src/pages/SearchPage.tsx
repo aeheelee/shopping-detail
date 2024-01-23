@@ -17,7 +17,12 @@ export default function SearchPage() {
 
   const [, setQuery] = useQueryParams({
     page: withDefault(NumberParam, 1),
-    query: StringParam,
+    query: withDefault(StringParam, keyword),
+    category: NumberParam,
+    minDiscount: NumberParam,
+    maxDiscount: NumberParam,
+    minPrice: NumberParam,
+    maxPrice: NumberParam,
   });
 
   if (!categories) return null;
@@ -30,6 +35,7 @@ export default function SearchPage() {
       },
       'replace',
     );
+    window.location.reload();
   };
 
   // console.log('-----------------------------------');
