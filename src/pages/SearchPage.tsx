@@ -41,14 +41,9 @@ export default function SearchPage() {
     setQuery(
       {
         page: 1,
-        query: keyword,
-        category: undefined,
-        minDiscount: undefined,
-        maxDiscount: undefined,
-        minPrice: undefined,
-        maxPrice: undefined,
+        query: ' ',
       },
-      'replaceIn',
+      'replace',
     );
   };
 
