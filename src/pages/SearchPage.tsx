@@ -6,11 +6,13 @@ import { useSearchParams } from 'react-router-dom';
 import Button from '../components/filter/Button';
 import SearchFilterList from '../components/filter/SearchFilterList';
 import ProductWrap from '../components/product/ProductWrap';
+import { useState } from 'react';
 
 export default function SearchPage() {
   // NOTE http://localhost:3000/search?query='검색어'
   const [searchParams] = useSearchParams();
   const keyword = searchParams.get('query') || window.encodeURIComponent(' ');
+  const [isOpen, setIsOpen] = useState(false);
 
   // 리액트 쿼리 : 카테고리 가져오기
   const { data: categories } = useCategories();
@@ -38,6 +40,10 @@ export default function SearchPage() {
     window.location.reload();
   };
 
+  const handleFilterClick = (): void => {
+    setIsOpen((prev) => !prev);
+  };
+
   // console.log('-----------------------------------');
   // console.log('data: ' + JSON.stringify(categories));
   // console.log('isLoading: ' + isLoadingCategories);
@@ -47,10 +53,11 @@ export default function SearchPage() {
 
   return (
     <StyledWrap>
-      <StyledFilter>
-        <SearchFilterList data={categories} />
+      <StyledFilter isOpen={isOpen}>
+        <SearchFilterList data={categories} onFilterCloseClick={handleFilterClick} />
         <Button handleButtonClick={handleButtonClick} />
       </StyledFilter>
+      <StyledFilterButton onClick={handleFilterClick}>FILTER</StyledFilterButton>
       <ProductWrap keyword={keyword} />
     </StyledWrap>
   );
@@ -66,9 +73,13 @@ const StyledWrap = styled.div`
   align-items: flex-start;
   gap: 0 20px;
   z-index: 1;
+
+  @media only screen and (max-width: 900px) {
+    flex-direction: column;
+  }
 `;
 
-const StyledFilter = styled.section`
+const StyledFilter = styled.section<{ isOpen: boolean }>`
   display: flex;
   width: 300px;
   height: 100%;
@@ -78,13 +89,28 @@ const StyledFilter = styled.section`
   box-sizing: border-box;
 
   @media only screen and (max-width: 900px) {
-    display: none;
+    display: ${({ isOpen }) => (isOpen ? 'flex' : 'none')};
     position: fixed;
     top: 0;
     right: 0;
     bottom: 0;
-    width: 80%;
+    left: 0;
+    width: 100%;
+    padding: 20px;
     background-color: #fff;
     z-index: 10;
+  }
+`;
+
+const StyledFilterButton = styled.button`
+  display: none;
+  padding: 5px 10px;
+  border: 2px solid blue;
+  border-radius: 5px;
+  font-size: 17px;
+  font-weight: bold;
+
+  @media only screen and (max-width: 900px) {
+    display: block;
   }
 `;

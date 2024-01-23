@@ -46,6 +46,10 @@ const ProductWrap = ({ keyword }: IContentsProps) => {
 
 const StyledContent = styled.section`
   flex: 1;
+
+  @media only screen and (max-width: 900px) {
+    width: 100%;
+  }
 `;
 
 const StyledText = styled.p`

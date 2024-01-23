@@ -46,7 +46,7 @@ export default function Header() {
   };
 
   return (
-    <header className="flex justify-around items-center py-4 sticky top-0 z-10 shadow-lg bg-white max-sm:flex-col gap-4 h-fit cursor-pointer">
+    <header className="flex justify-around items-center py-4 sticky top-0 shadow-lg bg-white max-sm:flex-col gap-4 h-fit cursor-pointer">
       <div className="flex items-center gap-4 " onClick={handleLogoClick}>
         <img alt="logo" src={logo} className="w-9" />
         <h1 className="text-xl font-semibold max-sm:text-md">COZ SHOPPING</h1>
