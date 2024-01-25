@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import ProductList from '../components/product/ProductList';
+import ProductMain from '../components/product/ProductMain';
 import CategoryMenu from '../components/category/CategoryMenu';
 
 export default function MainPage() {
@@ -11,8 +11,8 @@ export default function MainPage() {
       <StyledContainer>
         {/* <Route path="/" element={<ProductList setPath={setPath} />} />
         <Route path="/:category" element={<ProductList setPath={setPath} />} /> */}
+        <ProductMain />
       </StyledContainer>
-      {/* <ProductList data={products.items} /> */}
     </main>
   );
 }

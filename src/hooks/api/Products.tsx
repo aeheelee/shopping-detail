@@ -8,9 +8,12 @@ import { fetchApi } from '../api';
  * @param categoryId Id값을 가져옵니다.
  * @returns response data를 리턴합니다.
  */
-export const useProducts = (categoryId: number) => {
-  const url = API_BASE_URL + `/products?page=1&limit=12&category=${categoryId}`;
+const useProducts = (page: number, categoryId: number) => {
+  const url = API_BASE_URL + `/products?page=${page}&limit=12&category=${categoryId}`;
+  console.log(url);
   const fetchProducts = (): Promise<ProductType> => fetchApi(url);
 
-  return useQuery({ queryKey: ['products'], queryFn: () => fetchProducts });
+  return useQuery({ queryKey: ['products', page, categoryId], queryFn: () => fetchProducts });
 };
+
+export default useProducts;
