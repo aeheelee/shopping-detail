@@ -9,15 +9,10 @@ interface IContentsProps {
   keyword: string;
 }
 
-const ProductWrap = ({ keyword }: IContentsProps) => {
+const ProductSearch = ({ keyword }: IContentsProps) => {
   const [query, setQuery] = useQueryParams({
     page: withDefault(NumberParam, 1),
     query: withDefault(StringParam, keyword),
-    category: NumberParam,
-    minDiscount: NumberParam,
-    maxDiscount: NumberParam,
-    minPrice: NumberParam,
-    maxPrice: NumberParam,
   });
 
   const { data: products, isLoading: isLoadingCategories = true } = useSearch({ ...query });
@@ -57,4 +52,4 @@ const StyledText = styled.p`
   font-size: 14px;
 `;
 
-export default ProductWrap;
+export default ProductSearch;

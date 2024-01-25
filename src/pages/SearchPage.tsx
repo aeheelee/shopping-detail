@@ -5,7 +5,7 @@ import { useCategories } from '../hooks/api/Categories';
 import { useSearchParams } from 'react-router-dom';
 import Button from '../components/filter/Button';
 import SearchFilterList from '../components/filter/SearchFilterList';
-import ProductWrap from '../components/product/ProductWrap';
+import ProductSearch from '../components/product/ProductSearch';
 import { useState } from 'react';
 
 export default function SearchPage() {
@@ -20,11 +20,6 @@ export default function SearchPage() {
   const [, setQuery] = useQueryParams({
     page: withDefault(NumberParam, 1),
     query: withDefault(StringParam, keyword),
-    category: NumberParam,
-    minDiscount: NumberParam,
-    maxDiscount: NumberParam,
-    minPrice: NumberParam,
-    maxPrice: NumberParam,
   });
 
   if (!categories) return null;
@@ -58,7 +53,7 @@ export default function SearchPage() {
         <Button handleButtonClick={handleButtonClick} />
       </StyledFilter>
       <StyledFilterButton onClick={handleFilterClick}>FILTER</StyledFilterButton>
-      <ProductWrap keyword={keyword} />
+      <ProductSearch keyword={keyword} />
     </StyledWrap>
   );
 }
