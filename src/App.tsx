@@ -38,6 +38,14 @@ export const queryClient = new QueryClient({
 });
 
 function App() {
+  const { pathname } = window.location;
+
+  const isRootPath = pathname === '/';
+
+  if (isRootPath) {
+    window.location.href = '/0';
+  }
+
   return (
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools initialIsOpen={false} />
@@ -48,7 +56,7 @@ function App() {
             <Suspense fallback={<LoadingIndicator />}>
               <ScrollToTop />
               <Routes>
-                <Route path="/" element={<MainPage />} />
+                <Route path="/:category" element={<MainPage />} />
                 <Route path="/search" element={<SearchPage />} />
                 <Route path="/products/:productId" element={<ProductDetailPage />} />
               </Routes>

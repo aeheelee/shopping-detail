@@ -7,12 +7,10 @@ interface IProps {
 }
 const CategoryMenuItem = ({ data }: IProps) => {
   const { id, title, imageUrl } = data;
-  // 경로가 root인 경우 path 체크
-  const path = id ? `/${id}` : '/';
 
   return (
     <StyledWrap>
-      <StyledLink to={`${path}`}>
+      <StyledLink to={`/${id}`}>
         <img src={imageUrl} alt={title} />
         {title}
       </StyledLink>

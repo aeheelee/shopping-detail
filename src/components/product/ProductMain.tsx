@@ -7,16 +7,18 @@ import LoadingIndicator from '../LoadingIndicator';
 import useProducts from '../../hooks/api/Products';
 
 const ProductSearch = () => {
-  const { categoryId } = useParams();
+  const { category } = useParams();
   const [query, setQuery] = useQueryParams({
     page: withDefault(NumberParam, 1),
   });
 
-  const { data: products, isLoading: isLoadingProducts = true } = useProducts(query.page, Number(0));
+  console.log('category, ' + category);
+
+  const { data: products, isLoading: isLoadingProducts = true } = useProducts(query.page, Number(category));
+
+  console.log('products, ' + products);
 
   if (!products) return null;
-
-  console.log(products);
 
   const handleChangePage = (page: number) => {
     setQuery({ page });

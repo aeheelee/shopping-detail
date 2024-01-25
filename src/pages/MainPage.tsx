@@ -9,8 +9,6 @@ export default function MainPage() {
         <CategoryMenu />
       </StyledTop>
       <StyledContainer>
-        {/* <Route path="/" element={<ProductList setPath={setPath} />} />
-        <Route path="/:category" element={<ProductList setPath={setPath} />} /> */}
         <ProductMain />
       </StyledContainer>
     </main>
