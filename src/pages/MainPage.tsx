@@ -4,21 +4,37 @@ import CategoryMenu from '../components/category/CategoryMenu';
 
 export default function MainPage() {
   return (
-    <main>
+    <StyledWrap>
       <StyledTop>
         <CategoryMenu />
       </StyledTop>
-      <StyledContainer>
-        <ProductMain />
-      </StyledContainer>
-    </main>
+      <ProductMain />
+    </StyledWrap>
   );
 }
 
-const StyledContainer = styled.div``;
+const StyledWrap = styled.div`
+  position: relative;
+  flex: 1;
+  display: flex;
+  max-width: 1240px;
+  height: 100%;
+  margin: 0 auto;
+  align-items: flex-start;
+  gap: 0 20px;
+  z-index: 1;
+
+  @media only screen and (max-width: 900px) {
+    flex-direction: column;
+    z-index: 10;
+  }
+`;
 
 const StyledTop = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 3fr;
-  grid-gap: 0 20px;
+  width: 300px;
+  height: 100%;
+  padding: 20px 0;
+  @media only screen and (max-width: 900px) {
+    width: 100%;
+  }
 `;
