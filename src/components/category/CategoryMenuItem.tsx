@@ -1,7 +1,11 @@
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
+import { ProductCategoryType } from '../../types/CommonTypes';
 
-const CategoryMenuItem = ({ data }) => {
+interface IProps {
+  data: ProductCategoryType;
+}
+const CategoryMenuItem = ({ data }: IProps) => {
   const { id, title, imageUrl } = data;
   // 경로가 root인 경우 path 체크
   const path = id ? `/${id}` : '/';
