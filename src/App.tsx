@@ -56,7 +56,7 @@ function App() {
             <Suspense fallback={<LoadingIndicator />}>
               <ScrollToTop />
               <Routes>
-                <Route path="/:category" element={<MainPage />} />
+                <Route path="/:category?" element={<MainPage />} />
                 <Route path="/search" element={<SearchPage />} />
                 <Route path="/products/:productId" element={<ProductDetailPage />} />
               </Routes>

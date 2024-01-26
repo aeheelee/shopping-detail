@@ -7,10 +7,11 @@ interface IProps {
 }
 const CategoryMenuItem = ({ data }: IProps) => {
   const { id, title, imageUrl } = data;
+  const path = id !== 0 ? `/${id}` : '/';
 
   return (
     <StyledWrap>
-      <StyledLink to={`/${id}`}>
+      <StyledLink to={path}>
         <img src={imageUrl} alt={title} />
         {title}
       </StyledLink>
