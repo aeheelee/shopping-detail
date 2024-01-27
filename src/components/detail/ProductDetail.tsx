@@ -1,56 +1,70 @@
 import React from 'react';
 import styled from 'styled-components';
-import { detailData } from '../../constants/productDetail.mockup';
 import Button from '../Button';
+import useDetail from '../../hooks/api/useDetail';
+import { useParams } from 'react-router';
+import LoadingIndicator from '../LoadingIndicator';
 
 const ProductDetail = () => {
-  const data = detailData;
-  const infoHtml = `${data.info}`;
+  const { productId } = useParams();
+  const { data: detailData, isLoading: isLoadingDetail = true } = useDetail(Number(productId));
+
+  if (!detailData) return null;
+
+  const infoHtml = `${detailData.info}`;
 
   const handleButtonClick = () => {
     alert('해당 기능은 오픈 준비중입니다.');
   };
 
   return (
-    <StyledWrap>
-      <StyledImgBox>
-        <img src={data.imageUrl} alt={data.title} />
-      </StyledImgBox>
-      <StyledContent.Wrap>
-        <StyledContent.Title>상품정보</StyledContent.Title>
-        <StyledContent.Info dangerouslySetInnerHTML={{ __html: infoHtml }} />
-        <StyledContent.customer>
-          <dl>
-            <dt>판매량</dt>
-            <dd>{data.purchaseStatus.totalSales.toLocaleString()}</dd>
-          </dl>
-          <dl>
-            <dt>좋아요 수</dt>
-            <dd>{data.like.toLocaleString()}</dd>
-          </dl>
-          <dl>
-            <dt>구매 만족도</dt>
-            <dd>{data.purchaseStatus.satisfaction} / 5.0</dd>
-          </dl>
-        </StyledContent.customer>
-        <StyledContent.priceWrap>
-          <StyledContent.price>
-            ₩{data.price.toLocaleString()}
-            <span>{data.discountPercentage}% 할인</span>
-          </StyledContent.price>
-          <StyledContent.discountPrice>₩{data.discountPrice.toLocaleString()}</StyledContent.discountPrice>
-        </StyledContent.priceWrap>
-        <StyledContent.ButtonWrap>
-          <Button title="장바구니 담기" color="black" buttonClick={handleButtonClick} />
-          <Button title="구매하기" color="blue" buttonClick={handleButtonClick} />
-        </StyledContent.ButtonWrap>
-      </StyledContent.Wrap>
-    </StyledWrap>
+    <>
+      {isLoadingDetail ? (
+        <LoadingIndicator />
+      ) : (
+        <StyledWrap>
+          <StyledImgBox>
+            <img src={detailData.imageUrl} alt={detailData.title} />
+          </StyledImgBox>
+          <StyledContent.Wrap>
+            <StyledContent.Title>상품정보</StyledContent.Title>
+            <StyledContent.Info dangerouslySetInnerHTML={{ __html: infoHtml }} />
+            <StyledContent.customer>
+              <dl>
+                <dt>판매량</dt>
+                <dd>{detailData.purchaseStatus.totalSales.toLocaleString()}</dd>
+              </dl>
+              <dl>
+                <dt>좋아요 수</dt>
+                <dd>{detailData.like.toLocaleString()}</dd>
+              </dl>
+              <dl>
+                <dt>구매 만족도</dt>
+                <dd>{detailData.purchaseStatus.satisfaction} / 5.0</dd>
+              </dl>
+            </StyledContent.customer>
+            <StyledContent.priceWrap>
+              <StyledContent.price>
+                ₩{detailData.price.toLocaleString()}
+                <span>{detailData.discountPercentage}% 할인</span>
+              </StyledContent.price>
+              <StyledContent.discountPrice>₩{detailData.discountPrice.toLocaleString()}</StyledContent.discountPrice>
+            </StyledContent.priceWrap>
+            <StyledContent.ButtonWrap>
+              <Button title="장바구니 담기" color="black" buttonClick={handleButtonClick} />
+              <Button title="구매하기" color="blue" buttonClick={handleButtonClick} />
+            </StyledContent.ButtonWrap>
+          </StyledContent.Wrap>
+        </StyledWrap>
+      )}
+    </>
   );
 };
 
 const StyledWrap = styled.section`
-  display: flex;
+  display: grid;
+  grid-template-rows: repeat(2, 1fr);
+  grid-template-areas: 'a b';
 `;
 
 const StyledImgBox = styled.div`
@@ -61,6 +75,7 @@ const StyledImgBox = styled.div`
   /* height: 500px; */
   padding: 15px;
   background-color: #e9e9e9;
+  grid-area: a;
 `;
 
 const StyledContent = {
@@ -68,6 +83,7 @@ const StyledContent = {
     width: 65%;
     padding: 20px;
     box-sizing: border-box;
+    grid-area: b;
   `,
 
   Title: styled.p`
