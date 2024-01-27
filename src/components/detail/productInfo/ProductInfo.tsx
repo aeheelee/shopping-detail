@@ -12,7 +12,6 @@ const ProductInfo = ({ data: detailData }: IProductInfo) => {
   const [isOpenLayer, setIsOpenLayer] = useState(false);
 
   const infoHtml = `${detailData.info}`;
-  console.log(detailData);
 
   const handleButtonClick = () => {
     alert('서비스 준비중입니다');

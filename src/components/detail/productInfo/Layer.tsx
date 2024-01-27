@@ -7,7 +7,7 @@ interface IProps {
 }
 const Layer = ({ image, isOpen, onLayer }: IProps) => {
   return (
-    <StyledWrap isOpen={isOpen}>
+    <StyledWrap $isOpen={isOpen}>
       <StyledInner>
         <StyledButton onClick={() => onLayer()}>X</StyledButton>
         <img src={image} />
@@ -18,8 +18,8 @@ const Layer = ({ image, isOpen, onLayer }: IProps) => {
 
 export default Layer;
 
-const StyledWrap = styled.div<{ isOpen: boolean }>`
-  display: ${({ isOpen }) => (isOpen ? 'block' : 'none')};
+const StyledWrap = styled.div<{ $isOpen: boolean }>`
+  display: ${({ $isOpen }) => ($isOpen ? 'block' : 'none')};
   position: fixed;
   top: 50%;
   left: 50%;
