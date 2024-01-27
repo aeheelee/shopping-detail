@@ -2,6 +2,8 @@ import { useState, Suspense } from 'react';
 import { NumberParam, StringParam, useQueryParams, withDefault } from 'use-query-params';
 import { useSearchParams } from 'react-router-dom';
 import { styled } from 'styled-components';
+import { useResetAtom } from 'jotai/utils';
+import { filtersDropDownAtom } from '../store/atoms/filtersDropDownAtom';
 import { useCategories } from '../hooks/api/useCategories';
 import SearchFilterList from '../components/filter/SearchFilterList';
 import ProductSearch from '../components/product/ProductSearch';
@@ -13,6 +15,7 @@ export default function SearchPage() {
   const [searchParams] = useSearchParams();
   const keyword = searchParams.get('query') || window.encodeURIComponent(' ');
   const [isOpen, setIsOpen] = useState(false);
+  const resetFiltersDropDown = useResetAtom(filtersDropDownAtom);
 
   // 리액트 쿼리 : 카테고리 가져오기
   const { data: categories } = useCategories();
@@ -24,7 +27,7 @@ export default function SearchPage() {
 
   if (!categories) return null;
 
-  const handleButtonClick = () => {
+  const handleResetButtonClick = () => {
     setQuery(
       {
         page: 1,
@@ -32,25 +35,19 @@ export default function SearchPage() {
       },
       'replace',
     );
-    window.location.reload();
+
+    resetFiltersDropDown();
   };
 
   const handleFilterClick = (): void => {
     setIsOpen((prev) => !prev);
   };
 
-  // console.log('-----------------------------------');
-  // console.log('data: ' + JSON.stringify(categories));
-  // console.log('isLoading: ' + isLoadingCategories);
-  // console.log('isError: ' + isErrorCategories);
-  // console.log('errorMsg: ' + errorCategoriesMsg);
-  // console.log('-----------------------------------');
-
   return (
     <StyledWrap>
       <StyledFilter isOpen={isOpen}>
         <SearchFilterList data={categories} onFilterCloseClick={handleFilterClick} />
-        <Button title="초기화" buttonClick={handleButtonClick} />
+        <Button title="초기화" buttonClick={handleResetButtonClick} />
       </StyledFilter>
       <StyledFilterButton onClick={handleFilterClick}>FILTER</StyledFilterButton>
       <Suspense fallback={<LoadingIndicator />}>

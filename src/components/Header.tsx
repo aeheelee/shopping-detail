@@ -1,11 +1,14 @@
 import { useNavigate } from 'react-router-dom';
-import logo from '../assets/coz_logo_192.png';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { useResetAtom } from 'jotai/utils';
+import { filtersDropDownAtom } from '../store/atoms/filtersDropDownAtom';
+import logo from '../assets/coz_logo_192.png';
 
 export default function Header() {
   const navigate = useNavigate();
   const [query, setQuery] = useState('');
+  const resetFiltersDropDown = useResetAtom(filtersDropDownAtom);
 
   const location = useLocation();
 
@@ -32,7 +35,8 @@ export default function Header() {
 
     if (query) {
       navigate(`/search?query=${query.trim()}&page=1`);
-      window.location.reload();
+
+      resetFiltersDropDown();
     }
   };
 

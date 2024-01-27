@@ -10,7 +10,7 @@ import { fetchApi } from '../api';
  * @returns response data를 리턴합니다.
  */
 const useReview = (page: number, productId: number) => {
-  const url = API_BASE_URL + `/purchase/review/${productId}?page=${page}&limit=12`;
+  const url = API_BASE_URL + `/purchase/review/${productId}?page=${page}&limit=10`;
 
   const fetchReview = (): Promise<ReviesType> => fetchApi(url);
 
