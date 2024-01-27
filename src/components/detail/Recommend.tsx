@@ -1,12 +1,11 @@
 import styled from 'styled-components';
 import ProductSlide from '../product/ProductSlide';
 import useRecommend from '../../hooks/api/useRecommend';
-import LoadingIndicator from '../LoadingIndicator';
 import { useParams } from 'react-router-dom';
 
 const Recommend = () => {
   const { productId } = useParams();
-  const { data: products, isLoading: isLoadingProducts = true } = useRecommend(Number(productId));
+  const { data: products } = useRecommend(Number(productId));
 
   if (!products) return null;
 
@@ -14,7 +13,7 @@ const Recommend = () => {
     <StyledWrap>
       <StyledTitle>상품추천</StyledTitle>
       <StyledContent>
-        {isLoadingProducts ? <LoadingIndicator /> : <ProductSlide data={products.items} swiperName={'recommSlide'} />}
+        <ProductSlide data={products.items} swiperName={'recommSlide'} />
       </StyledContent>
     </StyledWrap>
   );

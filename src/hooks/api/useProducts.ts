@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useSuspenseQuery } from '@tanstack/react-query';
 import { API_BASE_URL } from '../../constants/constants';
 import { ProductType } from '../../types/CommonTypes';
 import { fetchApi } from '../api';
@@ -13,7 +13,7 @@ const useProducts = (page: number, category: number) => {
   const url = API_BASE_URL + `/products?page=${page}&limit=12&category=${category}`;
   const fetchProducts = (): Promise<ProductType> => fetchApi(url);
 
-  return useQuery({ queryKey: ['products', page, category], queryFn: () => fetchProducts() });
+  return useSuspenseQuery({ queryKey: ['products', page, category], queryFn: () => fetchProducts() });
 };
 
 export default useProducts;

@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { NumberParam, StringParam, useQueryParams, withDefault } from 'use-query-params';
 import ProductList from './ProductList';
 import Pagination from '../Pagination';
-import LoadingIndicator from '../LoadingIndicator';
 import useSearch from '../../hooks/api/useSearch';
 
 interface IContentsProps {
@@ -20,7 +19,7 @@ const ProductSearch = ({ keyword }: IContentsProps) => {
     maxPrice: NumberParam,
   });
 
-  const { data: products, isLoading: isLoadingCategories = true } = useSearch({ ...query });
+  const { data: products } = useSearch({ ...query });
 
   if (!products) return null;
 
@@ -29,11 +28,7 @@ const ProductSearch = ({ keyword }: IContentsProps) => {
       <StyledText>
         <strong>{products.totalItems}</strong>개 결과
       </StyledText>
-      {isLoadingCategories ? (
-        <LoadingIndicator />
-      ) : (
-        <>{products.items.length === 0 ? <div>찾으시는 상품이 없어요.</div> : <ProductList data={products.items} />}</>
-      )}
+      {products.items.length === 0 ? <div>찾으시는 상품이 없어요.</div> : <ProductList data={products.items} />}
       <Pagination maxPage={products.maxPage} currentPage={products.currentPage} />
     </StyledContent>
   );

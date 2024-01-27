@@ -1,12 +1,12 @@
-// import { useSearchParams } from 'react-router-dom';
+import { useState, Suspense } from 'react';
 import { NumberParam, StringParam, useQueryParams, withDefault } from 'use-query-params';
+import { useSearchParams } from 'react-router-dom';
 import { styled } from 'styled-components';
 import { useCategories } from '../hooks/api/useCategories';
-import { useSearchParams } from 'react-router-dom';
 import Button from '../components/filter/Button';
 import SearchFilterList from '../components/filter/SearchFilterList';
 import ProductSearch from '../components/product/ProductSearch';
-import { useState } from 'react';
+import LoadingIndicator from '../components/LoadingIndicator';
 
 export default function SearchPage() {
   // NOTE http://localhost:3000/search?query='검색어'
@@ -53,7 +53,9 @@ export default function SearchPage() {
         <Button handleButtonClick={handleButtonClick} />
       </StyledFilter>
       <StyledFilterButton onClick={handleFilterClick}>FILTER</StyledFilterButton>
-      <ProductSearch keyword={keyword} />
+      <Suspense fallback={<LoadingIndicator />}>
+        <ProductSearch keyword={keyword} />
+      </Suspense>
     </StyledWrap>
   );
 }

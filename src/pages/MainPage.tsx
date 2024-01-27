@@ -1,6 +1,8 @@
 import styled from 'styled-components';
+import { Suspense } from 'react';
 import ProductMain from '../components/product/ProductMain';
 import CategoryMenu from '../components/category/CategoryMenu';
+import LoadingIndicator from '../components/LoadingIndicator';
 
 export default function MainPage() {
   return (
@@ -8,7 +10,9 @@ export default function MainPage() {
       <StyledTop>
         <CategoryMenu />
       </StyledTop>
-      <ProductMain />
+      <Suspense fallback={<LoadingIndicator />}>
+        <ProductMain />
+      </Suspense>
     </StyledWrap>
   );
 }

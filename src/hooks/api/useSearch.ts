@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useSuspenseQuery } from '@tanstack/react-query';
 import { API_BASE_URL } from '../../constants/constants';
 import { ProductType } from '../../types/CommonTypes';
 import { generateUrl, fetchApi } from '../api';
@@ -24,7 +24,7 @@ const useSearch = (params: QueryStringParams = {}) => {
   });
   const fetchSearch = (): Promise<ProductType> => fetchApi(url);
 
-  return useQuery({
+  return useSuspenseQuery({
     queryKey: ['search', params],
     queryFn: () => fetchSearch(),
   });
