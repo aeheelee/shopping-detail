@@ -1,6 +1,6 @@
-import useDetail from '../../hooks/api/useDetail';
+import useDetail from '../../../hooks/api/useDetail';
 import { useParams } from 'react-router';
-import LoadingIndicator from '../LoadingIndicator';
+import LoadingIndicator from '../../LoadingIndicator';
 import ProductInfo from './ProductInfo';
 
 const ProductDetail = () => {

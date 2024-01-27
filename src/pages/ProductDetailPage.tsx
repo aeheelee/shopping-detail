@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import ReviewList from '../components/detail/review/ReviewList';
-import ProductDetail from '../components/detail/ProductDetail';
+import ProductDetail from '../components/detail/productInfo/ProductDetail';
 import Recommend from '../components/detail/Recommend';
 
 const ProductDetailPage = () => {

@@ -1,13 +1,15 @@
-import React from 'react';
+// import React, { useState } from 'react';
 import styled from 'styled-components';
-import { ProductDetailType } from '../../types/CommonTypes';
-import Button from '../Button';
+import { ProductDetailType } from '../../../types/CommonTypes';
+import Button from '../../Button';
 
 interface IProductInfo {
   data: ProductDetailType;
 }
 
 const ProductInfo = ({ data: detailData }: IProductInfo) => {
+  // const [isOpenImg, setIsOpenImg] = useState(false);
+
   const infoHtml = `${detailData.info}`;
 
   const handleButtonClick = () => {
@@ -16,7 +18,9 @@ const ProductInfo = ({ data: detailData }: IProductInfo) => {
   return (
     <StyledWrap>
       <StyledImgBox>
-        <img src={detailData.imageUrl} alt={detailData.title} />
+        <button>
+          <img src={detailData.imageUrl} alt={detailData.title} />
+        </button>
       </StyledImgBox>
       <StyledContent.Wrap>
         <StyledContent.Title>상품정보</StyledContent.Title>
