@@ -1,26 +1,31 @@
-// import React, { useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { ProductDetailType } from '../../../types/CommonTypes';
 import Button from '../../Button';
+import Layer from './Layer';
 
 interface IProductInfo {
   data: ProductDetailType;
 }
 
 const ProductInfo = ({ data: detailData }: IProductInfo) => {
-  // const [isOpenImg, setIsOpenImg] = useState(false);
+  const [isOpenLayer, setIsOpenLayer] = useState(false);
 
   const infoHtml = `${detailData.info}`;
+  console.log(detailData);
 
   const handleButtonClick = () => {
-    alert('해당 기능은 오픈 준비중입니다.');
+    alert('서비스 준비중입니다');
   };
+
+  const handleImageClick = () => {
+    setIsOpenLayer((prev) => !prev);
+  };
+
   return (
     <StyledWrap>
-      <StyledImgBox>
-        <button>
-          <img src={detailData.imageUrl} alt={detailData.title} />
-        </button>
+      <StyledImgBox onClick={handleImageClick}>
+        <img src={detailData.imageUrl} alt={detailData.title} />
       </StyledImgBox>
       <StyledContent.Wrap>
         <StyledContent.Title>상품정보</StyledContent.Title>
@@ -53,6 +58,7 @@ const ProductInfo = ({ data: detailData }: IProductInfo) => {
           <Button title="구매하기" color="blue" buttonClick={handleButtonClick} />
         </StyledContent.ButtonWrap>
       </StyledContent.Wrap>
+      <Layer image={detailData.imageUrl} onLayer={handleImageClick} isOpen={isOpenLayer} />
     </StyledWrap>
   );
 };
@@ -63,7 +69,7 @@ const StyledWrap = styled.section`
   grid-template-areas: 'a b';
 `;
 
-const StyledImgBox = styled.div`
+const StyledImgBox = styled.button`
   display: flex;
   justify-content: center;
   vertical-align: center;

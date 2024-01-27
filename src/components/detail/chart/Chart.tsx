@@ -10,10 +10,9 @@ interface IProps {
   };
 }
 
-const Chart = ({ data }: IProps) => {
+const ChartList = ({ data }: IProps) => {
   const { age, gender } = data;
-  console.log(age);
-  console.log(gender);
+
   return (
     <StyledWrap>
       <StyledContents>
@@ -28,7 +27,7 @@ const Chart = ({ data }: IProps) => {
   );
 };
 
-export default Chart;
+export default ChartList;
 
 const StyledWrap = styled.section`
   /* 임시값 */
