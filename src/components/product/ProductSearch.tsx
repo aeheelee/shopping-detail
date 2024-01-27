@@ -13,6 +13,11 @@ const ProductSearch = ({ keyword }: IContentsProps) => {
   const [query, setQuery] = useQueryParams({
     page: withDefault(NumberParam, 1),
     query: withDefault(StringParam, keyword),
+    category: NumberParam,
+    minDiscount: NumberParam,
+    maxDiscount: NumberParam,
+    minPrice: NumberParam,
+    maxPrice: NumberParam,
   });
 
   const { data: products, isLoading: isLoadingCategories = true } = useSearch({ ...query });
