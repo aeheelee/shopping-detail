@@ -55,7 +55,7 @@ const SearchFilter = ({ filter }: IProps) => {
     if (queryMinDiscount !== null) {
       updateFilterState('discount', true);
     }
-  }, [queryCategory, queryMinPrice, queryMinDiscount]);
+  }, [queryCategory, queryMinPrice, queryMinDiscount, setIsOpen]);
 
   const handleClick = () => {
     setIsOpen((prev) => {
