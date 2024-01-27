@@ -18,7 +18,7 @@ const ReviewList = () => {
 
   return (
     <section>
-      <StyledText>{reviewData.totalItems}</StyledText>
+      <StyledText>{reviewData.totalItems}개 후기</StyledText>
       <ul>
         {reviewData.items.map((item, index) => {
           const { rating, writer, content } = item;
