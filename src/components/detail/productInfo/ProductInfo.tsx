@@ -72,7 +72,7 @@ const StyledWrap = styled.section`
 const StyledImgBox = styled.button`
   display: flex;
   justify-content: center;
-  vertical-align: center;
+  align-items: center;
   padding: 15px;
   background-color: #e9e9e9;
   grid-area: a;
