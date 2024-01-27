@@ -1,14 +1,16 @@
 import styled from 'styled-components';
+import { NavLink } from 'react-router-dom';
 import { ProductItemsType } from '../../types/CommonTypes';
 
 interface Props {
   data: ProductItemsType;
 }
 const ProductCard = ({ data }: Props) => {
-  const { title, price, discountPercentage, discountPrice, imageUrl } = data;
+  // const { productId } = useParams();
+  const { id, title, price, discountPercentage, discountPrice, imageUrl } = data;
 
   return typeof price !== 'number' || typeof discountPrice !== 'number' ? (
-    <StyledWrap>
+    <StyledLink to={`/products/${id}`}>
       <StyledThumbnail>
         <img src={imageUrl} alt={title} />
       </StyledThumbnail>
@@ -23,9 +25,9 @@ const ProductCard = ({ data }: Props) => {
       <StyledDim>
         <p>판매 중지</p>
       </StyledDim>
-    </StyledWrap>
+    </StyledLink>
   ) : (
-    <StyledWrap>
+    <StyledLink to={`/products/${id}`}>
       <StyledThumbnail>
         <img src={imageUrl} alt={title} />
       </StyledThumbnail>
@@ -37,13 +39,13 @@ const ProductCard = ({ data }: Props) => {
           <StyledDiscountPrice>₩ {discountPrice.toLocaleString()}</StyledDiscountPrice>
         </StyledPriceBox>
       </StyledContent>
-    </StyledWrap>
+    </StyledLink>
   );
 };
 
 export default ProductCard;
 
-const StyledWrap = styled.div`
+const StyledLink = styled(NavLink)`
   position: relative;
   overflow: hidden;
   min-width: 0;
