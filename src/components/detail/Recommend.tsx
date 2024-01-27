@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import ProductSlide from '../product/ProductSlide';
-import useRecommend from '../../hooks/api/Recommend';
+import useRecommend from '../../hooks/api/useRecommend';
 import LoadingIndicator from '../LoadingIndicator';
 import { useParams } from 'react-router-dom';
 
