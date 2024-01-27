@@ -4,12 +4,15 @@ import Button from '../Button';
 import useDetail from '../../hooks/api/useDetail';
 import { useParams } from 'react-router';
 import LoadingIndicator from '../LoadingIndicator';
+import Chart from './chart/Chart';
 
 const ProductDetail = () => {
   const { productId } = useParams();
   const { data: detailData, isLoading: isLoadingDetail = true } = useDetail(Number(productId));
 
   if (!detailData) return null;
+  // 상품차트 데이터
+  const chartData = detailData.purchaseStatus;
 
   const infoHtml = `${detailData.info}`;
 
@@ -22,40 +25,43 @@ const ProductDetail = () => {
       {isLoadingDetail ? (
         <LoadingIndicator />
       ) : (
-        <StyledWrap>
-          <StyledImgBox>
-            <img src={detailData.imageUrl} alt={detailData.title} />
-          </StyledImgBox>
-          <StyledContent.Wrap>
-            <StyledContent.Title>상품정보</StyledContent.Title>
-            <StyledContent.Info dangerouslySetInnerHTML={{ __html: infoHtml }} />
-            <StyledContent.customer>
-              <dl>
-                <dt>판매량</dt>
-                <dd>{detailData.purchaseStatus.totalSales.toLocaleString()}</dd>
-              </dl>
-              <dl>
-                <dt>좋아요 수</dt>
-                <dd>{detailData.like.toLocaleString()}</dd>
-              </dl>
-              <dl>
-                <dt>구매 만족도</dt>
-                <dd>{detailData.purchaseStatus.satisfaction} / 5.0</dd>
-              </dl>
-            </StyledContent.customer>
-            <StyledContent.priceWrap>
-              <StyledContent.price>
-                ₩{detailData.price.toLocaleString()}
-                <span>{detailData.discountPercentage}% 할인</span>
-              </StyledContent.price>
-              <StyledContent.discountPrice>₩{detailData.discountPrice.toLocaleString()}</StyledContent.discountPrice>
-            </StyledContent.priceWrap>
-            <StyledContent.ButtonWrap>
-              <Button title="장바구니 담기" color="black" buttonClick={handleButtonClick} />
-              <Button title="구매하기" color="blue" buttonClick={handleButtonClick} />
-            </StyledContent.ButtonWrap>
-          </StyledContent.Wrap>
-        </StyledWrap>
+        <>
+          <StyledWrap>
+            <StyledImgBox>
+              <img src={detailData.imageUrl} alt={detailData.title} />
+            </StyledImgBox>
+            <StyledContent.Wrap>
+              <StyledContent.Title>상품정보</StyledContent.Title>
+              <StyledContent.Info dangerouslySetInnerHTML={{ __html: infoHtml }} />
+              <StyledContent.customer>
+                <dl>
+                  <dt>판매량</dt>
+                  <dd>{detailData.purchaseStatus.totalSales.toLocaleString()}</dd>
+                </dl>
+                <dl>
+                  <dt>좋아요 수</dt>
+                  <dd>{detailData.like.toLocaleString()}</dd>
+                </dl>
+                <dl>
+                  <dt>구매 만족도</dt>
+                  <dd>{detailData.purchaseStatus.satisfaction} / 5.0</dd>
+                </dl>
+              </StyledContent.customer>
+              <StyledContent.priceWrap>
+                <StyledContent.price>
+                  ₩{detailData.price.toLocaleString()}
+                  <span>{detailData.discountPercentage}% 할인</span>
+                </StyledContent.price>
+                <StyledContent.discountPrice>₩{detailData.discountPrice.toLocaleString()}</StyledContent.discountPrice>
+              </StyledContent.priceWrap>
+              <StyledContent.ButtonWrap>
+                <Button title="장바구니 담기" color="black" buttonClick={handleButtonClick} />
+                <Button title="구매하기" color="blue" buttonClick={handleButtonClick} />
+              </StyledContent.ButtonWrap>
+            </StyledContent.Wrap>
+          </StyledWrap>
+          <Chart data={chartData} />
+        </>
       )}
     </>
   );
