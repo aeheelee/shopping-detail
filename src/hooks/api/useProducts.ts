@@ -5,6 +5,7 @@ import { fetchApi } from '../api';
 
 /**
  *
+ * @param page current page를 가져옵니다.
  * @param categoryId Id값을 가져옵니다.
  * @returns response data를 리턴합니다.
  */

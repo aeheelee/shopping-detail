@@ -12,11 +12,7 @@ const ProductSearch = () => {
     page: withDefault(NumberParam, 1),
   });
 
-  console.log('category, ' + category);
-
   const { data: products, isLoading: isLoadingProducts = true } = useProducts(query.page, Number(category));
-
-  console.log('products, ' + products);
 
   if (!products) return null;
 
