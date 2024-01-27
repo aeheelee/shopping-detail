@@ -50,7 +50,7 @@ const StyledText = styled.p`
   margin-bottom: 15px;
   font-size: 14px;
   font-weight: bold;
-  color: #375fff;
+  color: blueviolet;
 `;
 
 export default ReviewList;
