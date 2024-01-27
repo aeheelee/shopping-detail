@@ -1,16 +1,27 @@
 import styled from 'styled-components';
 import ChartDoughnut from './ChartDoughnut';
 import ChartBar from './ChartBar';
+import { AgeType, genderType } from '../../../types/CommonTypes';
 
-const Chart = () => {
+interface IProps {
+  data: {
+    age: AgeType;
+    gender: genderType;
+  };
+}
+
+const Chart = ({ data }: IProps) => {
+  const { age, gender } = data;
+  console.log(age);
+  console.log(gender);
   return (
     <StyledWrap>
       <StyledContents>
         <StyledBar>
-          <ChartBar />
+          <ChartBar age={age} />
         </StyledBar>
         <StyledDoughnut>
-          <ChartDoughnut />
+          <ChartDoughnut gender={gender} />
         </StyledDoughnut>
       </StyledContents>
     </StyledWrap>
@@ -33,6 +44,10 @@ const StyledContents = styled.div`
   justify-content: center;
   padding: 0 20px;
   box-sizing: border-box;
+
+  @media only screen and (max-width: 900px) {
+    flex-direction: column;
+  }
 `;
 
 const StyledBar = styled.div`
