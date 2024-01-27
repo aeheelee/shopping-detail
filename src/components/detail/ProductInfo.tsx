@@ -36,10 +36,12 @@ const ProductInfo = ({ data: detailData }: IProductInfo) => {
           </dl>
         </StyledContent.customer>
         <StyledContent.priceWrap>
-          <StyledContent.price>
-            ₩{detailData.price.toLocaleString()}
-            <span>{detailData.discountPercentage}% 할인</span>
-          </StyledContent.price>
+          {detailData.discountPercentage === 0 ? null : (
+            <StyledContent.price>
+              ₩{detailData.price.toLocaleString()}
+              <span>{detailData.discountPercentage}% 할인</span>
+            </StyledContent.price>
+          )}
           <StyledContent.discountPrice>₩{detailData.discountPrice.toLocaleString()}</StyledContent.discountPrice>
         </StyledContent.priceWrap>
         <StyledContent.ButtonWrap>
