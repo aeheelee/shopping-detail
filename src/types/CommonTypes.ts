@@ -88,3 +88,17 @@ export interface ProductType {
 export interface RecommedType {
   items: ProductItemsType[];
 }
+/////////////////////////////////////////////
+
+// 리뷰 타입
+export interface ReviewItemsType {
+  id: number;
+  productId: number;
+  rating: number;
+  writer: string;
+  content: string;
+}
+
+export interface ReviesType extends PaginationResponse {
+  items: ReviewItemsType[];
+}
