@@ -21,12 +21,11 @@ const ReviewList = () => {
   };
 
   return (
-    <StyledWrap>
+    <section>
       <StyledText>90개 후기</StyledText>
-      <StyledList>
+      <ul>
         {reviewData.items.map((item, index) => {
           const { rating, writer, content } = item;
-
           return (
             <StyledItems key={`review_${index}`}>
               <ReviewItem writer={writer} content={content} />
@@ -34,18 +33,17 @@ const ReviewList = () => {
             </StyledItems>
           );
         })}
-      </StyledList>
+      </ul>
       <Pagination maxPage={reviewData.maxPage} currentPage={query.page} onPageChange={handleChangePage} />
-    </StyledWrap>
+    </section>
   );
 };
 
-const StyledWrap = styled.section``;
-const StyledList = styled.ul``;
 const StyledItems = styled.li`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 10px;
 `;
 const StyledText = styled.p`
   margin-bottom: 15px;
