@@ -32,7 +32,6 @@ const SearchFilter = ({ filter }: IProps) => {
     maxPrice: NumberParam,
   });
 
-  console.log('category,', query.category);
   useEffect(() => {
     const updateFilterState = (type: string, isOpen: boolean) => {
       setIsOpen((prev) => prev.map((item) => (item.type === type ? { ...item, open: isOpen } : item)));
