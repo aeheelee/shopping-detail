@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { NumberParam, StringParam, useQueryParams, withDefault } from 'use-query-params';
 import styled from 'styled-components';
-import { useSearchParams } from 'react-router-dom';
 import { useAtom } from 'jotai';
 import { filtersDropDownAtom } from '../../store/atoms/filtersDropDownAtom';
 
@@ -22,13 +21,7 @@ interface IProps {
 }
 
 const SearchFilter = ({ filter }: IProps) => {
-  const [searchParams] = useSearchParams();
-  const queryCategory = searchParams.get('category');
-  const queryMinPrice = searchParams.get('minPrice');
-  const queryMinDiscount = searchParams.get('minDiscount');
-
   const [isOpen, setIsOpen] = useAtom(filtersDropDownAtom);
-
   const [query, setQuery] = useQueryParams({
     page: withDefault(NumberParam, 1),
     query: withDefault(StringParam, window.encodeURIComponent(' ')),
@@ -39,23 +32,24 @@ const SearchFilter = ({ filter }: IProps) => {
     maxPrice: NumberParam,
   });
 
+  console.log('category,', query.category);
   useEffect(() => {
     const updateFilterState = (type: string, isOpen: boolean) => {
       setIsOpen((prev) => prev.map((item) => (item.type === type ? { ...item, open: isOpen } : item)));
     };
 
-    if (queryCategory !== null) {
+    if (query.category !== undefined) {
       updateFilterState('product', true);
     }
 
-    if (queryMinPrice !== null) {
+    if (query.minPrice !== undefined) {
       updateFilterState('price', true);
     }
 
-    if (queryMinDiscount !== null) {
+    if (query.minDiscount !== undefined) {
       updateFilterState('discount', true);
     }
-  }, [queryCategory, queryMinPrice, queryMinDiscount, setIsOpen]);
+  }, [query.category, query.minPrice, query.minDiscount, setIsOpen]);
 
   const handleClick = () => {
     setIsOpen((prev) => {
