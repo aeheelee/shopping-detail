@@ -1,26 +1,28 @@
 import styled from 'styled-components';
-import { Suspense, useState } from 'react';
+import { Suspense } from 'react';
 import ReviewList from '../components/detail/review/ReviewList';
 import ProductDetail from '../components/detail/productInfo/ProductDetail';
 import Recommend from '../components/detail/Recommend';
 import LoadingIndicator from '../components/LoadingIndicator';
 import Dimmed from '../components/Dimmed';
+import { useAtomValue } from 'jotai';
+import { imageLayerAtom } from '../store/atoms/imageLayerAtom';
 
 const ProductDetailPage = () => {
-  const [isOpenLayer, setIsOpenLayer] = useState(false);
+  const isOpenLayer = useAtomValue(imageLayerAtom);
 
-  const onLayer = (isOpen: boolean) => {
-    setIsOpenLayer(isOpen);
-  };
+  // const onLayer = (isOpen: boolean) => {
+  //   setIsOpenLayer(isOpen);
+  // };
 
   return (
     <StyledWrap>
-      <ProductDetail onLayer={onLayer} />
+      <ProductDetail />
       <Suspense fallback={<LoadingIndicator />}>
         <ReviewList />
       </Suspense>
       <Recommend />
-      {isOpenLayer && <Dimmed onDimmed={onLayer} />}
+      {isOpenLayer && <Dimmed />}
     </StyledWrap>
   );
 };

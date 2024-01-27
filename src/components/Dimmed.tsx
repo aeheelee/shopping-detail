@@ -1,15 +1,12 @@
-import { useState } from 'react';
+import { useResetAtom } from 'jotai/utils';
 import styled from 'styled-components';
+import { imageLayerAtom } from '../store/atoms/imageLayerAtom';
 
-interface IProps {
-  onDimmed: (isOpen: boolean) => void;
-}
+const Dimmed = () => {
+  const closeImageLayer = useResetAtom(imageLayerAtom);
 
-const Dimmed = ({ onDimmed }: IProps) => {
-  const [isOpen, setIsOpen] = useState(false);
   const handleClick = () => {
-    setIsOpen((prev) => !prev);
-    onDimmed(isOpen);
+    closeImageLayer();
   };
 
   return <StyledDimmed onClick={handleClick} />;

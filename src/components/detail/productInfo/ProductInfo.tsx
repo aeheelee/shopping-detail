@@ -1,16 +1,17 @@
-import React, { useState } from 'react';
 import styled from 'styled-components';
 import { ProductDetailType } from '../../../types/CommonTypes';
 import Button from '../../Button';
 import Layer from './Layer';
+import { useAtom } from 'jotai';
+import { imageLayerAtom } from '../../../store/atoms/imageLayerAtom';
 
 interface IProductInfo {
   data: ProductDetailType;
-  onLayer: (isOpenLayer: boolean) => void;
+  // onLayer: (isOpenLayer: boolean) => void;
 }
 
-const ProductInfo = ({ data: detailData, onLayer }: IProductInfo) => {
-  const [isOpenLayer, setIsOpenLayer] = useState(false);
+const ProductInfo = ({ data: detailData }: IProductInfo) => {
+  const [isOpenLayer, setIsOpenLayer] = useAtom(imageLayerAtom);
 
   const infoHtml = `${detailData.info}`;
 
@@ -20,7 +21,7 @@ const ProductInfo = ({ data: detailData, onLayer }: IProductInfo) => {
 
   const handleImageClick = () => {
     setIsOpenLayer((prev) => !prev);
-    onLayer(!isOpenLayer);
+    // onLayer(!isOpenLayer);
   };
 
   return (

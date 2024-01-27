@@ -45,7 +45,7 @@ export default function SearchPage() {
 
   return (
     <StyledWrap>
-      <StyledFilter isOpen={isOpen}>
+      <StyledFilter $isOpen={isOpen}>
         <SearchFilterList data={categories} onFilterCloseClick={handleFilterClick} />
         <Button title="초기화" buttonClick={handleResetButtonClick} />
       </StyledFilter>
@@ -74,7 +74,7 @@ const StyledWrap = styled.div`
   }
 `;
 
-const StyledFilter = styled.section<{ isOpen: boolean }>`
+const StyledFilter = styled.section<{ $isOpen: boolean }>`
   display: flex;
   width: 300px;
   height: 100%;
@@ -84,7 +84,7 @@ const StyledFilter = styled.section<{ isOpen: boolean }>`
   box-sizing: border-box;
 
   @media only screen and (max-width: 900px) {
-    display: ${({ isOpen }) => (isOpen ? 'flex' : 'none')};
+    display: ${({ $isOpen }) => ($isOpen ? 'flex' : 'none')};
     position: fixed;
     top: 0;
     right: 0;
