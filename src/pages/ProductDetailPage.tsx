@@ -1,9 +1,11 @@
 import styled from 'styled-components';
 import ReviewList from '../components/detail/review/ReviewList';
+import ProductDetail from '../components/detail/ProductDetail';
 
 const ProductDetailPage = () => {
   return (
     <StyledWrap>
+      <ProductDetail />
       <ReviewList />
     </StyledWrap>
   );
