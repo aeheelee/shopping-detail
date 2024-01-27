@@ -14,7 +14,7 @@ const ReviewList = () => {
   });
   const { data: reviewData, isLoading: isLoadingReview = true } = useReview(query.page, Number(productId));
 
-  if (!reviewData) return null;
+  if (!reviewData?.items.length) return null;
 
   return (
     <section>
