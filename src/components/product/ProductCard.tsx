@@ -6,38 +6,33 @@ interface Props {
   data: ProductItemsType;
 }
 const ProductCard = ({ data }: Props) => {
-  // const { productId } = useParams();
   const { id, title, price, discountPercentage, discountPrice, imageUrl } = data;
 
-  return typeof price !== 'number' || typeof discountPrice !== 'number' ? (
+  return (
     <StyledLink to={`/products/${id}`}>
       <StyledThumbnail>
         <img src={imageUrl} alt={title} />
       </StyledThumbnail>
       <StyledContent>
         <StyledTitle>{title}</StyledTitle>
-        <StyledPriceBox>
-          <StyledPrice>₩ 0</StyledPrice>
-          <StyledDiscountPercentage>0% 할인</StyledDiscountPercentage>
-          <StyledDiscountPrice>₩ 0</StyledDiscountPrice>
-        </StyledPriceBox>
-      </StyledContent>
-      <StyledDim>
-        <p>판매 중지</p>
-      </StyledDim>
-    </StyledLink>
-  ) : (
-    <StyledLink to={`/products/${id}`}>
-      <StyledThumbnail>
-        <img src={imageUrl} alt={title} />
-      </StyledThumbnail>
-      <StyledContent>
-        <StyledTitle>{title}</StyledTitle>
-        <StyledPriceBox>
-          <StyledPrice>₩ {price.toLocaleString()}</StyledPrice>
-          <StyledDiscountPercentage>{discountPercentage}% 할인</StyledDiscountPercentage>
-          <StyledDiscountPrice>₩ {discountPrice.toLocaleString()}</StyledDiscountPrice>
-        </StyledPriceBox>
+        {typeof price !== 'number' || typeof discountPrice !== 'number' ? (
+          <>
+            <StyledPriceBox>
+              <StyledPrice>₩ 0</StyledPrice>
+              <StyledDiscountPercentage>0% 할인</StyledDiscountPercentage>
+              <StyledDiscountPrice>₩ 0</StyledDiscountPrice>
+            </StyledPriceBox>
+            <StyledDim>
+              <p>판매 중지</p>
+            </StyledDim>
+          </>
+        ) : (
+          <StyledPriceBox>
+            <StyledPrice>₩ {price.toLocaleString()}</StyledPrice>
+            <StyledDiscountPercentage>{discountPercentage}% 할인</StyledDiscountPercentage>
+            <StyledDiscountPrice>₩ {discountPrice.toLocaleString()}</StyledDiscountPrice>
+          </StyledPriceBox>
+        )}
       </StyledContent>
     </StyledLink>
   );
