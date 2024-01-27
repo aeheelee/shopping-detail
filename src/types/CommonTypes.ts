@@ -84,3 +84,7 @@ export interface ProductType {
   next: boolean;
   items: ProductItemsType[];
 }
+
+export interface RecommedType {
+  items: ProductItemsType[];
+}
