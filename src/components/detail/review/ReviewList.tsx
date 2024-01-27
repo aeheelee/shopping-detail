@@ -5,14 +5,13 @@ import ReviewItem from './ReviewItem';
 import StarRate from './ReviewStarRate';
 import Pagination from '../../Pagination';
 import useReview from '../../../hooks/api/useReview';
-import LoadingIndicator from '../../LoadingIndicator';
 
 const ReviewList = () => {
   const { productId } = useParams();
   const [query] = useQueryParams({
     page: withDefault(NumberParam, 1),
   });
-  const { data: reviewData, isLoading: isLoadingReview = true } = useReview(query.page, Number(productId));
+  const { data: reviewData } = useReview(query.page, Number(productId));
 
   if (!reviewData?.items.length) return null;
 
@@ -21,18 +20,12 @@ const ReviewList = () => {
       <StyledText>{reviewData.totalItems}개 후기</StyledText>
       <ul>
         {reviewData.items.map((item, index) => {
-          const { rating, writer, content } = item;
+          const { productId, rating, writer, content } = item;
           return (
-            <>
-              {isLoadingReview ? (
-                <LoadingIndicator />
-              ) : (
-                <StyledItems key={`review_${index}`}>
-                  <ReviewItem writer={writer} content={content} />
-                  <StarRate rating={rating} />
-                </StyledItems>
-              )}
-            </>
+            <StyledItems key={`review${productId}_${index}`}>
+              <ReviewItem writer={writer} content={content} />
+              <StarRate rating={rating} />
+            </StyledItems>
           );
         })}
       </ul>
