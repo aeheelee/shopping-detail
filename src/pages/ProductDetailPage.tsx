@@ -21,7 +21,7 @@ const StyledWrap = styled.section`
   min-width: 900px;
   max-width: 1300px;
   margin: 0 auto;
-  padding: 40px 50px;
+  padding: 40px 50px 80px;
 `;
 
 export default ProductDetailPage;

@@ -16,7 +16,7 @@ const ReviewList = () => {
   if (!reviewData?.items.length) return null;
 
   return (
-    <section>
+    <StyledWrap>
       <StyledText>{reviewData.totalItems}개 후기</StyledText>
       <ul>
         {reviewData.items.map((item, index) => {
@@ -30,9 +30,15 @@ const ReviewList = () => {
         })}
       </ul>
       <Pagination maxPage={reviewData.maxPage} currentPage={query.page} />
-    </section>
+    </StyledWrap>
   );
 };
+
+const StyledWrap = styled.section`
+  width: 90%;
+  margin: 0 auto;
+  padding-top: 100px;
+`;
 
 const StyledItems = styled.li`
   display: flex;
@@ -44,7 +50,7 @@ const StyledText = styled.p`
   margin-bottom: 15px;
   font-size: 14px;
   font-weight: bold;
-  color: #375fff;
+  color: blueviolet;
 `;
 
 export default ReviewList;
