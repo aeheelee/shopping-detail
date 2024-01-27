@@ -3,7 +3,11 @@ import { useParams } from 'react-router';
 import ProductInfo from './ProductInfo';
 import ChartList from '../chart/Chart';
 
-const ProductDetail = () => {
+interface IProps {
+  onLayer: (isOpenLayer: boolean) => void;
+}
+
+const ProductDetail = ({ onLayer }: IProps) => {
   const { productId } = useParams();
   const { data: detailData } = useDetail(Number(productId));
 
@@ -13,7 +17,7 @@ const ProductDetail = () => {
 
   return (
     <>
-      <ProductInfo data={detailData} />
+      <ProductInfo data={detailData} onLayer={onLayer} />
       <ChartList data={chartData} />
     </>
   );

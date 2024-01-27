@@ -6,9 +6,10 @@ import Layer from './Layer';
 
 interface IProductInfo {
   data: ProductDetailType;
+  onLayer: (isOpenLayer: boolean) => void;
 }
 
-const ProductInfo = ({ data: detailData }: IProductInfo) => {
+const ProductInfo = ({ data: detailData, onLayer }: IProductInfo) => {
   const [isOpenLayer, setIsOpenLayer] = useState(false);
 
   const infoHtml = `${detailData.info}`;
@@ -19,6 +20,7 @@ const ProductInfo = ({ data: detailData }: IProductInfo) => {
 
   const handleImageClick = () => {
     setIsOpenLayer((prev) => !prev);
+    onLayer(!isOpenLayer);
   };
 
   return (
