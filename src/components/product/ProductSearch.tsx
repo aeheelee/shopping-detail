@@ -3,7 +3,7 @@ import { NumberParam, StringParam, useQueryParams, withDefault } from 'use-query
 import ProductList from './ProductList';
 import Pagination from '../Pagination';
 import LoadingIndicator from '../LoadingIndicator';
-import useSearch from '../../hooks/api/Search';
+import useSearch from '../../hooks/api/useSearch';
 
 interface IContentsProps {
   keyword: string;

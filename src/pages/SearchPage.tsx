@@ -1,7 +1,7 @@
 // import { useSearchParams } from 'react-router-dom';
 import { NumberParam, StringParam, useQueryParams, withDefault } from 'use-query-params';
 import { styled } from 'styled-components';
-import { useCategories } from '../hooks/api/Categories';
+import { useCategories } from '../hooks/api/useCategories';
 import { useSearchParams } from 'react-router-dom';
 import Button from '../components/filter/Button';
 import SearchFilterList from '../components/filter/SearchFilterList';

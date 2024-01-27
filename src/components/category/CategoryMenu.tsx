@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import CategoryMenuItem from './CategoryMenuItem';
-import { useCategories } from '../../hooks/api/Categories';
+import { useCategories } from '../../hooks/api/useCategories';
 import { useEffect, useState } from 'react';
 import { ProductCategoryType } from '../../types/CommonTypes';
 
