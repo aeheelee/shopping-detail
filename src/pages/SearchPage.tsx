@@ -3,10 +3,10 @@ import { NumberParam, StringParam, useQueryParams, withDefault } from 'use-query
 import { useSearchParams } from 'react-router-dom';
 import { styled } from 'styled-components';
 import { useCategories } from '../hooks/api/useCategories';
-import Button from '../components/filter/Button';
 import SearchFilterList from '../components/filter/SearchFilterList';
 import ProductSearch from '../components/product/ProductSearch';
 import LoadingIndicator from '../components/LoadingIndicator';
+import Button from '../components/Button';
 
 export default function SearchPage() {
   // NOTE http://localhost:3000/search?query='검색어'
@@ -50,7 +50,7 @@ export default function SearchPage() {
     <StyledWrap>
       <StyledFilter isOpen={isOpen}>
         <SearchFilterList data={categories} onFilterCloseClick={handleFilterClick} />
-        <Button handleButtonClick={handleButtonClick} />
+        <Button title="초기화" buttonClick={handleButtonClick} />
       </StyledFilter>
       <StyledFilterButton onClick={handleFilterClick}>FILTER</StyledFilterButton>
       <Suspense fallback={<LoadingIndicator />}>
