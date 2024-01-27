@@ -8,7 +8,7 @@ import useProducts from '../../hooks/api/useProducts';
 
 const ProductSearch = () => {
   const { category } = useParams();
-  const [query, setQuery] = useQueryParams({
+  const [query] = useQueryParams({
     page: withDefault(NumberParam, 1),
   });
 
@@ -16,15 +16,10 @@ const ProductSearch = () => {
 
   if (!products) return null;
 
-  const handleChangePage = (page: number) => {
-    setQuery({ page });
-    window.scrollTo(0, 0);
-  };
-
   return (
     <StyledContent>
       {isLoadingProducts ? <LoadingIndicator /> : <ProductList data={products.items} />}
-      <Pagination maxPage={products.maxPage} currentPage={products.currentPage} onPageChange={handleChangePage} />
+      <Pagination maxPage={products.maxPage} currentPage={products.currentPage} />
     </StyledContent>
   );
 };

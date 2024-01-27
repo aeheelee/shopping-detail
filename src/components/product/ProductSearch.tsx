@@ -10,7 +10,7 @@ interface IContentsProps {
 }
 
 const ProductSearch = ({ keyword }: IContentsProps) => {
-  const [query, setQuery] = useQueryParams({
+  const [query] = useQueryParams({
     page: withDefault(NumberParam, 1),
     query: withDefault(StringParam, keyword),
     category: NumberParam,
@@ -24,11 +24,6 @@ const ProductSearch = ({ keyword }: IContentsProps) => {
 
   if (!products) return null;
 
-  const handleChangePage = (page: number) => {
-    setQuery({ page });
-    window.scrollTo(0, 0);
-  };
-
   return (
     <StyledContent>
       <StyledText>
@@ -39,7 +34,7 @@ const ProductSearch = ({ keyword }: IContentsProps) => {
       ) : (
         <>{products.items.length === 0 ? <div>찾으시는 상품이 없어요.</div> : <ProductList data={products.items} />}</>
       )}
-      <Pagination maxPage={products.maxPage} currentPage={products.currentPage} onPageChange={handleChangePage} />
+      <Pagination maxPage={products.maxPage} currentPage={products.currentPage} />
     </StyledContent>
   );
 };

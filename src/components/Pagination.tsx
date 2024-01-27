@@ -1,16 +1,21 @@
-// import { useMemo } from 'react';
 import styled, { css } from 'styled-components';
+import { NumberParam, useQueryParams, withDefault } from 'use-query-params';
 
 interface IPaginationProps {
   maxPage: number;
   currentPage?: number;
-  onPageChange: (page: number) => void;
 }
 
-const Pagination = ({ maxPage, currentPage = 1, onPageChange }: IPaginationProps) => {
+const Pagination = ({ maxPage, currentPage = 1 }: IPaginationProps) => {
+  const [, setQuery] = useQueryParams({
+    page: withDefault(NumberParam, 1),
+  });
+
   const pages = Array.from({ length: maxPage }, (_, index) => index + 1);
 
-  const handleClickPage = (page: number) => () => onPageChange(page);
+  const handleChangePage = (page: number) => {
+    setQuery({ page });
+  };
 
   return (
     <StyledPagination>
@@ -18,7 +23,7 @@ const Pagination = ({ maxPage, currentPage = 1, onPageChange }: IPaginationProps
         <StyledPaginationButton
           key={`page_${index}_${_idx}`}
           disabled={currentPage === index}
-          onClick={handleClickPage(index)}
+          onClick={() => handleChangePage(index)}
         >
           {index}
         </StyledPaginationButton>

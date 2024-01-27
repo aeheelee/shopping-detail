@@ -5,20 +5,16 @@ import ReviewItem from './ReviewItem';
 import StarRate from './ReviewStarRate';
 import Pagination from '../../Pagination';
 import useReview from '../../../hooks/api/useReview';
+import LoadingIndicator from '../../LoadingIndicator';
 
 const ReviewList = () => {
   const { productId } = useParams();
-  const [query, setQuery] = useQueryParams({
+  const [query] = useQueryParams({
     page: withDefault(NumberParam, 1),
   });
-  const { data: reviewData } = useReview(query.page, Number(productId));
+  const { data: reviewData, isLoading: isLoadingReview = true } = useReview(query.page, Number(productId));
 
   if (!reviewData) return null;
-
-  const handleChangePage = (page: number) => {
-    setQuery({ page });
-    window.scrollTo(0, 0);
-  };
 
   return (
     <section>
@@ -27,14 +23,20 @@ const ReviewList = () => {
         {reviewData.items.map((item, index) => {
           const { rating, writer, content } = item;
           return (
-            <StyledItems key={`review_${index}`}>
-              <ReviewItem writer={writer} content={content} />
-              <StarRate rating={rating} />
-            </StyledItems>
+            <>
+              {isLoadingReview ? (
+                <LoadingIndicator />
+              ) : (
+                <StyledItems key={`review_${index}`}>
+                  <ReviewItem writer={writer} content={content} />
+                  <StarRate rating={rating} />
+                </StyledItems>
+              )}
+            </>
           );
         })}
       </ul>
-      <Pagination maxPage={reviewData.maxPage} currentPage={query.page} onPageChange={handleChangePage} />
+      <Pagination maxPage={reviewData.maxPage} currentPage={query.page} />
     </section>
   );
 };
