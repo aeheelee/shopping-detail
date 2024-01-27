@@ -1,10 +1,12 @@
 import styled from 'styled-components';
 import ReviewList from '../components/detail/review/ReviewList';
+import Chart from '../components/detail/chart/Chart';
 
 const ProductDetailPage = () => {
   return (
     <StyledWrap>
       <ReviewList />
+      <Chart />
     </StyledWrap>
   );
 };
