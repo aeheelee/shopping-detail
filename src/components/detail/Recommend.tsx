@@ -20,7 +20,11 @@ const Recommend = () => {
 };
 export default Recommend;
 
-const StyledWrap = styled.section``;
+const StyledWrap = styled.section`
+  width: 90%;
+  margin: 0 auto;
+  padding-top: 100px;
+`;
 
 const StyledTitle = styled.h2`
   text-align: center;

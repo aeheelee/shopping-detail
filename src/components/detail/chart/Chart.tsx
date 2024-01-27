@@ -31,8 +31,9 @@ export default ChartList;
 
 const StyledWrap = styled.section`
   /* 임시값 */
-  max-width: 1240px;
+  max-width: 900px;
   margin: 0 auto;
+  padding-top: 100px;
 `;
 
 const StyledContents = styled.div`
