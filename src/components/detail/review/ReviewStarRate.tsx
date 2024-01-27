@@ -2,16 +2,19 @@ import styled from 'styled-components';
 
 import { IcEmptyStars, IcStars } from '../../../assets';
 
-const StarRate = () => {
-  const number = 4;
-  const percentageRate = (100 / 5) * number;
+interface IProps {
+  rating: number;
+}
+
+const StarRate = ({ rating }: IProps) => {
+  const percentageRate = (100 / 5) * rating;
 
   return (
     <StyledStarWrap>
       <StyledStarContent>
         <StyledStarFull>
           <IcEmptyStars title="총점 5점" />
-          <StyledStarFill setWidth={percentageRate}>
+          <StyledStarFill $setWidth={percentageRate}>
             <IcStars />
           </StyledStarFill>
         </StyledStarFull>
@@ -47,12 +50,12 @@ const StyledStarFull = styled.div`
   }
 `;
 
-const StyledStarFill = styled.div<{ setWidth: number }>`
+const StyledStarFill = styled.div<{ $setWidth: number }>`
   position: absolute;
   top: 0;
   left: 0;
   overflow: hidden;
-  width: ${({ setWidth }) => `${setWidth}%`};
+  width: ${({ $setWidth }) => `${$setWidth}%`};
   height: 100%;
 
   svg {

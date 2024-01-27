@@ -1,9 +1,14 @@
 import styled from 'styled-components';
 
-const ReviewItem = () => (
+interface IProps {
+  writer: string;
+  content: string;
+}
+
+const ReviewItem = ({ writer, content }: IProps) => (
   <StyledBox>
-    <StyledNickname>닉네임</StyledNickname>
-    <StyledComment>제품 퀄리티가 많이 떨어집니다. 돈이 아까워요.</StyledComment>
+    <StyledNickname>{writer}</StyledNickname>
+    <StyledComment>{content}</StyledComment>
   </StyledBox>
 );
 
