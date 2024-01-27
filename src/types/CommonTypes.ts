@@ -103,22 +103,26 @@ export interface ReviesType extends PaginationResponse {
   items: ReviewItemsType[];
 }
 
+export interface AgeType {
+  type1: number;
+  type2: number;
+  type3: number;
+  type4: number;
+  type5: number;
+}
+
+export interface genderType {
+  man: number;
+  woman: number;
+}
+
 export interface ProductDetailType extends ProductItemsType {
   like: number;
   info: string;
   purchaseStatus: {
     totalSales: number;
     satisfaction: string;
-    age: {
-      type1: number;
-      type2: number;
-      type3: number;
-      type4: number;
-      type5: number;
-    };
-    gender: {
-      man: number;
-      woman: number;
-    };
+    age: AgeType;
+    gender: genderType;
   };
 }

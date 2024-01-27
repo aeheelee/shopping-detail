@@ -1,49 +1,46 @@
 import styled from 'styled-components';
+import { NavLink } from 'react-router-dom';
 import { ProductItemsType } from '../../types/CommonTypes';
 
 interface Props {
   data: ProductItemsType;
 }
 const ProductCard = ({ data }: Props) => {
-  const { title, price, discountPercentage, discountPrice, imageUrl } = data;
+  const { id, title, price, discountPercentage, discountPrice, imageUrl } = data;
 
-  return typeof price !== 'number' || typeof discountPrice !== 'number' ? (
-    <StyledWrap>
+  return (
+    <StyledLink to={`/products/${id}`}>
       <StyledThumbnail>
         <img src={imageUrl} alt={title} />
       </StyledThumbnail>
       <StyledContent>
         <StyledTitle>{title}</StyledTitle>
-        <StyledPriceBox>
-          <StyledPrice>₩ 0</StyledPrice>
-          <StyledDiscountPercentage>0% 할인</StyledDiscountPercentage>
-          <StyledDiscountPrice>₩ 0</StyledDiscountPrice>
-        </StyledPriceBox>
+        {typeof price !== 'number' || typeof discountPrice !== 'number' ? (
+          <>
+            <StyledPriceBox>
+              <StyledPrice>₩ 0</StyledPrice>
+              <StyledDiscountPercentage>0% 할인</StyledDiscountPercentage>
+              <StyledDiscountPrice>₩ 0</StyledDiscountPrice>
+            </StyledPriceBox>
+            <StyledDim>
+              <p>판매 중지</p>
+            </StyledDim>
+          </>
+        ) : (
+          <StyledPriceBox>
+            <StyledPrice>₩ {price.toLocaleString()}</StyledPrice>
+            <StyledDiscountPercentage>{discountPercentage}% 할인</StyledDiscountPercentage>
+            <StyledDiscountPrice>₩ {discountPrice.toLocaleString()}</StyledDiscountPrice>
+          </StyledPriceBox>
+        )}
       </StyledContent>
-      <StyledDim>
-        <p>판매 중지</p>
-      </StyledDim>
-    </StyledWrap>
-  ) : (
-    <StyledWrap>
-      <StyledThumbnail>
-        <img src={imageUrl} alt={title} />
-      </StyledThumbnail>
-      <StyledContent>
-        <StyledTitle>{title}</StyledTitle>
-        <StyledPriceBox>
-          <StyledPrice>₩ {price.toLocaleString()}</StyledPrice>
-          <StyledDiscountPercentage>{discountPercentage}% 할인</StyledDiscountPercentage>
-          <StyledDiscountPrice>₩ {discountPrice.toLocaleString()}</StyledDiscountPrice>
-        </StyledPriceBox>
-      </StyledContent>
-    </StyledWrap>
+    </StyledLink>
   );
 };
 
 export default ProductCard;
 
-const StyledWrap = styled.div`
+const StyledLink = styled(NavLink)`
   position: relative;
   overflow: hidden;
   min-width: 0;
