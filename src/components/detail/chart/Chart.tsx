@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import ChartDoughnut from './ChartDoughnut';
+import ChartPie from './ChartPie';
 import ChartBar from './ChartBar';
 import { AgeType, genderType } from '../../../types/CommonTypes';
 
@@ -19,9 +19,9 @@ const ChartList = ({ data }: IProps) => {
         <StyledBar>
           <ChartBar age={age} />
         </StyledBar>
-        <StyledDoughnut>
-          <ChartDoughnut gender={gender} />
-        </StyledDoughnut>
+        <StyledPie>
+          <ChartPie gender={gender} />
+        </StyledPie>
       </StyledContents>
     </StyledWrap>
   );
@@ -56,11 +56,11 @@ const StyledBar = styled.div`
   justify-content: center;
 
   canvas {
-    width: 100%;
+    height: 100%;
   }
 `;
 
-const StyledDoughnut = styled.div`
+const StyledPie = styled.div`
   flex: 1;
   display: flex;
   justify-content: center;

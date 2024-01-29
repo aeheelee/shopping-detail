@@ -10,6 +10,13 @@ interface IProps {
 
 const options = {
   responsive: true,
+  scale: {
+    y: {
+      beginAtZero: true,
+      max: 100,
+      stepSize: 10,
+    },
+  },
   plugins: {
     legend: {
       display: false,
@@ -27,18 +34,22 @@ const options = {
 const ChartBar = ({ age }: IProps) => {
   const labels = ['~18세', '19~28세', '29~38세', '39~48세', '49세~'];
 
+  const maxIndex = Object.values(age).indexOf(Math.max(...Object.values(age)));
+  const bgColors = Array(labels.length).fill('#666464');
+  bgColors[maxIndex] = '#2f00ff';
+
   const data = {
     labels,
     datasets: [
       {
-        labels: '라벨입니다',
+        labels: '연령별 구매 통계 그래프',
         data: Object.values(age),
-        backgroundColor: 'rgba(255, 99, 132, 0.5)',
+        backgroundColor: bgColors,
       },
     ],
   };
 
-  return <Bar options={options} data={data} />;
+  return <Bar height={300} options={options} data={data} />;
 };
 
 export default ChartBar;
