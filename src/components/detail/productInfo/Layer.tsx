@@ -29,10 +29,20 @@ const StyledWrap = styled.div<{ $isOpen: boolean }>`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  overflow-y: auto;
   padding: 30px;
   border: 2px solid black;
   background-color: #fff;
   z-index: 100;
+
+  @media only screen and (max-width: 900px) {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    transform: translate(0, 0);
+    padding: 20px 0;
+  }
 `;
 
 const StyledInner = styled.div`
@@ -42,6 +52,10 @@ const StyledInner = styled.div`
   gap: 10px 0;
   width: 500px;
   max-height: 800px;
+
+  @media only screen and (max-width: 900px) {
+    width: 100%;
+  }
 `;
 
 const StyledImage = styled.div`
