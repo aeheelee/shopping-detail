@@ -26,7 +26,7 @@ const ChartPie = ({ gender }: IProps) => {
     labels: ['남성', '여성'],
     datasets: [
       {
-        label: '성별 구매 통계 그래프',
+        label: '구매율(%)',
         data: Object.values(gender),
         backgroundColor: ['rgba(0, 4, 251, 1)', '#ec7a45'],
         borderColor: ['#fff', '#fff'],

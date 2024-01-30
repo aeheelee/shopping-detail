@@ -42,7 +42,7 @@ const ChartBar = ({ age }: IProps) => {
     labels,
     datasets: [
       {
-        labels: '연령별 구매 통계 그래프',
+        labels: '구매율(%) ',
         data: Object.values(age),
         backgroundColor: bgColors,
       },
