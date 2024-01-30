@@ -66,25 +66,32 @@ const ProductInfo = ({ data: detailData }: IProductInfo) => {
 };
 
 const StyledWrap = styled.section`
-  display: grid;
-  grid-template-columns: 35% 65%;
-  grid-template-areas: 'a b';
+  display: flex;
+
+  @media only screen and (max-width: 900px) {
+    flex-direction: column;
+  }
 `;
 
 const StyledImgBox = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 420px;
+  flex-shrink: 0;
   padding: 15px;
   background-color: #e9e9e9;
-  grid-area: a;
+
+  @media only screen and (max-width: 900px) {
+    width: 100%;
+  }
 `;
 
 const StyledContent = {
   Wrap: styled.div`
+    flex: 1;
     padding: 20px;
     box-sizing: border-box;
-    grid-area: b;
   `,
 
   Title: styled.p`

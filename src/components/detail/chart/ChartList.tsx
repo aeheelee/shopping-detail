@@ -30,10 +30,11 @@ const ChartList = ({ data }: IProps) => {
 export default ChartList;
 
 const StyledWrap = styled.section`
-  /* 임시값 */
   max-width: 900px;
   margin: 0 auto;
-  padding-top: 100px;
+  margin-top: 50px;
+  padding: 0 20px;
+  box-sizing: border-box;
 `;
 
 const StyledContents = styled.div`

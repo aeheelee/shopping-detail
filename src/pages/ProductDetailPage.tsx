@@ -28,10 +28,13 @@ const ProductDetailPage = () => {
 };
 
 const StyledWrap = styled.section`
-  min-width: 900px;
   max-width: 1300px;
   margin: 0 auto;
   padding: 40px 50px 80px;
+
+  @media only screen and (max-width: 900px) {
+    padding: 20px 0;
+  }
 `;
 
 export default ProductDetailPage;

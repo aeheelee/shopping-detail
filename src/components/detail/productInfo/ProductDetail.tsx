@@ -1,7 +1,7 @@
 import useDetail from '../../../hooks/api/useDetail';
 import { useParams } from 'react-router';
 import ProductInfo from './ProductInfo';
-import ChartList from '../chart/Chart';
+import ChartList from '../chart/ChartList';
 
 // interface IProps {
 //   onLayer: (isOpenLayer: boolean) => void;
