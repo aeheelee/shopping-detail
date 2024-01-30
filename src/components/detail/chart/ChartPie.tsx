@@ -28,7 +28,7 @@ const ChartPie = ({ gender }: IProps) => {
       {
         label: '구매율(%)',
         data: Object.values(gender),
-        backgroundColor: ['rgba(0, 4, 251, 1)', '#ec7a45'],
+        backgroundColor: ['rgba(0, 4, 251, 1)', 'rgba(255, 99, 132, 0.5)'],
         borderColor: ['#fff', '#fff'],
         borderWidth: 3,
       },
