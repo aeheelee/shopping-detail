@@ -1,16 +1,13 @@
 import styled from 'styled-components';
-import { NumberParam, useQueryParams, withDefault } from 'use-query-params';
 import { useParams } from 'react-router-dom';
 import ProductList from './ProductList';
 import Pagination from '../Pagination';
 import useProducts from '../../hooks/api/useProducts';
+import { useFilter } from '../../hooks/useFilter';
 
 const ProductSearch = () => {
   const { category } = useParams();
-  const [query] = useQueryParams({
-    page: withDefault(NumberParam, 1),
-  });
-
+  const { query } = useFilter();
   const { data: products } = useProducts(query.page, Number(category));
 
   if (!products) return null;

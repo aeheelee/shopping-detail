@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
-import { NumberParam, StringParam, useQueryParams, withDefault } from 'use-query-params';
 import styled from 'styled-components';
 import { useAtom } from 'jotai';
 import { filtersDropDownAtom } from '../../store/atoms/filtersDropDownAtom';
+import { useFilter } from '../../hooks/useFilter';
 
 interface IData {
   id: number;
@@ -22,15 +22,7 @@ interface IProps {
 
 const SearchFilter = ({ filter }: IProps) => {
   const [isOpen, setIsOpen] = useAtom(filtersDropDownAtom);
-  const [query, setQuery] = useQueryParams({
-    page: withDefault(NumberParam, 1),
-    query: withDefault(StringParam, window.encodeURIComponent(' ')),
-    category: NumberParam,
-    minDiscount: NumberParam,
-    maxDiscount: NumberParam,
-    minPrice: NumberParam,
-    maxPrice: NumberParam,
-  });
+  const { query, setQuery } = useFilter();
 
   useEffect(() => {
     const updateFilterState = (type: string, isOpen: boolean) => {

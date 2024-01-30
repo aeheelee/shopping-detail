@@ -1,6 +1,4 @@
 import { useState, Suspense } from 'react';
-import { NumberParam, StringParam, useQueryParams, withDefault } from 'use-query-params';
-import { useSearchParams } from 'react-router-dom';
 import { styled } from 'styled-components';
 import { useResetAtom } from 'jotai/utils';
 import { filtersDropDownAtom } from '../store/atoms/filtersDropDownAtom';
@@ -9,32 +7,20 @@ import SearchFilterList from '../components/filter/SearchFilterList';
 import ProductSearch from '../components/product/ProductSearch';
 import LoadingIndicator from '../components/LoadingIndicator';
 import Button from '../components/Button';
+import { useFilter } from '../hooks/useFilter';
 
 export default function SearchPage() {
-  // NOTE http://localhost:3000/search?query='검색어'
-  const [searchParams] = useSearchParams();
-  const keyword = searchParams.get('query') || window.encodeURIComponent(' ');
+  const { resetQuery } = useFilter();
   const [isOpen, setIsOpen] = useState(false);
   const resetFiltersDropDown = useResetAtom(filtersDropDownAtom);
 
   // 리액트 쿼리 : 카테고리 가져오기
   const { data: categories } = useCategories();
 
-  const [, setQuery] = useQueryParams({
-    page: withDefault(NumberParam, 1),
-    query: withDefault(StringParam, keyword),
-  });
-
   if (!categories) return null;
 
   const handleResetButtonClick = () => {
-    setQuery(
-      {
-        page: 1,
-        query: keyword,
-      },
-      'replace',
-    );
+    resetQuery();
 
     resetFiltersDropDown();
   };
@@ -51,7 +37,7 @@ export default function SearchPage() {
       </StyledFilter>
       <StyledFilterButton onClick={handleFilterClick}>FILTER</StyledFilterButton>
       <Suspense fallback={<LoadingIndicator />}>
-        <ProductSearch keyword={keyword} />
+        <ProductSearch />
       </Suspense>
     </StyledWrap>
   );

@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { NumberParam, useQueryParams, withDefault } from 'use-query-params';
+import { useFilter } from '../hooks/useFilter';
 
 interface IPaginationProps {
   maxPage: number;
@@ -7,9 +7,7 @@ interface IPaginationProps {
 }
 
 const Pagination = ({ maxPage, currentPage = 1 }: IPaginationProps) => {
-  const [, setQuery] = useQueryParams({
-    page: withDefault(NumberParam, 1),
-  });
+  const { setQuery } = useFilter();
 
   const pages = Array.from({ length: maxPage }, (_, index) => index + 1);
 

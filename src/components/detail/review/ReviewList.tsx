@@ -1,16 +1,14 @@
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
-import { NumberParam, useQueryParams, withDefault } from 'use-query-params';
 import ReviewItem from './ReviewItem';
 import StarRate from './ReviewStarRate';
 import Pagination from '../../Pagination';
 import useReview from '../../../hooks/api/useReview';
+import { useFilter } from '../../../hooks/useFilter';
 
 const ReviewList = () => {
   const { productId } = useParams();
-  const [query] = useQueryParams({
-    page: withDefault(NumberParam, 1),
-  });
+  const { query } = useFilter();
   const { data: reviewData } = useReview(query.page, Number(productId));
 
   if (!reviewData?.items.length) return null;

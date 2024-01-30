@@ -1,23 +1,12 @@
 import styled from 'styled-components';
-import { NumberParam, StringParam, useQueryParams, withDefault } from 'use-query-params';
 import ProductList from './ProductList';
 import Pagination from '../Pagination';
 import useSearch from '../../hooks/api/useSearch';
+import { useFilter } from '../../hooks/useFilter';
 
-interface IContentsProps {
-  keyword: string;
-}
-
-const ProductSearch = ({ keyword }: IContentsProps) => {
-  const [query] = useQueryParams({
-    page: withDefault(NumberParam, 1),
-    query: withDefault(StringParam, keyword),
-    category: NumberParam,
-    minDiscount: NumberParam,
-    maxDiscount: NumberParam,
-    minPrice: NumberParam,
-    maxPrice: NumberParam,
-  });
+const ProductSearch = () => {
+  const { query, setQuery, keyword } = useFilter();
+  setQuery({ query: keyword });
 
   const { data: products } = useSearch({ ...query });
 
