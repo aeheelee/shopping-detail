@@ -11,10 +11,6 @@ import { imageLayerAtom } from '../store/atoms/imageLayerAtom';
 const ProductDetailPage = () => {
   const isOpenLayer = useAtomValue(imageLayerAtom);
 
-  // const onLayer = (isOpen: boolean) => {
-  //   setIsOpenLayer(isOpen);
-  // };
-
   return (
     <StyledWrap>
       <ProductDetail />

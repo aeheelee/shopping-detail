@@ -7,7 +7,6 @@ import { imageLayerAtom } from '../../../store/atoms/imageLayerAtom';
 
 interface IProductInfo {
   data: ProductDetailType;
-  // onLayer: (isOpenLayer: boolean) => void;
 }
 
 const ProductInfo = ({ data: detailData }: IProductInfo) => {
@@ -21,7 +20,6 @@ const ProductInfo = ({ data: detailData }: IProductInfo) => {
 
   const handleImageClick = () => {
     setIsOpenLayer((prev) => !prev);
-    // onLayer(!isOpenLayer);
   };
 
   return (

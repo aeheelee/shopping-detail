@@ -3,10 +3,6 @@ import { useParams } from 'react-router';
 import ProductInfo from './ProductInfo';
 import ChartList from '../chart/ChartList';
 
-// interface IProps {
-//   onLayer: (isOpenLayer: boolean) => void;
-// }
-
 const ProductDetail = () => {
   const { productId } = useParams();
   const { data: detailData } = useDetail(Number(productId));
