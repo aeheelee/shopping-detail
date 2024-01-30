@@ -27,11 +27,11 @@ export interface ProductCategoryType {
 //   type: string;
 // }
 
-// export interface AgeType {
-//   id: number;
-//   type: string;
-//   description: string;
-// }
+export interface OriginalAgeType {
+  id: number;
+  type: string;
+  description: string;
+}
 
 export interface SearchPriceFilterType {
   id: number;
@@ -54,7 +54,7 @@ export interface CategoryType {
   product: ProductCategoryType[];
   searchFilter: SearchFiltersType;
   // recomType: RecomType[];
-  // ageType: AgeType[];
+  ageType: OriginalAgeType[];
 }
 /////////////////////////////////////////////
 
@@ -109,6 +109,7 @@ export interface AgeType {
   type3: number;
   type4: number;
   type5: number;
+  [key: string]: number;
 }
 
 export interface genderType {

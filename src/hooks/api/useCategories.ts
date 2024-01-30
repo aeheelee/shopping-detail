@@ -24,5 +24,5 @@ const fetchCategories = async (): Promise<CategoryType> => {
  * @returns
  */
 export const useCategories = () => {
-  return useQuery<CategoryType>({ queryKey: ['categories'], queryFn: fetchCategories });
+  return useQuery<CategoryType>({ queryKey: ['categories'], queryFn: () => fetchCategories() });
 };

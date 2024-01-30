@@ -1,6 +1,7 @@
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 import { AgeType } from '../../../types/CommonTypes';
+import { useCategories } from '../../../hooks/api/useCategories';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
@@ -32,19 +33,27 @@ const options = {
 };
 
 const ChartBar = ({ age }: IProps) => {
-  const labels = ['~18세', '19~28세', '29~38세', '39~48세', '49세~'];
+  const { data: categories } = useCategories();
 
-  const maxIndex = Object.values(age).indexOf(Math.max(...Object.values(age)));
-  const bgColors = Array(labels.length).fill('#666464');
-  bgColors[maxIndex] = '#2f00ff';
+  if (!categories) return null;
+
+  const ageData = categories.ageType.map((item) => ({
+    ...item,
+    value: age[item.type],
+  }));
+
+  const ageValues = ageData.map((item) => item.value);
+  const chartLabels = ageData.map((item) => item.description);
+  const chartMaxValue = Math.max(...ageValues);
+  const maxBgColor = ageValues.map((item) => (item === chartMaxValue ? 'blue' : 'rgba(255, 99, 132, 0.5)'));
 
   const data = {
-    labels,
+    labels: chartLabels,
     datasets: [
       {
-        labels: '구매율(%) ',
-        data: Object.values(age),
-        backgroundColor: bgColors,
+        labels: '구매율(%)',
+        data: ageValues,
+        backgroundColor: maxBgColor,
       },
     ],
   };
