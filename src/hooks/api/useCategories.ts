@@ -1,29 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
+import { fetchApi } from '.';
 import { API_BASE_URL } from '../../constants/constants';
 import { CategoryType } from '../../types/CommonTypes';
 
-/**
- * 카테고리 정보를 가지고 옵니다.
- *
- * @returns
- */
-const fetchCategories = async (): Promise<CategoryType> => {
-  try {
-    const url = API_BASE_URL + '/categories';
-    const response = await axios.get<CategoryType>(url);
-    return response.data;
-  } catch (error) {
-    throw new Error(error.response ? error.response.data : 'Network error');
-  }
-};
-
-/**
- * 카테고리 정보를 관리 합니다.
- *
- * @returns
- */
+// category 정보를 가져오고 관리 합니다.
 export const useCategories = () => {
+  const url = API_BASE_URL + '/categories';
+  const fetchCategories = (): Promise<CategoryType> => fetchApi(url);
+
   const { data: categoryData } = useQuery<CategoryType>({ queryKey: ['categories'], queryFn: () => fetchCategories() });
 
   if (!categoryData) {
