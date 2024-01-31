@@ -13,7 +13,8 @@
     "noImplicitAny": true,
     "strictNullChecks": true,
     "allowJs": true,
-    "outDir": "./dist"
+    "outDir": "./dist",
+    "typeRoots": ["node_modules/@types", "./typings"]
   },
   "include": ["./src"],
   "exclude": ["*.test.tsx", "node_modules", "build"]

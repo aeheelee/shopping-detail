@@ -10,6 +10,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.5.1",
     "chart.js": "^4.4.1",
+    "dompurify": "^3.0.8",
     "faker": "^5.5.3",
     "jotai": "^2.6.3",
     "react": "^18.2.0",
@@ -50,6 +51,7 @@
     ]
   },
   "devDependencies": {
+    "@types/dompurify": "^3.0.5",
     "@types/faker": "5.5.9",
     "@types/jest": "^29.5.7",
     "@types/node": "^20.8.10",

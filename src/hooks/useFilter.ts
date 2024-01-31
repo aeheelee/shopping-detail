@@ -28,5 +28,3 @@ export const useFilter = () => {
 
   return { query, setQuery, keyword, resetQuery };
 };
-
-// export default useFilter;

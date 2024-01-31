@@ -4,6 +4,7 @@ import Button from '../../Button';
 import Layer from './Layer';
 import { useAtom } from 'jotai';
 import { imageLayerAtom } from '../../../store/atoms/imageLayerAtom';
+import DOMPurify from 'dompurify';
 
 interface IProductInfo {
   data: ProductDetailType;
@@ -12,7 +13,7 @@ interface IProductInfo {
 const ProductInfo = ({ data: detailData }: IProductInfo) => {
   const [isOpenLayer, setIsOpenLayer] = useAtom(imageLayerAtom);
 
-  const infoHtml = `${detailData.info}`;
+  const sanitizedInfoHtml = DOMPurify.sanitize(detailData.info);
 
   const handleButtonClick = () => {
     alert('서비스 준비중입니다');
@@ -29,7 +30,7 @@ const ProductInfo = ({ data: detailData }: IProductInfo) => {
       </StyledImgBox>
       <StyledContent.Wrap>
         <StyledContent.Title>상품정보</StyledContent.Title>
-        <StyledContent.Info dangerouslySetInnerHTML={{ __html: infoHtml }} />
+        <StyledContent.Info dangerouslySetInnerHTML={{ __html: sanitizedInfoHtml }} />
         <StyledContent.customer>
           <dl>
             <dt>판매량</dt>
