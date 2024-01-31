@@ -33,11 +33,11 @@ const options = {
 };
 
 const ChartBar = ({ age }: IProps) => {
-  const { data: categories } = useCategories();
+  const { categoryData } = useCategories();
 
-  if (!categories) return null;
+  if (!categoryData) return null;
 
-  const ageData = categories.ageType.map((item) => ({
+  const ageData = categoryData.ageType.map((item) => ({
     ...item,
     value: age[item.type],
   }));

@@ -2,7 +2,6 @@ import { useState, Suspense } from 'react';
 import { styled } from 'styled-components';
 import { useResetAtom } from 'jotai/utils';
 import { filtersDropDownAtom } from '../store/atoms/filtersDropDownAtom';
-import { useCategories } from '../hooks/api/useCategories';
 import SearchFilterList from '../components/filter/SearchFilterList';
 import ProductSearch from '../components/product/ProductSearch';
 import LoadingIndicator from '../components/LoadingIndicator';
@@ -13,11 +12,6 @@ export default function SearchPage() {
   const { resetQuery } = useFilter();
   const [isOpen, setIsOpen] = useState(false);
   const resetFiltersDropDown = useResetAtom(filtersDropDownAtom);
-
-  // 리액트 쿼리 : 카테고리 가져오기
-  const { data: categories } = useCategories();
-
-  if (!categories) return null;
 
   const handleResetButtonClick = () => {
     resetQuery();
@@ -32,7 +26,7 @@ export default function SearchPage() {
   return (
     <StyledWrap>
       <StyledFilter $isOpen={isOpen}>
-        <SearchFilterList data={categories} onFilterCloseClick={handleFilterClick} />
+        <SearchFilterList onFilterCloseClick={handleFilterClick} />
         <Button title="초기화" buttonClick={handleResetButtonClick} />
       </StyledFilter>
       <StyledFilterButton onClick={handleFilterClick}>FILTER</StyledFilterButton>

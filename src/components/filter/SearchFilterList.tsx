@@ -1,36 +1,17 @@
-import { useMemo } from 'react';
 import SearchFilter from './SearchFilter';
-import type { CategoryType } from '../../types/CommonTypes';
 import styled from 'styled-components';
+import { useCategories } from '../../hooks/api/useCategories';
 
 interface IProps {
-  data: CategoryType;
   onFilterCloseClick: () => void;
 }
 
-const SearchFilterList = ({ data, onFilterCloseClick }: IProps) => {
-  const newArray = useMemo(() => {
-    const {
-      product,
-      searchFilter: { price, discount },
-    } = data;
-
-    const priceData = price.map((item) => ({
-      ...item,
-      title: `₩${item.min.toLocaleString()} ~ ₩${item.max.toLocaleString()}`,
-    }));
-    const discountData = discount.map((item) => ({ ...item, title: `${item.min}% ~ ${item.max}%` }));
-
-    return [
-      { type: 'product', title: '상품별', data: [{ id: 0, title: '전체' }, ...product] },
-      { type: 'price', title: '가격별', data: [{ id: 0, title: '전체' }, ...priceData] },
-      { type: 'discount', title: '할인별', data: [{ id: 0, title: '전체' }, ...discountData] },
-    ];
-  }, [data]);
+const SearchFilterList = ({ onFilterCloseClick }: IProps) => {
+  const { filterData } = useCategories();
 
   return (
     <StyledFilterListWrap>
-      {newArray.map((item, index) => (
+      {filterData.map((item, index) => (
         <SearchFilter filter={item} key={index} />
       ))}
       <StyledFilterCloseButton onClick={onFilterCloseClick}>X</StyledFilterCloseButton>
