@@ -30,6 +30,7 @@ export const useCategories = () => {
     return { categoryData: undefined, filterData: [], categoryMenu: [] };
   }
 
+  // filter 관련 data
   const {
     product,
     searchFilter: { price, discount },
@@ -47,6 +48,7 @@ export const useCategories = () => {
     { type: 'discount', title: '할인별', data: [{ id: 0, title: '전체' }, ...discountData] },
   ];
 
+  // category menu 관련 data
   const categoryMenu = [
     {
       id: 0,
