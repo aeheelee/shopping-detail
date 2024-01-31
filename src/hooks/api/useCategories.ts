@@ -27,7 +27,7 @@ export const useCategories = () => {
   const { data: categoryData } = useQuery<CategoryType>({ queryKey: ['categories'], queryFn: () => fetchCategories() });
 
   if (!categoryData) {
-    return { categoryData: undefined, filterData: [] };
+    return { categoryData: undefined, filterData: [], categoryMenu: [] };
   }
 
   const {
@@ -47,5 +47,16 @@ export const useCategories = () => {
     { type: 'discount', title: '할인별', data: [{ id: 0, title: '전체' }, ...discountData] },
   ];
 
-  return { categoryData, filterData };
+  const categoryMenu = [
+    {
+      id: 0,
+      category: '',
+      title: '전체',
+      imageUrl:
+        'https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?auto=format&fit=crop&q=80&w=1740&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    },
+    ...categoryData.product,
+  ];
+
+  return { categoryData, filterData, categoryMenu };
 };
