@@ -51,7 +51,7 @@ const ChartBar = ({ age }: IProps) => {
     labels: chartLabels,
     datasets: [
       {
-        labels: '구매율(%)',
+        label: '구매율(%)',
         data: ageValues,
         backgroundColor: maxBgColor,
       },
