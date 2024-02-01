@@ -13,6 +13,12 @@ interface IProductInfo {
 const ProductInfo = ({ data: detailData }: IProductInfo) => {
   const [isOpenLayer, setIsOpenLayer] = useAtom(imageLayerAtom);
 
+  /**
+   *  NOTE: Sanitizer API는 임의의 문자열이 페이지에 안전하게 삽입될 수 있도록 하는 것
+   * 단순히 문자열로 DOM을 조작하면 크로스 사이트 스크립팅이 일어난다(악성코드)
+   * DOMPurfy는 브라우저에 Sanitizer API가 구현되지 않는 경우 대체 역할을 하는 노트 패키지
+   * https://velog.io/@dosomething/DOM-%EC%A1%B0%EC%9E%91%EA%B3%BC-%ED%81%AC%EB%A1%9C%EC%8A%A4-%EC%82%AC%EC%9D%B4%ED%8A%B8-%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8C%85
+   */
   const sanitizedInfoHtml = DOMPurify.sanitize(detailData.info);
 
   const handleButtonClick = () => {

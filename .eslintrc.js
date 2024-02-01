@@ -1,3 +1,9 @@
+/**
+ * NOTE: ESlint란?
+ * ESlint는 자바스크립트를 위한 정적 분석 라이브러리이고, 정적 분석은 경험이 많은 개발자들의 오류 사례로부터 규칙을 만든다.
+ * 코드의 실행 없이 분석이 가능하여 빠르게 버그를 찾아냄
+ * 코드의 퀄리티를 일관되게 보장하고, 에러가 발생할 가능성이 높은 패턴을 찾아줌
+ */
 module.exports = {
   parser: '@typescript-eslint/parser', // Specifies the ESLint parser
   parserOptions: {

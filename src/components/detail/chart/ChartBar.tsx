@@ -37,6 +37,7 @@ const ChartBar = ({ age }: IProps) => {
 
   if (!categoryData) return null;
 
+  // NOTE: categoryData에 detail의 purchaseStatus.age 맵핑하여 새로운 배열 만들기
   const ageData = categoryData.ageType.map((item) => ({
     ...item,
     value: age[item.type],
