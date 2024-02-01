@@ -104,11 +104,6 @@ export interface ReviesType extends PaginationResponse {
 }
 
 export interface AgeType {
-  type1: number;
-  type2: number;
-  type3: number;
-  type4: number;
-  type5: number;
   [key: string]: number;
 }
 

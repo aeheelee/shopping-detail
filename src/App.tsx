@@ -38,14 +38,6 @@ export const queryClient = new QueryClient({
 });
 
 function App() {
-  const { pathname } = window.location;
-
-  const isRootPath = pathname === '/';
-
-  if (isRootPath) {
-    window.location.href = '/0';
-  }
-
   return (
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools initialIsOpen={false} />
