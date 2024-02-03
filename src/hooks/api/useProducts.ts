@@ -13,7 +13,7 @@ const useProducts = (page: number, category: number) => {
   const url = API_BASE_URL + `/products?page=${page}&limit=12&category=${category}`;
   const fetchProducts = (): Promise<ProductType> => fetchApi(url);
 
-  return useSuspenseQuery({ queryKey: ['products', page, category], queryFn: () => fetchProducts() });
+  return useSuspenseQuery({ queryKey: ['products', page, category], queryFn: fetchProducts });
 };
 
 export default useProducts;

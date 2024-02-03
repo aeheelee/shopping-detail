@@ -7,7 +7,7 @@ const useDetail = (id: number) => {
   const url = API_BASE_URL + `/detail/${id}`;
   const fetchDetail = (): Promise<ProductDetailType> => fetchApi(url);
 
-  return useQuery({ queryKey: ['detail', id], queryFn: () => fetchDetail(), staleTime: 0 });
+  return useQuery({ queryKey: ['detail', id], queryFn: fetchDetail, staleTime: 0 });
 };
 
 export default useDetail;

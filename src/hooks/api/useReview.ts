@@ -14,7 +14,7 @@ const useReview = (page: number, productId: number) => {
 
   const fetchReview = (): Promise<ReviesType> => fetchApi(url);
 
-  return useSuspenseQuery({ queryKey: ['review', page, productId], queryFn: () => fetchReview() });
+  return useSuspenseQuery({ queryKey: ['review', page, productId], queryFn: fetchReview });
 };
 
 export default useReview;

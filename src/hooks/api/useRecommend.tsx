@@ -7,7 +7,7 @@ const useRecommend = (id: number) => {
   const url = API_BASE_URL + `/recommendation/${id}`;
   const fetchRecommend = (): Promise<RecommedType> => fetchApi(url);
 
-  return useQuery({ queryKey: ['recommend', id], queryFn: () => fetchRecommend() });
+  return useQuery({ queryKey: ['recommend', id], queryFn: fetchRecommend });
 };
 
 export default useRecommend;

@@ -8,7 +8,7 @@ export const useCategories = () => {
   const url = API_BASE_URL + '/categories';
   const fetchCategories = (): Promise<CategoryType> => fetchApi(url);
 
-  const { data: categoryData } = useQuery<CategoryType>({ queryKey: ['categories'], queryFn: () => fetchCategories() });
+  const { data: categoryData } = useQuery<CategoryType>({ queryKey: ['categories'], queryFn: fetchCategories });
 
   if (!categoryData) {
     return { categoryData: undefined, filterData: [], categoryMenu: [] };

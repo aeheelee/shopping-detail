@@ -26,7 +26,7 @@ const useSearch = (params: QueryStringParams = {}) => {
 
   return useSuspenseQuery({
     queryKey: ['search', params],
-    queryFn: () => fetchSearch(),
+    queryFn: fetchSearch,
   });
 };
 
