@@ -49,7 +49,7 @@ const StyledInner = styled.div`
   align-items: flex-end;
   gap: 10px 0;
   width: 500px;
-  max-height: 800px;
+  height: 700px;
 
   @media only screen and (max-width: 900px) {
     width: 100%;
