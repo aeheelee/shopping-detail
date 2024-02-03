@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 import ReviewItem from './ReviewItem';
 import StarRate from './ReviewStarRate';
-import Pagination from '../../Pagination';
+import Pagination from '../../common/Pagination';
 import useReview from '../../../hooks/api/useReview';
 import { useFilter } from '../../../hooks/useFilter';
 

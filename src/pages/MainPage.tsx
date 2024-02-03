@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Suspense } from 'react';
 import ProductMain from '../components/product/ProductMain';
 import CategoryMenu from '../components/category/CategoryMenu';
-import LoadingIndicator from '../components/LoadingIndicator';
+import LoadingIndicator from '../components/common/LoadingIndicator';
 
 export default function MainPage() {
   return (

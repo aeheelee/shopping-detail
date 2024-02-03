@@ -3,14 +3,9 @@ import { Suspense } from 'react';
 import ReviewList from '../components/detail/review/ReviewList';
 import ProductDetail from '../components/detail/productInfo/ProductDetail';
 import Recommend from '../components/detail/Recommend';
-import LoadingIndicator from '../components/LoadingIndicator';
-import Dimmed from '../components/Dimmed';
-import { useAtomValue } from 'jotai';
-import { imageLayerAtom } from '../store/atoms/imageLayerAtom';
+import LoadingIndicator from '../components/common/LoadingIndicator';
 
 const ProductDetailPage = () => {
-  const isOpenLayer = useAtomValue(imageLayerAtom);
-
   return (
     <StyledWrap>
       <ProductDetail />
@@ -18,7 +13,6 @@ const ProductDetailPage = () => {
         <ReviewList />
       </Suspense>
       <Recommend />
-      {isOpenLayer && <Dimmed />}
     </StyledWrap>
   );
 };

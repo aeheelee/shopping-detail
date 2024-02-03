@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { useFilter } from '../hooks/useFilter';
+import { useFilter } from '../../hooks/useFilter';
 
 interface IPaginationProps {
   maxPage: number;

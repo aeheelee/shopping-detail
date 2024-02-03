@@ -4,8 +4,8 @@ import { useResetAtom } from 'jotai/utils';
 import { filtersDropDownAtom } from '../store/atoms/filtersDropDownAtom';
 import SearchFilterList from '../components/filter/SearchFilterList';
 import ProductSearch from '../components/product/ProductSearch';
-import LoadingIndicator from '../components/LoadingIndicator';
-import Button from '../components/Button';
+import LoadingIndicator from '../components/common/LoadingIndicator';
+import Button from '../components/common/Button';
 import { useFilter } from '../hooks/useFilter';
 
 export default function SearchPage() {

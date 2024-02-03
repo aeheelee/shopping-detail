@@ -1,12 +1,11 @@
-import { useResetAtom } from 'jotai/utils';
 import styled from 'styled-components';
-import { imageLayerAtom } from '../store/atoms/imageLayerAtom';
+interface IProps {
+  onClose: () => void;
+}
 
-const Dimmed = () => {
-  const closeImageLayer = useResetAtom(imageLayerAtom);
-
+const Dimmed = ({ onClose }: IProps) => {
   const handleClick = () => {
-    closeImageLayer();
+    onClose();
   };
 
   return <StyledDimmed onClick={handleClick} />;
@@ -21,7 +20,7 @@ const StyledDimmed = styled.div`
   left: 0;
   bottom: 0;
   right: 0;
-  z-index: 50;
+  z-index: 20;
   background-color: #000;
   opacity: 0.7;
 `;

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 import ProductList from './ProductList';
-import Pagination from '../Pagination';
+import Pagination from '../common/Pagination';
 import useProducts from '../../hooks/api/useProducts';
 import { useFilter } from '../../hooks/useFilter';
 

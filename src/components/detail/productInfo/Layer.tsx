@@ -33,7 +33,7 @@ const StyledWrap = styled.div<{ $isOpen: boolean }>`
   padding: 30px;
   border: 2px solid black;
   background-color: #fff;
-  z-index: 100;
+  z-index: 30;
 
   @media only screen and (max-width: 900px) {
     top: 0;

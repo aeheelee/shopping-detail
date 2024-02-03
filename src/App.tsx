@@ -3,7 +3,7 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 import './App.css';
 import Footer from './components/Footer';
 import Header from './components/Header';
-import LoadingIndicator from './components/LoadingIndicator';
+import LoadingIndicator from './components/common/LoadingIndicator';
 import MainPage from './pages/MainPage';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';

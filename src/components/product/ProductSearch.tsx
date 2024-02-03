@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import ProductList from './ProductList';
-import Pagination from '../Pagination';
+import Pagination from '../common/Pagination';
 import useSearch from '../../hooks/api/useSearch';
 import { useFilter } from '../../hooks/useFilter';
 
