@@ -1,5 +1,12 @@
 header {
   height: 8vh !important;
+  z-index: 15;
+}
+
+@media only screen and (max-width: 900px) {
+  header {
+    flex-direction: row !important;
+  }
 }
 
 aside {

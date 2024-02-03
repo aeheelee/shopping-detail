@@ -20,4 +20,12 @@ export default CategoryMenu;
 
 const StyledWrap = styled.div`
   margin-top: 30px;
+  @media only screen and (max-width: 900px) {
+    overflow-x: auto;
+    margin-top: 0;
+    ul {
+      display: flex;
+      align-items: center;
+    }
+  }
 `;

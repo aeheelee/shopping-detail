@@ -25,6 +25,14 @@ const StyledWrap = styled.li`
   & + & {
     margin-top: 10px;
   }
+
+  @media only screen and (max-width: 900px) {
+    flex-shrink: 0;
+    & + & {
+      margin-top: 0;
+      margin-left: 8px;
+    }
+  }
 `;
 
 const StyledLink = styled(NavLink)`

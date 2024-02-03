@@ -30,7 +30,6 @@ const StyledWrap = styled.div`
 
   @media only screen and (max-width: 900px) {
     flex-direction: column;
-    z-index: 10;
   }
 `;
 
