@@ -2,8 +2,6 @@ import styled from 'styled-components';
 import { ProductDetailType } from '../../../types/CommonTypes';
 import Button from '../../common/Button';
 import Layer from './Layer';
-// import { useAtom } from 'jotai';
-// import { imageLayerAtom } from '../../../store/atoms/imageLayerAtom';
 import DOMPurify from 'dompurify';
 import CreatePortal from '../../common/CreatePortal';
 import Dimmed from '../../common/Dimmed';
@@ -14,7 +12,6 @@ interface IProductInfo {
 }
 
 const ProductInfo = ({ data: detailData }: IProductInfo) => {
-  // const [isOpenLayer, setIsOpenLayer] = useAtom(imageLayerAtom);
   const [isOpenLayer, setIsOpenLayer] = useState(false);
 
   /**
