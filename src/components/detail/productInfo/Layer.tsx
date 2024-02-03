@@ -3,12 +3,11 @@ import { IoClose } from 'react-icons/io5';
 
 interface IProps {
   image: string;
-  isOpen: boolean;
   onLayer: () => void;
 }
-const Layer = ({ image, isOpen, onLayer }: IProps) => {
+const Layer = ({ image, onLayer }: IProps) => {
   return (
-    <StyledWrap $isOpen={isOpen}>
+    <StyledWrap>
       <StyledInner>
         <StyledButton onClick={() => onLayer()}>
           <IoClose size={20} />
@@ -23,8 +22,7 @@ const Layer = ({ image, isOpen, onLayer }: IProps) => {
 
 export default Layer;
 
-const StyledWrap = styled.div<{ $isOpen: boolean }>`
-  display: ${({ $isOpen }) => ($isOpen ? 'block' : 'none')};
+const StyledWrap = styled.div`
   position: fixed;
   top: 50%;
   left: 50%;

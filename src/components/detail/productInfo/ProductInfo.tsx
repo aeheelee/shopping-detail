@@ -67,10 +67,12 @@ const ProductInfo = ({ data: detailData }: IProductInfo) => {
         </StyledContent.ButtonWrap>
       </StyledContent.Wrap>
       <CreatePortal>
-        <>
-          <Layer image={detailData.imageUrl} onLayer={handleImageClick} isOpen={isOpenLayer} />
-          {isOpenLayer && <Dimmed onClose={handleImageClick} />}
-        </>
+        {isOpenLayer && (
+          <>
+            <Layer image={detailData.imageUrl} onLayer={handleImageClick} />
+            <Dimmed onClose={handleImageClick} />
+          </>
+        )}
       </CreatePortal>
     </StyledWrap>
   );
