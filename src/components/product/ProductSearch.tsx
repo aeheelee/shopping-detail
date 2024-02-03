@@ -5,9 +5,7 @@ import useSearch from '../../hooks/api/useSearch';
 import { useFilter } from '../../hooks/useFilter';
 
 const ProductSearch = () => {
-  const { query, setQuery, keyword } = useFilter();
-  setQuery({ query: keyword });
-
+  const { query } = useFilter();
   const { data: products } = useSearch({ ...query });
 
   if (!products) return null;
